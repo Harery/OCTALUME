@@ -1,0 +1,119 @@
+{
+  "$schema": "https://claude.ai/claude.json",
+  "description": "Unified Enterprise Lifecycle Framework - Claude Code Configuration",
+
+  "model": "claude-sonnet-4-5-20250929",
+  "maxTokens": 200000,
+  "temperature": 0,
+
+  "allowedTools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Bash",
+    "Glob",
+    "Grep"
+  ],
+
+  "permissions": {
+    "Read": "always",
+    "Glob": "always",
+    "Grep": "always",
+    "Bash(cat,ls,pwd,git status,git log,git diff)": "always",
+    "Bash(git add,git commit,git push)": "ask",
+    "Bash(npm test,npm run test,npm run test:*)": "always",
+    "Bash(source scripts/init.sh)": "ask",
+    "Bash(npm install,pip install)": "ask",
+    "Write(.claude/,feature_list.json,traceability.json,claude-progress.txt)": "always",
+    "Write(src/,tests/)": "ask",
+    "Edit": "ask"
+  },
+
+  "mcpServers": {
+    "lifecycle-tools": {
+      "command": "node",
+       "args": [".claude/mcp-server/index.js"],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "lifecycle-filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-filesystem", "."]
+    }
+  },
+
+  "agents": {
+    "initializer": {
+      "description": "Initializes new lifecycle projects with complete structure, feature list, and configuration",
+      "prompt": "You are the Lifecycle Initializer Agent. Your job is to set up a new project for long-running development across multiple context windows. Read .claude/agents/INITIALIZER.md for full instructions.",
+      "temperature": 0
+    },
+    "coder": {
+      "description": "Makes incremental progress on features, one at a time, leaving clean state",
+      "prompt": "You are the Lifecycle Coding Agent. Your job is to make incremental progress on features, one at a time. Read .claude/agents/CODING.md for full instructions.",
+      "temperature": 0
+    },
+    "orchestrator": {
+      "description": "Coordinates phase-specific sub-agents across the enterprise lifecycle",
+      "prompt": "You are the Lifecycle Orchestrator. You coordinate specialized sub-agents across 8 phases. Read .claude/ORCHESTRATOR.md for full instructions.",
+      "temperature": 0,
+      "thinkingMode": "auto"
+    },
+    "vision": {
+      "description": "Phase 1: Vision & Strategy - Defines product vision, market opportunity, business case",
+      "prompt": "You are the Phase 1 Vision & Strategy agent. Read skills/phase_01_vision_strategy/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "requirements": {
+      "description": "Phase 2: Requirements & Scope - Defines functional, non-functional, security requirements",
+      "prompt": "You are the Phase 2 Requirements & Scope agent. Read skills/phase_02_requirements_scope/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "architecture": {
+      "description": "Phase 3: Architecture & Design - Designs system, security, data architecture",
+      "prompt": "You are the Phase 3 Architecture & Design agent. Read skills/phase_03_architecture_design/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "planning": {
+      "description": "Phase 4: Development Planning - Creates WBS, resource plan, sprint plan",
+      "prompt": "You are the Phase 4 Development Planning agent. Read skills/phase_04_development_planning/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "development": {
+      "description": "Phase 5: Development Execution - Implements features in agile sprints",
+      "prompt": "You are the Phase 5 Development Execution agent. Read skills/phase_05_development_execution/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "quality": {
+      "description": "Phase 6: Quality & Security Validation - Validates quality through comprehensive testing",
+      "prompt": "You are the Phase 6 Quality & Security Validation agent. Read skills/phase_06_quality_security/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "deployment": {
+      "description": "Phase 7: Deployment & Release - Deploys validated build to production",
+      "prompt": "You are the Phase 7 Deployment & Release agent. Read skills/phase_07_deployment_release/SKILL.md and execute this phase.",
+      "temperature": 0
+    },
+    "operations": {
+      "description": "Phase 8: Operations & Maintenance - Monitoring, incident management, improvements",
+      "prompt": "You are the Phase 8 Operations & Maintenance agent. Read skills/phase_08_operations_maintenance/SKILL.md and execute this phase.",
+      "temperature": 0
+    }
+  },
+
+  "thinkingMode": "auto",
+
+  "promptQueue": [
+    "Read CLAUDE.md for project context",
+    "Read .claude/project-state.json for current state",
+    "Read claude-progress.txt for recent work",
+    "Check feature_list.json for next task"
+  ],
+
+  "appendSystemPrompt": "\n\nIMPORTANT: Always follow the Unified Enterprise Lifecycle framework defined in CLAUDE.md. Work on ONE feature at a time. Never mark a feature as 'passing' without thorough testing. Leave the codebase in a clean state after each session.",
+
+  "disableSlashCommands": [],
+
+  "permissionMode": "default"
+}

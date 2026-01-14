@@ -1,0 +1,57 @@
+# OCTALUME Enterprise Lifecycle Framework - .gitignore
+
+# Claude Code
+.claude/local/
+.claude-state.json
+claude-progress-*.json
+.claude/**/*.lock
+
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+
+# Build
+dist/
+build/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Memory locks
+.claude/memory/locks/
+
+# Active agents tracking
+.claude/agents/active-agents.json
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Misc
+~*
+*.bak
+*.backup
