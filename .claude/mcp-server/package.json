@@ -1,0 +1,57 @@
+{
+  "name": "@harery/octalume-mcp-server",
+  "version": "1.0.0",
+  "description": "OCTALUME Framework MCP Server - Enterprise 8-phase SDLC framework with quality gates, multi-agent orchestration, and AI-assisted development tools for Claude Code",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "octalume",
+    "enterprise-sdlc",
+    "software-development-lifecycle",
+    "8-phase-framework",
+    "stage-gate",
+    "quality-gates",
+    "project-management",
+    "claude-code",
+    "ai-assisted-development",
+    "multi-agent-orchestration",
+    "sdlc-automation",
+    "compliance-framework",
+    "devops",
+    "agile",
+    "security-by-design",
+    "traceability",
+    "mcp",
+    "lifecycle",
+    "enterprise",
+    "claude",
+    "gates",
+    "phases",
+    "go-no-go"
+  ],
+  "author": {
+    "name": "Mohamed ElHarery",
+    "email": "mohamed@harery.com",
+    "url": "https://www.harery.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Harery/OCTALUME.git"
+  },
+  "homepage": "https://www.harery.com/",
+  "bugs": {
+    "url": "https://github.com/Harery/OCTALUME/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

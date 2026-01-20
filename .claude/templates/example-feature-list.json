@@ -1,0 +1,1067 @@
+{
+  "project_name": "Example Enterprise Application",
+  "project_description": "E-commerce platform with user management, product catalog, shopping cart, checkout, and order management",
+  "features": [
+    {
+      "id": "F-001",
+      "phase": "phase_01_vision_strategy",
+      "category": "vision",
+      "description": "Define product vision and business objectives",
+      "acceptance_criteria": [
+        "Product vision statement documented",
+        "Business objectives clearly defined",
+        "Target market identified",
+        "Success metrics established"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review vision statement with stakeholders",
+        "Confirm business objectives are measurable",
+        "Validate target market assumptions"
+      ]
+    },
+    {
+      "id": "F-002",
+      "phase": "phase_01_vision_strategy",
+      "category": "vision",
+      "description": "Conduct market analysis and competitive research",
+      "acceptance_criteria": [
+        "Market size analysis completed",
+        "Competitive matrix created",
+        "Market opportunity documented",
+        "SWOT analysis completed"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-001"],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Validate market data sources",
+        "Review competitive analysis with stakeholders"
+      ]
+    },
+    {
+      "id": "F-003",
+      "phase": "phase_01_vision_strategy",
+      "category": "vision",
+      "description": "Create business case with ROI projections",
+      "acceptance_criteria": [
+        "Business case document completed",
+        "ROI projections calculated",
+        "Cost-benefit analysis completed",
+        "Risk assessment documented"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-001", "F-002"],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review financial assumptions with Finance",
+        "Validate ROI calculation methodology"
+      ]
+    },
+    {
+      "id": "F-004",
+      "phase": "phase_02_requirements_scope",
+      "category": "requirements",
+      "description": "Define user registration requirements",
+      "acceptance_criteria": [
+        "User registration functional requirements documented",
+        "Input validation requirements defined",
+        "Error handling requirements specified",
+        "Security requirements identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review requirements with UX team",
+        "Validate security requirements with Security Architect"
+      ]
+    },
+    {
+      "id": "F-005",
+      "phase": "phase_02_requirements_scope",
+      "category": "requirements",
+      "description": "Define user authentication requirements",
+      "acceptance_criteria": [
+        "Authentication methods specified",
+        "Password complexity requirements defined",
+        "Multi-factor authentication requirements documented",
+        "Session management requirements specified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review authentication requirements with Security Lead",
+        "Validate compliance with SOC 2"
+      ]
+    },
+    {
+      "id": "F-006",
+      "phase": "phase_02_requirements_scope",
+      "category": "requirements",
+      "description": "Define product catalog requirements",
+      "acceptance_criteria": [
+        "Product data model defined",
+        "Category hierarchy requirements specified",
+        "Search and filtering requirements documented",
+        "Product image handling requirements defined"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review data model with Data Architect",
+        "Validate search performance requirements"
+      ]
+    },
+    {
+      "id": "F-007",
+      "phase": "phase_02_requirements_scope",
+      "category": "requirements",
+      "description": "Define shopping cart requirements",
+      "acceptance_criteria": [
+        "Cart persistence requirements specified",
+        "Cart modification requirements documented",
+        "Cart calculation accuracy requirements defined",
+        "Guest cart requirements specified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review cart calculation logic",
+        "Validate guest cart session handling"
+      ]
+    },
+    {
+      "id": "F-008",
+      "phase": "phase_02_requirements_scope",
+      "category": "requirements",
+      "description": "Define checkout and payment requirements",
+      "acceptance_criteria": [
+        "Checkout flow requirements documented",
+        "Payment integration requirements specified",
+        "PCI DSS compliance requirements identified",
+        "Order confirmation requirements defined"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review payment flow with Compliance Officer",
+        "Validate PCI DSS scope"
+      ]
+    },
+    {
+      "id": "F-009",
+      "phase": "phase_02_requirements_scope",
+      "category": "requirements",
+      "description": "Define order management requirements",
+      "acceptance_criteria": [
+        "Order lifecycle requirements documented",
+        "Order status tracking requirements specified",
+        "Notification requirements defined",
+        "Reporting requirements identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Product Owner",
+      "verification_steps": [
+        "Review order states with stakeholders",
+        "Validate reporting requirements"
+      ]
+    },
+    {
+      "id": "F-010",
+      "phase": "phase_02_requirements_scope",
+      "category": "nfr",
+      "description": "Define performance requirements",
+      "acceptance_criteria": [
+        "Response time requirements specified",
+        "Throughput requirements documented",
+        "Scalability requirements defined",
+        "Performance testing requirements identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Performance Engineer",
+      "verification_steps": [
+        "Benchmark against industry standards",
+        "Validate performance testing approach"
+      ]
+    },
+    {
+      "id": "F-011",
+      "phase": "phase_02_requirements_scope",
+      "category": "nfr",
+      "description": "Define security requirements",
+      "acceptance_criteria": [
+        "Authentication security requirements specified",
+        "Authorization requirements documented",
+        "Data encryption requirements defined",
+        "Security testing requirements identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Security Architect",
+      "verification_steps": [
+        "Review security requirements with CISO",
+        "Validate against threat model"
+      ]
+    },
+    {
+      "id": "F-012",
+      "phase": "phase_02_requirements_scope",
+      "category": "nfr",
+      "description": "Define availability and reliability requirements",
+      "acceptance_criteria": [
+        "Uptime requirements specified (SLA)",
+        "Disaster recovery requirements documented",
+        "Backup requirements defined",
+        "High availability requirements identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "SRE Lead",
+      "verification_steps": [
+        "Review SLA targets with business",
+        "Validate disaster recovery approach"
+      ]
+    },
+    {
+      "id": "F-013",
+      "phase": "phase_02_requirements_scope",
+      "category": "compliance",
+      "description": "Identify SOC 2 compliance requirements",
+      "acceptance_criteria": [
+        "SOC 2 controls mapped to features",
+        "Evidence collection requirements documented",
+        "Audit readiness checklist created",
+        "Compliance monitoring requirements defined"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Compliance Officer",
+      "verification_steps": [
+        "Review SOC 2 control framework",
+        "Validate evidence collection approach"
+      ]
+    },
+    {
+      "id": "F-014",
+      "phase": "phase_02_requirements_scope",
+      "category": "compliance",
+      "description": "Identify GDPR compliance requirements",
+      "acceptance_criteria": [
+        "Data subject rights requirements documented",
+        "Consent management requirements specified",
+        "Data breach notification requirements defined",
+        "Privacy policy requirements identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Compliance Officer",
+      "verification_steps": [
+        "Review GDPR requirements with legal",
+        "Validate consent flow design"
+      ]
+    },
+    {
+      "id": "F-015",
+      "phase": "phase_02_requirements_scope",
+      "category": "traceability",
+      "description": "Create requirements traceability matrix",
+      "acceptance_criteria": [
+        "RTM template created",
+        "Requirements mapped to features",
+        "Features mapped to components",
+        "Components mapped to tests"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-001", "F-002", "F-003", "F-004", "F-005", "F-006", "F-007", "F-008", "F-009"],
+      "assignee": "Project Manager",
+      "verification_steps": [
+        "Verify all requirements are traced",
+        "Validate traceability completeness"
+      ]
+    },
+    {
+      "id": "F-016",
+      "phase": "phase_03_architecture_design",
+      "category": "architecture",
+      "description": "Design system architecture",
+      "acceptance_criteria": [
+        "System architecture diagram created",
+        "Component boundaries defined",
+        "Interface specifications documented",
+        "Technology stack decisions made"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-010", "F-011", "F-012"],
+      "assignee": "CTA",
+      "verification_steps": [
+        "Review architecture with stakeholders",
+        "Validate technology choices"
+      ]
+    },
+    {
+      "id": "F-017",
+      "phase": "phase_03_architecture_design",
+      "category": "architecture",
+      "description": "Design security architecture",
+      "acceptance_criteria": [
+        "Security architecture diagram created",
+        "Security control mapping documented",
+        "Data flow security defined",
+        "Security monitoring specified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Security Architect",
+      "verification_steps": [
+        "Review security architecture with CISO",
+        "Validate against threat model"
+      ]
+    },
+    {
+      "id": "F-018",
+      "phase": "phase_03_architecture_design",
+      "category": "architecture",
+      "description": "Design data architecture",
+      "acceptance_criteria": [
+        "Data model diagram created",
+        "Database schema designed",
+        "Data migration strategy documented",
+        "Data retention policy defined"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Data Architect",
+      "verification_steps": [
+        "Review data model with stakeholders",
+        "Validate database performance"
+      ]
+    },
+    {
+      "id": "F-019",
+      "phase": "phase_03_architecture_design",
+      "category": "security",
+      "description": "Conduct threat modeling (STRIDE)",
+      "acceptance_criteria": [
+        "STRIDE threat model completed",
+        "Threat mitigation strategies documented",
+        "Security controls mapped to threats",
+        "Residual risk assessment completed"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-016", "F-017"],
+      "assignee": "Security Architect",
+      "verification_steps": [
+        "Review threat model with CISO",
+        "Validate mitigation strategies"
+      ]
+    },
+    {
+      "id": "F-020",
+      "phase": "phase_03_architecture_design",
+      "category": "infrastructure",
+      "description": "Design cloud infrastructure architecture",
+      "acceptance_criteria": [
+        "Cloud architecture diagram created",
+        "Network topology designed",
+        "High availability architecture defined",
+        "Disaster recovery architecture specified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-016", "F-012"],
+      "assignee": "Cloud Architect",
+      "verification_steps": [
+        "Review cloud architecture with DevOps",
+        "Validate cost estimates"
+      ]
+    },
+    {
+      "id": "F-021",
+      "phase": "phase_03_architecture_design",
+      "category": "architecture",
+      "description": "Create API design specifications",
+      "acceptance_criteria": [
+        "API contract documented",
+        "Endpoint specifications defined",
+        "Authentication requirements specified",
+        "Rate limiting requirements defined"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-016"],
+      "assignee": "CTA",
+      "verification_steps": [
+        "Review API design with frontend team",
+        "Validate against requirements"
+      ]
+    },
+    {
+      "id": "F-022",
+      "phase": "phase_03_architecture_design",
+      "category": "architecture",
+      "description": "Design integration architecture",
+      "acceptance_criteria": [
+        "Integration patterns documented",
+        "Message queue specifications defined",
+        "Event-driven architecture specified",
+        "Third-party integration requirements documented"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": ["F-016"],
+      "assignee": "CTA",
+      "verification_steps": [
+        "Review integration architecture",
+        "Validate third-party APIs"
+      ]
+    },
+    {
+      "id": "F-023",
+      "phase": "phase_04_development_planning",
+      "category": "planning",
+      "description": "Create Work Breakdown Structure (WBS)",
+      "acceptance_criteria": [
+        "WBS document completed",
+        "Work packages defined",
+        "Dependencies mapped",
+        "Effort estimates calculated"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Project Manager",
+      "verification_steps": [
+        "Review WBS with team",
+        "Validate effort estimates"
+      ]
+    },
+    {
+      "id": "F-024",
+      "phase": "phase_04_development_planning",
+      "category": "planning",
+      "description": "Create resource plan",
+      "acceptance_criteria": [
+        "Resource requirements documented",
+        "Team structure defined",
+        "Resource allocation completed",
+        "Resource risks identified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Project Manager",
+      "verification_steps": [
+        "Review resource plan with stakeholders",
+        "Validate budget constraints"
+      ]
+    },
+    {
+      "id": "F-025",
+      "phase": "phase_04_development_planning",
+      "category": "planning",
+      "description": "Create sprint plan",
+      "acceptance_criteria": [
+        "Sprint duration defined",
+        "Sprint ceremonies planned",
+        "Sprint team composition specified",
+        "Sprint goals documented"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-023", "F-024"],
+      "assignee": "Tech Lead",
+      "verification_steps": [
+        "Review sprint plan with team",
+        "Validate sprint capacity"
+      ]
+    },
+    {
+      "id": "F-026",
+      "phase": "phase_04_development_planning",
+      "category": "planning",
+      "description": "Create risk register",
+      "acceptance_criteria": [
+        "Risks identified and documented",
+        "Risk impact assessed",
+        "Mitigation strategies defined",
+        "Risk owners assigned"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Project Manager",
+      "verification_steps": [
+        "Review risk register with stakeholders",
+        "Validate mitigation strategies"
+      ]
+    },
+    {
+      "id": "F-027",
+      "phase": "phase_04_development_planning",
+      "category": "devops",
+      "description": "Design CI/CD pipeline",
+      "acceptance_criteria": [
+        "CI pipeline stages defined",
+        "CD pipeline stages defined",
+        "Automated testing integrated",
+        "Deployment approvals specified"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "DevOps Lead",
+      "verification_steps": [
+        "Review CI/CD design with team",
+        "Validate pipeline stages"
+      ]
+    },
+    {
+      "id": "F-028",
+      "phase": "phase_04_development_planning",
+      "category": "quality",
+      "description": "Create test strategy",
+      "acceptance_criteria": [
+        "Test approach documented",
+        "Test types defined",
+        "Test environments specified",
+        "Test data strategy defined"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "QA Lead",
+      "verification_steps": [
+        "Review test strategy with stakeholders",
+        "Validate test coverage goals"
+      ]
+    },
+    {
+      "id": "F-029",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement user registration",
+      "acceptance_criteria": [
+        "User can register with email and password",
+        "Email validation works correctly",
+        "Password meets complexity requirements",
+        "Registration confirmation email sent"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-004"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test registration with valid email",
+        "Test registration with invalid email",
+        "Test password complexity validation",
+        "Verify confirmation email sent"
+      ]
+    },
+    {
+      "id": "F-030",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement user authentication",
+      "acceptance_criteria": [
+        "User can log in with valid credentials",
+        "Invalid credentials are rejected",
+        "Session is created on successful login",
+        "User can log out"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-005"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test login with valid credentials",
+        "Test login with invalid credentials",
+        "Verify session creation",
+        "Test logout functionality"
+      ]
+    },
+    {
+      "id": "F-031",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement password reset",
+      "acceptance_criteria": [
+        "User can request password reset",
+        "Reset email is sent",
+        "User can set new password via reset link",
+        "Reset link expires after use"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test password reset request",
+        "Verify reset email sent",
+        "Test new password set via link",
+        "Verify link expires after use"
+      ]
+    },
+    {
+      "id": "F-032",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement product catalog display",
+      "acceptance_criteria": [
+        "Products are displayed in grid/list",
+        "Product details are shown correctly",
+        "Category filtering works",
+        "Search returns relevant results"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-006"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test product grid display",
+        "Test product detail page",
+        "Test category filter",
+        "Test search functionality"
+      ]
+    },
+    {
+      "id": "F-033",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement shopping cart",
+      "acceptance_criteria": [
+        "User can add product to cart",
+        "Cart shows correct items",
+        "User can update quantity",
+        "User can remove item from cart",
+        "Cart totals are calculated correctly"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-007"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test add to cart",
+        "Test cart display",
+        "Test quantity update",
+        "Test remove from cart",
+        "Test cart calculations"
+      ]
+    },
+    {
+      "id": "F-034",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement checkout flow",
+      "acceptance_criteria": [
+        "User can enter shipping information",
+        "User can select shipping method",
+        "User can enter payment information",
+        "Order is created on successful payment",
+        "User receives order confirmation"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-008"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test shipping information entry",
+        "Test shipping method selection",
+        "Test payment information entry",
+        "Test order creation",
+        "Verify order confirmation sent"
+      ]
+    },
+    {
+      "id": "F-035",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement order management",
+      "acceptance_criteria": [
+        "Admin can view orders",
+        "Admin can update order status",
+        "User can view their orders",
+        "Order notifications are sent"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": ["F-009"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test admin order view",
+        "Test order status update",
+        "Test user order view",
+        "Verify order notifications"
+      ]
+    },
+    {
+      "id": "F-036",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement admin dashboard",
+      "acceptance_criteria": [
+        "Admin can access dashboard",
+        "Dashboard shows key metrics",
+        "Dashboard shows recent orders",
+        "Dashboard shows system status"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test admin dashboard access",
+        "Verify dashboard metrics",
+        "Verify recent orders display",
+        "Verify system status indicators"
+      ]
+    },
+    {
+      "id": "F-037",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement user profile management",
+      "acceptance_criteria": [
+        "User can view their profile",
+        "User can update their information",
+        "User can change their password",
+        "User can manage their preferences"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test profile view",
+        "Test profile update",
+        "Test password change",
+        "Test preferences management"
+      ]
+    },
+    {
+      "id": "F-038",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement product reviews",
+      "acceptance_criteria": [
+        "User can submit product review",
+        "Reviews are displayed on product page",
+        "Reviews are moderated",
+        "Review ratings are calculated"
+      ],
+      "status": "failing",
+      "priority": "P2",
+      "dependencies": ["F-032"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test review submission",
+        "Test review display",
+        "Test review moderation",
+        "Verify rating calculations"
+      ]
+    },
+    {
+      "id": "F-039",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement wishlist functionality",
+      "acceptance_criteria": [
+        "User can add product to wishlist",
+        "User can view their wishlist",
+        "User can remove from wishlist",
+        "User can move item from wishlist to cart"
+      ],
+      "status": "failing",
+      "priority": "P2",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test add to wishlist",
+        "Test wishlist view",
+        "Test remove from wishlist",
+        "Test move to cart"
+      ]
+    },
+    {
+      "id": "F-040",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement email notifications",
+      "acceptance_criteria": [
+        "Order confirmation emails sent",
+        "Shipping notification emails sent",
+        "Password reset emails sent",
+        "Marketing emails configurable"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test order confirmation email",
+        "Test shipping notification email",
+        "Test password reset email",
+        "Test email preferences"
+      ]
+    },
+    {
+      "id": "F-041",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement search functionality",
+      "acceptance_criteria": [
+        "Search returns relevant products",
+        "Search handles partial matches",
+        "Search filters work correctly",
+        "Search results are sorted properly"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test basic search",
+        "Test partial matching",
+        "Test search filters",
+        "Test result sorting"
+      ]
+    },
+    {
+      "id": "F-042",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement category navigation",
+      "acceptance_criteria": [
+        "Categories are displayed hierarchically",
+        "Category filtering works",
+        "Breadcrumbs show navigation path",
+        "Category counts are accurate"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": ["F-006"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test category display",
+        "Test category filtering",
+        "Test breadcrumb navigation",
+        "Verify category counts"
+      ]
+    },
+    {
+      "id": "F-043",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement product comparison",
+      "acceptance_criteria": [
+        "User can select products to compare",
+        "Comparison shows key attributes",
+        "User can remove from comparison",
+        "Comparison is mobile-friendly"
+      ],
+      "status": "failing",
+      "priority": "P2",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test product selection",
+        "Test comparison display",
+        "Test removal from comparison",
+        "Test mobile responsiveness"
+      ]
+    },
+    {
+      "id": "F-044",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement discount codes",
+      "acceptance_criteria": [
+        "User can enter discount code",
+        "Valid codes are applied correctly",
+        "Invalid codes are rejected",
+        "Discount is reflected in total"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test valid discount code",
+        "Test invalid discount code",
+        "Verify discount calculation",
+        "Test expired codes"
+      ]
+    },
+    {
+      "id": "F-045",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement tax calculation",
+      "acceptance_criteria": [
+        "Tax is calculated based on location",
+        "Tax rates are configurable",
+        "Tax-exempt customers handled",
+        "Tax is displayed on checkout"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test tax calculation by location",
+        "Test tax rate configuration",
+        "Test tax-exempt handling",
+        "Verify tax display"
+      ]
+    },
+    {
+      "id": "F-046",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement shipping calculation",
+      "acceptance_criteria": [
+        "Shipping options displayed based on location",
+        "Shipping rates are calculated correctly",
+        "Free shipping threshold works",
+        "Shipping tracking is available"
+      ],
+      "status": "failing",
+      "priority": "P0",
+      "dependencies": [],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test shipping options display",
+        "Test shipping rate calculation",
+        "Test free shipping threshold",
+        "Test tracking integration"
+      ]
+    },
+    {
+      "id": "F-047",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement guest checkout",
+      "acceptance_criteria": [
+        "Guest can complete checkout",
+        "Guest can create account after checkout",
+        "Guest order is tracked",
+        "Guest receives order confirmation"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": ["F-034"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test guest checkout flow",
+        "Test post-checkout account creation",
+        "Test guest order tracking",
+        "Verify guest email confirmation"
+      ]
+    },
+    {
+      "id": "F-048",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement order history",
+      "acceptance_criteria": [
+        "User can view order history",
+        "Order details are displayed",
+        "Order status updates are shown",
+        "Reorder functionality works"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": ["F-035"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test order history view",
+        "Test order detail display",
+        "Test status update display",
+        "Test reorder functionality"
+      ]
+    },
+    {
+      "id": "F-049",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement order cancellation",
+      "acceptance_criteria": [
+        "User can request cancellation",
+        "Cancellation rules are enforced",
+        "Cancellation is processed",
+        "Refund is initiated if applicable"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": ["F-035"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test cancellation request",
+        "Test cancellation rules",
+        "Verify cancellation processing",
+        "Verify refund initiation"
+      ]
+    },
+    {
+      "id": "F-050",
+      "phase": "phase_05_development_execution",
+      "category": "development",
+      "description": "Implement return processing",
+      "acceptance_criteria": [
+        "User can request return",
+        "Return rules are enforced",
+        "Return authorization is created",
+        "Refund is processed on return receipt"
+      ],
+      "status": "failing",
+      "priority": "P1",
+      "dependencies": ["F-035"],
+      "assignee": "Developer",
+      "verification_steps": [
+        "Test return request",
+        "Test return rules",
+        "Verify RMA creation",
+        "Verify refund processing"
+      ]
+    }
+  ],
+  "metadata": {
+    "total_features": 50,
+    "completed_features": 0,
+    "in_progress_features": 0,
+    "blocked_features": 0,
+    "passing_features": 0,
+    "failing_features": 50,
+    "current_phase": "phase_01_vision_strategy",
+    "created_at": "2025-01-13T00:00:00Z",
+    "updated_at": "2025-01-13T00:00:00Z",
+    "note": "This is a partial example showing 50 features. A complete enterprise project would typically have 200-500 features across all 8 phases."
+  }
+}
