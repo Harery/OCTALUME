@@ -10,8 +10,6 @@ Spoiler alert: **You're going to do great.** And we're here to help you every st
 
 ## Why Your Contribution Matters
 
-Let us tell you a quick story. Last year, a contributor submitted their first PR—a simple documentation fix. Three months later, they were architecting core framework features. Another contributor found a critical bug in their first week of reviewing issues. Your perspective, your experience, and your skills bring something unique that no one else can.
-
 Every contribution, no matter how small, makes OCTALUME better for everyone. We mean this.
 
 ---

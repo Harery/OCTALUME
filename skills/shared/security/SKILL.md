@@ -5,29 +5,7 @@ type: "shared"
 used_by: ["all_phases"]
 ---
 
-# 🔒 Security Framework - Your Shield in a Dangerous World
-
-> "Security protects everything you've built. Without it, you're not building software—you're building regrets."
-
----
-
-## 🌟 Why Security Matters (A True Story)
-
-Let me tell you about "TechStart." They built an amazing e-commerce platform in 6 months. Six months after launch? They lost everything.
-
-Someone discovered they could access any user's order history by changing a URL parameter. No authentication check. Just `order=123` became `order=456` and suddenly you're seeing someone else's purchases. Credit card numbers. Addresses. Phone numbers.
-
-**The result?**
-- $2.3 million in fines and legal fees
-- 47,000 customers affected  
-- Company reputation destroyed
-- Team members left the industry from stress
-
-**The sad part?** This was preventable. A simple security check. A threat model in Phase 3. A security test in Phase 6.
-
-**Security isn't about fear.** It's about protection. It's about building something that lasts. It's about sleep-filled nights knowing your customers' data is safe.
-
-Let's make sure your story has a different ending.
+# 🔒 Security Framework
 
 ---
 

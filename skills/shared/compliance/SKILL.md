@@ -5,34 +5,7 @@ type: "shared"
 used_by: ["all_phases"]
 ---
 
-# 📋 Compliance Framework - Building Trust with Customers
-
-> "Compliance isn't about paperwork—it's about building trust. When customers see you take compliance seriously, they know you take their data seriously too."
-
----
-
-## 🌟 Why Compliance Matters (A Story About Lost Opportunity)
-
-Let me tell you about "HealthFlow," a promising healthcare startup. They had an amazing product—AI-powered health insights that genuinely helped patients. Hospitals loved it. Users loved it. They were ready to scale.
-
-**What happened?** A major hospital system (their dream customer) asked: "Are you HIPAA compliant?"
-
-The HealthFlow team said: "We're working on it. We'll be compliant soon."
-
-The hospital said: "Come back when you are."
-
-**The opportunity cost:**
-- $2.5 million contract lost
-- 18 months of sales cycle wasted
-- Competitor won the contract (because they were HIPAA compliant)
-- HealthFlow spent 6 months scrambling to achieve compliance
-- By the time they were compliant, the competitor was entrenched
-
-**The sad part?** If they had started compliance in Phase 1 (not Phase 7), they would've been compliant when the opportunity came. Instead, they lost their biggest opportunity.
-
-**Compliance isn't a burden.** It's a competitive advantage. It's a moat that protects your business. It's a signal that says "we're trustworthy."
-
-Let's make sure your story has a different ending.
+# 📋 Compliance Framework
 
 ---
 

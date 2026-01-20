@@ -5,30 +5,7 @@ type: "shared"
 used_by: ["all_phases"]
 ---
 
-# ✓ Quality Framework - Your Safety Net Before Production
-
-> "Quality is your safety net. It catches mistakes before your customers do."
-
----
-
-## 🌟 Why Quality Matters (A Story About Trust)
-
-Let me tell you about "QuickShip," a logistics startup that moved fast. Really fast. They shipped features daily. Customers loved the rapid innovation. Until the day everything broke.
-
-**What happened?** A developer pushed a change at 5 PM on Friday. It seemed fine—tests passed, code review approved. By Saturday morning, their shipping calculation was wrong. Packages were being sent to the wrong addresses. 3,400 customers affected.
-
-**The aftermath:**
-- $180,000 in shipping costs to fix mistakes
-- 2,100 angry customer support tickets
-- Team worked all weekend (burnout, not sustainable)
-- Customers lost trust ("I can't rely on them")
-- 15% customer churn in the following month
-
-**The sad part?** This was preventable. A proper end-to-end test would have caught it. A staging environment validation would have revealed it. A quality gate would have prevented the deployment.
-
-**Quality isn't about being slow.** It's about being confident. It's about deploying on Friday and sleeping peacefully. It's about knowing your software works.
-
-Let's make sure your story has a different ending.
+# ✓ Quality Framework
 
 ---
 
