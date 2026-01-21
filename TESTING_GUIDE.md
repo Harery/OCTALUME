@@ -369,7 +369,7 @@ Initialize a new OCTALUME project for a simple todo list application with:
 - Simple user interface
 
 Target: Personal users
-Budget: $5,000
+Budget: Project resources
 Timeline: 2 months
 ```
 

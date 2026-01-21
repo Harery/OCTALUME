@@ -120,7 +120,7 @@ This phase needs more specialists than Phase 1. Requirements depth demands exper
 
 **Security Lead**: They'll define security requirements like *"all API calls must be authenticated"* and *"PII must be encrypted at rest."* These become architecture drivers in Phase 3.
 
-**Compliance Officer**: They'll map requirements to regulations like GDPR or HIPAA. One compliance requirement missed now can cost $100K+ in delays later.
+**Compliance Officer**: They'll map requirements to regulations like GDPR or HIPAA. One compliance requirement missed now can can cause significant delays in delays later.
 
 **Data Architect**: They'll define data entities, relationships, and volumes. They'll ask questions like *"how many users will we have in 3 years?"* that impact infrastructure planning.
 </details>
@@ -247,7 +247,7 @@ You'll define the quality attributes that determine how well your system perform
 - Response time: 45 seconds (users abandoned)
 - Database crashed under load
 - Site was down for 6 hours
-- Lost $180K in sales in one day
+- Lost significant revenue in sales in one day
 - Company's reputation took a massive hit
 
 **The Post-Mortem**:

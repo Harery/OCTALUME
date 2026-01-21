@@ -34,7 +34,7 @@ claude --prompt "Initialize a new lifecycle project for [describe your project]"
 - Admin dashboard for inventory management
 
 Target market: Small to medium businesses
-Budget: $50,000 - $100,000
+Budget: Project resources allocated
 Timeline: 6 months
 Team: 5 developers, 1 QA, 1 DevOps
 Compliance: PCI DSS required"
