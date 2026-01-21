@@ -33,12 +33,12 @@
 - Delivers the shopping experience our customers deserve
 
 **The numbers are compelling:**
-- **Investment**: $2.5M over 18 months
-- **Expected ROI**: 264% over 3 years (that's $12.4M net return)
-- **Break-even**: Month 14 (just over a year)
-- **Revenue boost**: From $10M to $19.5M in 3 years
+- **Investment**: Project resources over development timeline
+- **Expected ROI**: Significant return over 3 years through increased revenue and efficiency
+- **Break-even**: Estimated within first year of operation
+- **Revenue boost**: Substantial increase projected over 3 years
 
-**This isn't just about technology - it's about our future.** Competitors with modern platforms are eating our lunch. Every day we wait, we lose $14K in revenue and market share we may never get back.
+**This isn't just about technology - it's about our future.** Competitors with modern platforms are eating our lunch. Every day we wait, we lose revenue and market share we may never get back.
 
 **Recommendation**: **GO** - Proceed with development immediately
 
@@ -66,7 +66,7 @@ You pull out your phone during your commute (because that's when 60% of our cust
 
 **Here's the heart of the issue:**
 
-> Our legacy e-commerce platform, built in 2015 on outdated technology, cannot handle modern shopping demands. It's limiting our growth, damaging our brand, and costing us $5M annually in lost revenue. Competitors with modern platforms are capturing the market share that should be ours.
+> Our legacy e-commerce platform, built in 2015 on outdated technology, cannot handle modern shopping demands. It's limiting our growth, damaging our brand, and costing us significant revenue annually in lost revenue. Competitors with modern platforms are capturing the market share that should be ours.
 
 **In one sentence:** We're trying to win a Formula 1 race with a horse and buggy.
 
