@@ -1,12 +1,27 @@
-# CLAUDE.md - OCTALUME Framework Context v2.0
+# CLAUDE.md - OCTALUME Framework Context v2.1
 
 This file is auto-loaded when Claude Code starts in this directory. It provides the complete context for understanding and working with the OCTALUME Enterprise Lifecycle Framework.
 
 ---
 
-## 🚀 What's New in v2.0
+## 🚀 What's New in v2.1 (Retrofit Release)
 
-OCTALUME v2.0 introduces powerful automation features while maintaining enterprise governance:
+OCTALUME v2.1 brings Auto-Claude-inspired features to the governance-first framework:
+
+| Feature | Description | Command |
+|---------|-------------|---------|
+| **🔍 Semantic Memory Search** | Vector-based search across memory | `/memory-semantic-search` |
+| **🔒 Security Allowlist** | 300+ command rules with validators | `/security-check` |
+| **🤖 AI QA Reviewer** | AI-powered quality validation | `/qa-ai-review` |
+| **🔀 AI Merge Resolver** | AI-assisted conflict resolution | `/worktree-ai-merge` |
+| **📊 Codebase Insights** | AI analysis of project structure | `/analyze-codebase` |
+| **💡 Improvement Discovery** | Find technical debt & improvements | `/find-improvements` |
+| **🗺️ Roadmap Discovery** | AI discovers potential features | `/discover-roadmap` |
+| **📐 Architecture Explainer** | Generate architecture docs | `/explain-architecture` |
+| **🦊 GitLab Integration** | Full GitLab CLI support | `./scripts/gitlab-integration.sh` |
+| **📋 Linear Integration** | Linear project management sync | `./scripts/linear-integration.sh` |
+
+### v2.0 Features (Still Available)
 
 | Feature | Description | Command |
 |---------|-------------|---------|
@@ -46,38 +61,61 @@ OCTALUME/
 │   ├── ORCHESTRATOR.md               # Multi-agent coordinator
 │   ├── CONTEXT_ENGINEERING.md        # Context management
 │   ├── agents/                       # Agent harnesses
-│   ├── commands/                     # 🆕 v2.0 slash commands
+│   ├── commands/                     # Slash commands
 │   │   ├── memory-search.md
 │   │   ├── memory-save.md
+│   │   ├── memory-semantic-search.md # 🆕 v2.1
 │   │   ├── worktree-init.md
 │   │   ├── worktree-merge.md
+│   │   ├── worktree-ai-merge.md      # 🆕 v2.1
 │   │   ├── qa-run.md
 │   │   ├── qa-fix.md
+│   │   ├── qa-ai-review.md           # 🆕 v2.1
+│   │   ├── security-check.md         # 🆕 v2.1
+│   │   ├── analyze-codebase.md       # 🆕 v2.1
+│   │   ├── find-improvements.md      # 🆕 v2.1
+│   │   ├── discover-roadmap.md       # 🆕 v2.1
+│   │   ├── explain-architecture.md   # 🆕 v2.1
 │   │   ├── github-issue.md
 │   │   ├── github-pr.md
 │   │   ├── stack-detect.md
 │   │   └── changelog.md
-│   ├── memory/                       # 🆕 v2.0 persistent memory
+│   ├── memory/                       # Persistent memory
 │   │   ├── memory.json
 │   │   ├── memory-manager.js
+│   │   ├── semantic-search.js        # 🆕 v2.1
 │   │   ├── sessions/
 │   │   └── insights/
-│   ├── worktrees/                    # 🆕 v2.0 worktree tracking
+│   ├── security/                     # 🆕 v2.1 Security controls
+│   │   ├── allowlist.json
+│   │   ├── security-check.js
+│   │   └── validators/
+│   │       ├── validate-rm.sh
+│   │       ├── validate-git.sh
+│   │       └── validate-chmod.sh
+│   ├── worktrees/                    # Worktree tracking
 │   │   └── active.json
-│   ├── qa/                           # 🆕 v2.0 automated QA
+│   ├── qa/                           # Automated QA
 │   │   ├── config.json
+│   │   ├── ai-reviewer.md            # 🆕 v2.1
 │   │   ├── criteria/
 │   │   └── reports/
-│   ├── integrations/                 # 🆕 v2.0 external integrations
-│   │   └── github.json
-│   ├── specs/                        # 🆕 v2.0 detected stack
+│   ├── integrations/                 # External integrations
+│   │   ├── github.json
+│   │   ├── gitlab.json               # 🆕 v2.1
+│   │   └── linear.json               # 🆕 v2.1
+│   ├── specs/                        # Detected stack
 │   │   └── detected-stack.json
 │   ├── hooks/                        # Event triggers
 │   └── tools/                        # Tool definitions
-├── scripts/                          # 🆕 v2.0 automation scripts
+├── scripts/                          # Automation scripts
 │   ├── worktree-manager.sh
 │   ├── qa-runner.sh
+│   ├── qa-ai-review.sh               # 🆕 v2.1
+│   ├── ai-merge-resolver.sh          # 🆕 v2.1
 │   ├── github-integration.sh
+│   ├── gitlab-integration.sh         # 🆕 v2.1
+│   ├── linear-integration.sh         # 🆕 v2.1
 │   ├── stack-detector.sh
 │   └── changelog-generator.sh
 └── skills/                           # Phase-specific skills
@@ -94,7 +132,39 @@ OCTALUME/
 
 ---
 
-## 🆕 v2.0 Commands Reference
+## 🆕 v2.1 Commands Reference
+
+### Semantic Memory (AI-Powered)
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/memory-semantic-search <query>` | Search memory using semantic similarity | `/memory-semantic-search authentication flow` |
+
+### Security Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/security-check <command>` | Validate command against allowlist | `/security-check "rm -rf node_modules"` |
+
+### AI QA Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/qa-ai-review [phase]` | AI-powered quality review | `/qa-ai-review P3` |
+| `/worktree-ai-merge <name>` | AI-assisted merge conflict resolution | `/worktree-ai-merge feature-auth` |
+
+### Codebase Insight Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/analyze-codebase` | Comprehensive codebase analysis | `/analyze-codebase` |
+| `/find-improvements` | Discover technical debt & improvements | `/find-improvements` |
+| `/discover-roadmap` | AI discovers potential features | `/discover-roadmap` |
+| `/explain-architecture` | Generate architecture explanation | `/explain-architecture` |
+
+---
+
+## v2.0 Commands Reference
 
 ### Memory Commands
 

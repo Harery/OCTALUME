@@ -1,0 +1,44 @@
+{
+  "enabled": true,
+  "description": "GitLab integration configuration for OCTALUME",
+  
+  "defaults": {
+    "target_branch": "main",
+    "squash_on_merge": true,
+    "remove_source_branch": true,
+    "draft_by_default": false
+  },
+  
+  "labels": {
+    "P1": "phase::vision",
+    "P2": "phase::requirements",
+    "P3": "phase::architecture",
+    "P4": "phase::planning",
+    "P5": "phase::development",
+    "P6": "phase::quality",
+    "P7": "phase::deployment",
+    "P8": "phase::operations",
+    "bug": "type::bug",
+    "feature": "type::feature",
+    "enhancement": "type::enhancement",
+    "documentation": "type::documentation",
+    "security": "priority::security"
+  },
+  
+  "templates": {
+    "issue": {
+      "bug": "## Bug Description\n\n## Steps to Reproduce\n\n## Expected Behavior\n\n## Actual Behavior\n\n## Environment",
+      "feature": "## Feature Description\n\n## User Story\n\n## Acceptance Criteria\n\n## Technical Notes",
+      "task": "## Task Description\n\n## Requirements\n\n## Definition of Done"
+    },
+    "mr": {
+      "default": "## Changes\n\n## Testing\n\n## Checklist\n- [ ] Tests added\n- [ ] Documentation updated\n- [ ] No breaking changes"
+    }
+  },
+  
+  "auto_actions": {
+    "create_issue_on_qa_failure": false,
+    "create_mr_on_worktree_complete": false,
+    "run_pipeline_on_mr_create": true
+  }
+}

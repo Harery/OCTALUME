@@ -1,0 +1,43 @@
+{
+  "enabled": false,
+  "description": "Linear integration configuration for OCTALUME",
+  "note": "Set LINEAR_API_KEY environment variable to enable",
+  
+  "defaults": {
+    "default_team": null,
+    "default_project": null,
+    "default_priority": 3
+  },
+  
+  "phase_labels": {
+    "P1": "Phase: Vision",
+    "P2": "Phase: Requirements", 
+    "P3": "Phase: Architecture",
+    "P4": "Phase: Planning",
+    "P5": "Phase: Development",
+    "P6": "Phase: Quality",
+    "P7": "Phase: Deployment",
+    "P8": "Phase: Operations"
+  },
+  
+  "priority_mapping": {
+    "urgent": 1,
+    "high": 2,
+    "medium": 3,
+    "low": 4,
+    "none": 0
+  },
+  
+  "sync": {
+    "auto_sync": false,
+    "sync_interval_minutes": 30,
+    "sync_assigned_only": true,
+    "sync_to_memory": true
+  },
+  
+  "auto_actions": {
+    "create_issue_on_qa_failure": false,
+    "update_issue_on_commit": false,
+    "close_issue_on_merge": false
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "version": "2.1",
+  "description": "OCTALUME Security Command Allowlist - Controls which commands can be executed",
+  
+  "base_commands": {
+    "description": "Always allowed - safe read/navigation commands",
+    "commands": [
+      "ls", "ll", "la", "dir",
+      "cat", "head", "tail", "less", "more",
+      "grep", "egrep", "fgrep", "rg", "ag",
+      "find", "fd", "locate",
+      "wc", "sort", "uniq", "cut", "tr", "awk", "sed",
+      "echo", "printf", "tee",
+      "pwd", "cd", "pushd", "popd",
+      "which", "whereis", "type", "command",
+      "file", "stat", "du", "df",
+      "date", "cal", "time",
+      "env", "printenv", "export",
+      "true", "false", "test", "[", "[[",
+      "diff", "cmp", "comm",
+      "xargs", "parallel",
+      "jq", "yq"
+    ]
+  },
+  
+  "write_commands": {
+    "description": "File modification commands - allowed for write-enabled roles",
+    "commands": [
+      "mkdir", "touch", "cp", "mv", "ln",
+      "tee", "cat >", "echo >",
+      "chmod", "chown"
+    ],
+    "requires_validation": ["chmod", "chown"]
+  },
+  
+  "dangerous_commands": {
+    "description": "Commands requiring extra validation",
+    "commands": {
+      "rm": {
+        "validator": "validate-rm.sh",
+        "blocked_patterns": [
+          "-rf /",
+          "-rf /*",
+          "-rf ~",
+          "-rf ~/",
+          "-rf $HOME",
+          "--no-preserve-root",
+          "/ ",
+          "/* "
+        ],
+        "allowed_flags": ["-f", "-r", "-rf", "-i", "-v"],
+        "max_depth": 5
+      },
+      "git push": {
+        "validator": "validate-git.sh",
+        "require_confirmation": true,
+        "blocked_branches": ["main", "master", "production"],
+        "force_push_blocked": true
+      },
+      "git commit": {
+        "validator": "validate-git.sh",
+        "secret_scanning": true,
+        "patterns_to_block": [
+          "password\\s*=",
+          "api_key\\s*=",
+          "secret\\s*=",
+          "token\\s*=",
+          "AWS_SECRET",
+          "PRIVATE_KEY"
+        ]
+      },
+      "sudo": {
+        "validator": null,
+        "blocked": true,
+        "message": "sudo commands are not allowed in OCTALUME"
+      },
+      "curl": {
+        "validator": "validate-curl.sh",
+        "allowed_methods": ["GET", "POST", "PUT", "DELETE"],
+        "blocked_domains": [],
+        "require_https": false
+      },
+      "wget": {
+        "validator": "validate-wget.sh"
+      }
+    }
+  },
+  
+  "package_managers": {
+    "description": "Package manager commands",
+    "npm": ["npm install", "npm ci", "npm run", "npm test", "npm build", "npm start", "npm exec", "npx"],
+    "yarn": ["yarn", "yarn install", "yarn add", "yarn run", "yarn test", "yarn build"],
+    "pnpm": ["pnpm", "pnpm install", "pnpm add", "pnpm run", "pnpm exec"],
+    "pip": ["pip install", "pip freeze", "pip list", "pip show"],
+    "uv": ["uv pip", "uv venv", "uv run", "uvx"],
+    "cargo": ["cargo build", "cargo run", "cargo test", "cargo check"],
+    "go": ["go build", "go run", "go test", "go mod", "go get"],
+    "composer": ["composer install", "composer require", "composer update"]
+  },
+  
+  "build_tools": {
+    "description": "Build and compilation commands",
+    "commands": [
+      "make", "cmake", "ninja",
+      "gcc", "g++", "clang", "clang++",
+      "rustc", "cargo",
+      "javac", "java", "mvn", "gradle",
+      "dotnet", "msbuild",
+      "webpack", "vite", "esbuild", "rollup", "parcel",
+      "tsc", "babel", "swc"
+    ]
+  },
+  
+  "test_runners": {
+    "description": "Testing framework commands",
+    "commands": [
+      "jest", "vitest", "mocha", "jasmine", "karma",
+      "pytest", "python -m pytest", "unittest",
+      "go test",
+      "cargo test",
+      "dotnet test",
+      "mvn test", "gradle test",
+      "phpunit",
+      "rspec", "minitest"
+    ]
+  },
+  
+  "linters_formatters": {
+    "description": "Code quality tools",
+    "commands": [
+      "eslint", "prettier", "biome",
+      "ruff", "black", "isort", "flake8", "pylint", "mypy",
+      "rustfmt", "clippy",
+      "gofmt", "golint", "staticcheck",
+      "rubocop",
+      "php-cs-fixer", "phpstan"
+    ]
+  },
+  
+  "version_control": {
+    "description": "Git commands",
+    "safe": [
+      "git status", "git log", "git diff", "git show",
+      "git branch", "git tag", "git remote",
+      "git fetch", "git pull",
+      "git stash", "git stash list", "git stash show",
+      "git blame", "git bisect",
+      "git ls-files", "git ls-tree"
+    ],
+    "write": [
+      "git add", "git commit", "git reset",
+      "git checkout", "git switch",
+      "git merge", "git rebase",
+      "git cherry-pick",
+      "git worktree"
+    ],
+    "dangerous": [
+      "git push",
+      "git push --force",
+      "git reset --hard",
+      "git clean"
+    ]
+  },
+  
+  "role_permissions": {
+    "description": "Role-based command access",
+    "TECH_LEAD": {
+      "allowed": ["base_commands", "write_commands", "dangerous_commands", "package_managers", "build_tools", "test_runners", "linters_formatters", "version_control"],
+      "denied": ["sudo"]
+    },
+    "DEVELOPER": {
+      "allowed": ["base_commands", "write_commands", "package_managers", "build_tools", "test_runners", "linters_formatters", "version_control.safe", "version_control.write"],
+      "denied": ["sudo", "dangerous_commands.rm", "version_control.dangerous"]
+    },
+    "QA_LEAD": {
+      "allowed": ["base_commands", "test_runners", "version_control.safe"],
+      "denied": ["write_commands", "dangerous_commands", "sudo"]
+    },
+    "DEVOPS": {
+      "allowed": ["base_commands", "write_commands", "dangerous_commands", "package_managers", "build_tools", "version_control"],
+      "denied": []
+    },
+    "SECURITY_ARCHITECT": {
+      "allowed": ["base_commands", "linters_formatters", "version_control.safe"],
+      "denied": ["write_commands", "dangerous_commands", "sudo"]
+    },
+    "READ_ONLY": {
+      "allowed": ["base_commands", "version_control.safe"],
+      "denied": ["write_commands", "dangerous_commands", "package_managers", "build_tools", "sudo"]
+    }
+  }
+}
