@@ -33,12 +33,12 @@ Users should be able to register, log in, and browse product categories by sprin
 
 | ID | Story | Points | Assignee | Status |
 |----|-------|--------|----------|--------|
-| US-001 | As a user, I want to register with email so I can create an account | 5 | Alex Chen | ✅ Done |
-| US-002 | As a user, I want to login with my credentials so I can access my account | 5 | Alex Chen | ✅ Done |
-| US-003 | As a user, I want to reset my password so I can recover account access | 3 | Alex Chen | ✅ Done |
-| US-004 | As a user, I want to browse product categories so I can discover products | 8 | Jordan Lee | ✅ Done |
-| US-005 | As a user, I want to view a product listing page so I can see available items | 8 | Jordan Lee | ✅ Done |
-| US-006 | As a user, I want to view product details so I can learn about items | 5 | Sam Wilson | ✅ Done |
+| US-001 | As a user, I want to register with email so I can create an account | 5 | Alex Chen |  Done |
+| US-002 | As a user, I want to login with my credentials so I can access my account | 5 | Alex Chen |  Done |
+| US-003 | As a user, I want to reset my password so I can recover account access | 3 | Alex Chen |  Done |
+| US-004 | As a user, I want to browse product categories so I can discover products | 8 | Jordan Lee |  Done |
+| US-005 | As a user, I want to view a product listing page so I can see available items | 8 | Jordan Lee |  Done |
+| US-006 | As a user, I want to view product details so I can learn about items | 5 | Sam Wilson |  Done |
 | US-007 | As a user, I want to sort products by price so I can find deals | 3 | Sam Wilson | 👀 In Review |
 | US-008 | As a user, I want basic product filtering so I can narrow my search | 5 | Sam Wilson | ⬜ Carryover |
 
@@ -82,3 +82,7 @@ Users should be able to register, log in, and browse product categories by sprin
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

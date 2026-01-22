@@ -1,10 +1,9 @@
 # Runbook Template
 
 **Document ID:** P8-RUN-{XXX}  
-**Version:** 1.0  
+  
 **Service:** {Service Name}  
 **Author:** {SRE Lead}  
-**Date:** {YYYY-MM-DD}
 
 ---
 
@@ -322,3 +321,7 @@ aws s3 ls s3://backups/database/ | tail -10
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

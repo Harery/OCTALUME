@@ -1,10 +1,9 @@
 # Rollback Plan Template
 
 **Document ID:** P7-ROLLBACK-{XXX}  
-**Version:** 1.0  
+  
 **Release:** {X.Y.Z}  
 **Author:** {DevOps Lead}  
-**Date:** {YYYY-MM-DD}
 
 ---
 
@@ -192,3 +191,7 @@ Please contact {name} for questions.
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

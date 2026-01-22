@@ -39,8 +39,8 @@
 - ⬜ To Do
 - 🔄 In Progress
 - 👀 In Review
-- ✅ Done
-- ❌ Blocked
+-  Done
+-  Blocked
 
 ### 2.2 Technical Tasks
 
@@ -220,3 +220,7 @@ We, the development team, commit to delivering the sprint goal by completing all
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

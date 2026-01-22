@@ -1,10 +1,9 @@
 # Monitoring Setup Template
 
 **Document ID:** P8-MON-{XXX}  
-**Version:** 1.0  
+  
 **Service:** {Service Name}  
 **Author:** {SRE Lead}  
-**Date:** {YYYY-MM-DD}
 
 ---
 
@@ -286,3 +285,7 @@ message:"authentication failed" AND @timestamp:[now-1h TO now]
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

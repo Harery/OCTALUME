@@ -1,10 +1,9 @@
 # Threat Model Document Template
 
 **Document ID:** P3-THREAT-{XXX}  
-**Version:** 1.0  
+  
 **Status:** Draft | In Review | Approved  
 **Author:** {Security Lead}  
-**Date:** {YYYY-MM-DD}  
 **Classification:** Confidential  
 **Traceability:** Links to P3-ARCH-{XXX}, P3-SEC-{XXX}
 
@@ -275,3 +274,7 @@ This threat model uses the STRIDE methodology:
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

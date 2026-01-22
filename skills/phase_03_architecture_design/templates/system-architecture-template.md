@@ -1,10 +1,9 @@
 # System Architecture Document (SAD) Template
 
 **Document ID:** P3-ARCH-{XXX}  
-**Version:** 1.0  
+  
 **Status:** Draft | In Review | Approved  
 **Author:** {Architect Name}  
-**Date:** {YYYY-MM-DD}  
 **Traceability:** Links to P2-REQ-{XXX}, P2-NFR-{XXX}
 
 ---
@@ -321,3 +320,7 @@ User ──► IdP ──► Token ──► API Gateway ──► Service
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

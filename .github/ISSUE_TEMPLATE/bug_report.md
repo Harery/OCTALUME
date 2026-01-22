@@ -86,3 +86,7 @@ If you have any logs or error output, please paste them here. This information i
 ## Thank You Again!
 
 Your contribution matters. Every bug report helps us improve Expert Mentor for the entire community. We'll review your report and respond as soon as we can.
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

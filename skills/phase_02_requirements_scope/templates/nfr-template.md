@@ -1,10 +1,9 @@
 # Non-Functional Requirements (NFR) Template
 
 **Document ID:** P2-NFR-{XXX}  
-**Version:** 1.0  
+  
 **Status:** Draft | In Review | Approved  
 **Author:** {Author Name}  
-**Date:** {YYYY-MM-DD}  
 **Traceability:** Links to P2-REQ-{XXX}
 
 ---
@@ -228,3 +227,7 @@
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

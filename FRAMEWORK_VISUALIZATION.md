@@ -572,7 +572,7 @@ Epic: "User Authentication"
 3. **Impact analysis:** "If we change this, what breaks?" → Trace dependencies
 
 <details>
-<summary>🔍 How to use traceability in real projects</summary>
+<summary> How to use traceability in real projects</summary>
 
 **Scenario:** A bug is found in production
 
@@ -910,10 +910,13 @@ Want to learn more?
 
 ---
 
-**Version:** 1.0.0
-**Last Updated:** 2026-01-20
+
 OCTALUME Enterprise Lifecycle Framework
 
 ---
 
 > **Remember:** These diagrams might look complex at first, but they represent a well-thought-out system that's guided hundreds of projects to success. Take your time, ask questions, and let OCTALUME guide you through your software development journey.
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

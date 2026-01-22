@@ -1,10 +1,9 @@
 # Functional Requirements Document (FRD) Template
 
 **Document ID:** P2-REQ-{XXX}  
-**Version:** 1.0  
+  
 **Status:** Draft | In Review | Approved  
 **Author:** {Author Name}  
-**Date:** {YYYY-MM-DD}  
 **Traceability:** Links to P1-VISION-{XXX}
 
 ---
@@ -173,3 +172,7 @@
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

@@ -75,3 +75,7 @@ Have you explored other ways to solve this problem? Sharing what you've already 
 ## Thank You for Contributing!
 
 Your ideas help shape the future of Expert Mentor. We review all feature requests and appreciate you taking the time to make the project better for everyone. We'll respond as soon as we can to discuss your suggestion.
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

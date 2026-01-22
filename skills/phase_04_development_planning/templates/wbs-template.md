@@ -1,10 +1,9 @@
 # Work Breakdown Structure (WBS) Template
 
 **Document ID:** P4-WBS-{XXX}  
-**Version:** 1.0  
+  
 **Status:** Draft | In Review | Approved  
 **Author:** {Project Manager}  
-**Date:** {YYYY-MM-DD}  
 **Traceability:** Links to P3-ARCH-{XXX}
 
 ---
@@ -245,3 +244,7 @@
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

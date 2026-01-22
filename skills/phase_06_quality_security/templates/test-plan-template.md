@@ -1,10 +1,9 @@
 # Test Plan Template
 
 **Document ID:** P6-TEST-{XXX}  
-**Version:** 1.0  
+  
 **Status:** Draft | In Review | Approved  
 **Author:** {QA Lead}  
-**Date:** {YYYY-MM-DD}  
 **Traceability:** Links to P2-REQ-{XXX}, P5-FEAT-{XXX}
 
 ---
@@ -202,3 +201,7 @@ Open → In Analysis → In Development → Ready for Test → Verified → Clos
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

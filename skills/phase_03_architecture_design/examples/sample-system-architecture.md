@@ -1,10 +1,9 @@
 # Example: E-Commerce Platform Architecture
 
 **Document ID:** P3-ARCH-001  
-**Version:** 1.0  
+  
 **Status:** Approved  
 **Author:** David Kim, Chief Technical Architect  
-**Date:** 2026-01-18  
 **Traceability:** Links to P2-REQ-001, P2-NFR-001
 
 ---
@@ -138,3 +137,7 @@ This document defines the system architecture for ShopEase, a cloud-native e-com
 ---
 
 **Document End**
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**

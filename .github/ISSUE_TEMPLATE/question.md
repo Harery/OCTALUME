@@ -65,3 +65,7 @@ For the fastest response, you might want to quickly check if your question has a
 ## Thank You for Reaching Out!
 
 Asking questions is part of learning, and we're glad you're here. We'll do our best to provide a helpful answer as soon as we can.
+
+---
+
+**Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework**
