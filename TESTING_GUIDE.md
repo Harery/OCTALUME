@@ -38,7 +38,7 @@ df -h
 - Disk space showing at least 500MB available
 
 <details>
-<summary>🔧 Something doesn't match?</summary>
+<summary> Something doesn't match?</summary>
 
 **Problem:** Your OS version is older than required.
 
@@ -73,7 +73,7 @@ v18.x.x  # (or higher - this is good!)
 ```
 
 <details>
-<summary>❌ Error: "node: command not found"</summary>
+<summary> Error: "node: command not found"</summary>
 
 This means Node.js didn't install properly. Let's fix it:
 
@@ -90,7 +90,7 @@ sudo apt-get install -y nodejs
 </details>
 
 <details>
-<summary>⚠️ Warning: Version too old</summary>
+<summary> Warning: Version too old</summary>
 
 If you see a version lower than 18, you'll need to update:
 
@@ -126,7 +126,7 @@ git version 2.x.x  # (any 2.x version is fine)
 ```
 
 <details>
-<summary>❌ Error: "git: command not found"</summary>
+<summary> Error: "git: command not found"</summary>
 
 If git isn't found, the install command above should fix it. If you still have issues, try:
 
@@ -172,14 +172,14 @@ claude login
 4. Return to your terminal—you're ready to go!
 
 <details>
-<summary>❌ Error: Browser doesn't open</summary>
+<summary> Error: Browser doesn't open</summary>
 
 If your browser doesn't open automatically (common on headless servers), you'll see a URL in the terminal. Copy it and paste it manually into your browser.
 
 </details>
 
 <details>
-<summary>❌ Error: "Cannot find module '@anthropic-ai/claude-code'"</summary>
+<summary> Error: "Cannot find module '@anthropic-ai/claude-code'"</summary>
 
 This usually means npm's global path isn't set up. Try:
 
@@ -211,12 +211,12 @@ ls -la
 
 **What you should see:**
 ```
-✅ README.md              # Framework overview
-✅ SETUP_GUIDE.md         # How to use it
-✅ CLAUDE.md              # Auto-loaded context
-✅ .claude/               # Configuration (hidden directory)
-✅ skills/                # Phase and shared skills
-✅ LICENSE                # License information
+ README.md              # Framework overview
+ SETUP_GUIDE.md         # How to use it
+ CLAUDE.md              # Auto-loaded context
+ .claude/               # Configuration (hidden directory)
+ skills/                # Phase and shared skills
+ LICENSE                # License information
 ```
 
 **Welcome home!** You're now standing in the OCTALUME directory. This is where the magic happens.
@@ -240,11 +240,11 @@ ls node_modules/@modelcontextprotocol/
 
 **What you should see:**
 ```
-✅ node_modules/@modelcontextprotocol/sdk/  # Success!
+ node_modules/@modelcontextprotocol/sdk/  # Success!
 ```
 
 <details>
-<summary>❌ Error: "EACCES: permission denied"</summary>
+<summary> Error: "EACCES: permission denied"</summary>
 
 This is a common permission issue. Let's fix it:
 
@@ -280,24 +280,24 @@ ls -la skills/
 
 For `.claude/`:
 ```
-✅ mcp-server/      # MCP server with dependencies
-✅ agents/          # Agent configurations
-✅ commands/        # Claude Code commands
-✅ skills/          # Additional skill files
-✅ hooks/           # Event hook scripts
+ mcp-server/      # MCP server with dependencies
+ agents/          # Agent configurations
+ commands/        # Claude Code commands
+ skills/          # Additional skill files
+ hooks/           # Event hook scripts
 ```
 
 For `skills/`:
 ```
-✅ phase_01_vision_strategy/
-✅ phase_02_requirements_scope/
-✅ phase_03_architecture_design/
-✅ phase_04_development_planning/
-✅ phase_05_development_execution/
-✅ phase_06_quality_security/
-✅ phase_07_deployment_release/
-✅ phase_08_operations_maintenance/
-✅ shared/          # Cross-cutting skills
+ phase_01_vision_strategy/
+ phase_02_requirements_scope/
+ phase_03_architecture_design/
+ phase_04_development_planning/
+ phase_05_development_execution/
+ phase_06_quality_security/
+ phase_07_deployment_release/
+ phase_08_operations_maintenance/
+ shared/          # Cross-cutting skills
 ```
 
 **You're ready to test!** Everything should be in place now.
@@ -339,7 +339,7 @@ Claude should explain that OCTALUME is an enterprise 8-phase software developmen
 8. Operations & Maintenance
 
 <details>
-<summary>❌ Claude doesn't know about OCTALUME</summary>
+<summary> Claude doesn't know about OCTALUME</summary>
 
 If Claude doesn't respond with OCTALUME information, CLAUDE.md might not be loading. Check:
 
@@ -374,11 +374,11 @@ Timeline: 2 months
 ```
 
 **What should happen:**
-1. ✅ Claude creates the project directory structure
-2. ✅ Claude generates a feature list (200-500 features for a full project)
-3. ✅ Claude initializes a git repository
-4. ✅ Claude creates an artifacts directory for documentation
-5. ✅ Claude starts Phase 1: Vision & Strategy
+1.  Claude creates the project directory structure
+2.  Claude generates a feature list (200-500 features for a full project)
+3.  Claude initializes a git repository
+4.  Claude creates an artifacts directory for documentation
+5.  Claude starts Phase 1: Vision & Strategy
 
 **Let's verify:**
 
@@ -395,14 +395,14 @@ ls -la artifacts/
 
 **What you should see:**
 ```
-✅ .claude/project-state.json  # Project tracking
-✅ artifacts/P1/               # Phase 1 artifacts directory
-✅ feature_list.json           # Generated feature list
-✅ .git/                       # Git repository initialized
+ .claude/project-state.json  # Project tracking
+ artifacts/P1/               # Phase 1 artifacts directory
+ feature_list.json           # Generated feature list
+ .git/                       # Git repository initialized
 ```
 
 <details>
-<summary>❌ Error: "Project state not found"</summary>
+<summary> Error: "Project state not found"</summary>
 
 If the project didn't initialize properly, try again with a clearer prompt:
 
@@ -442,7 +442,7 @@ cat artifacts/P1/P1-VISION-001-business-case.md
 
 **What you should see:**
 ```
-✅ P1-VISION-001-business-case.md
+ P1-VISION-001-business-case.md
 ```
 
 The file should contain:
@@ -453,7 +453,7 @@ The file should contain:
 - Recommendation
 
 <details>
-<summary>❌ Artifact not created</summary>
+<summary> Artifact not created</summary>
 
 If the artifact wasn't created, check the artifacts directory:
 
@@ -491,7 +491,7 @@ cat artifacts/P1/P1-VISION-002-prd.md
 
 **What you should see:**
 ```
-✅ P1-VISION-002-prd.md
+ P1-VISION-002-prd.md
 ```
 
 The file should contain:
@@ -545,7 +545,7 @@ Complete Phase 1 and run go/no-go decision to move to Phase 2.
 - Explanation of the decision
 
 <details>
-<summary>⚠️ No-Go decision: What now?</summary>
+<summary> No-Go decision: What now?</summary>
 
 A No-Go decision isn't failure—it's quality control! Claude will tell you exactly what's missing. For example:
 - "Business case incomplete—missing financial projections"
@@ -696,12 +696,12 @@ time claude --prompt "Show me the framework structure"
 ```
 
 **Expected results:**
-- ✅ < 3 seconds: Excellent
-- ✅ < 5 seconds: Good
-- ⚠️ ≥ 5 seconds: Acceptable but consider system resources
+-  < 3 seconds: Excellent
+-  < 5 seconds: Good
+-  ≥ 5 seconds: Acceptable but consider system resources
 
 <details>
-<summary>🐌 Slow loading? Here's why</summary>
+<summary> Slow loading? Here's why</summary>
 
 Slow loading can be caused by:
 - Low RAM (close other programs)
@@ -724,9 +724,9 @@ Slow loading can be caused by:
 ```
 
 **Expected results:**
-- ✅ < 1GB: Excellent
-- ✅ < 2GB: Good
-- ⚠️ ≥ 2GB: Monitor during extended use
+-  < 1GB: Excellent
+-  < 2GB: Good
+-  ≥ 2GB: Monitor during extended use
 
 ---
 
@@ -759,14 +759,14 @@ node index.js
 
 **What you should see:**
 ```
-✅ MCP Server listening on port 3000
-✅ Loaded 9 lifecycle tools
+ MCP Server listening on port 3000
+ Loaded 9 lifecycle tools
 ```
 
 **Press Ctrl+C to stop the server**
 
 <details>
-<summary>❌ Error: "Cannot find module 'express'"</summary>
+<summary> Error: "Cannot find module 'express'"</summary>
 
 Dependencies might not be installed. Run:
 
@@ -792,11 +792,11 @@ ls -la .claude/memory/*.sh
 
 **What you should see:**
 ```
-✅ -rwxr-xr-x  # Executable script (755 permission)
+ -rwxr-xr-x  # Executable script (755 permission)
 ```
 
 <details>
-<summary>❌ Wrong permissions?</summary>
+<summary> Wrong permissions?</summary>
 
 If scripts show `-rw-r--r--` (not executable), fix them:
 
@@ -813,19 +813,19 @@ ls -la .claude/hooks/*.sh
 
 ---
 
-## Congratulations, Tester! 🎉
+## Congratulations, Tester! 
 
 You've completed the OCTALUME testing guide! Here's what you accomplished:
 
-✅ Verified your system meets requirements
-✅ Installed Node.js, npm, git, and Claude Code
-✅ Cloned and configured OCTALUME
-✅ Tested framework initialization
-✅ Created artifacts (business case, PRD)
-✅ Verified traceability system
-✅ Tested quality gates
-✅ Validated edge case handling
-✅ Checked performance benchmarks
+ Verified your system meets requirements
+ Installed Node.js, npm, git, and Claude Code
+ Cloned and configured OCTALUME
+ Tested framework initialization
+ Created artifacts (business case, PRD)
+ Verified traceability system
+ Tested quality gates
+ Validated edge case handling
+ Checked performance benchmarks
 
 ---
 
@@ -858,8 +858,8 @@ We'd love to hear about your testing experience—both successes and issues help
 
 **Ways to reach us:**
 - **GitHub Issues:** https://github.com/Harery/OCTALUME/issues
-- **Email:** mohamed@harery.com
-- **Website:** https://www.harery.com/
+- **Email:** octalume@harery.com
+- **Website:** https://harery.com/
 
 **When reporting issues, please include:**
 - Your OS and version
@@ -884,4 +884,4 @@ Thank you for being a thorough tester. Your diligence makes OCTALUME better for 
 
 **Version:** 1.0.0
 **Last Updated:** 2026-01-20
-**Expert Mentor Review**: Transforming technical documentation into warm, guided experiences
+**OCTALUME Enterprise Lifecycle Framework

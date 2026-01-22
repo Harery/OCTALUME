@@ -20,7 +20,7 @@ This document is packed with visual diagrams (called "Mermaid diagrams") that sh
 - **Curious minds** who just want to see how it all fits together
 
 <details>
-<summary>🎨 How to view these diagrams</summary>
+<summary> How to view these diagrams</summary>
 
 **Quick options:**
 1. **GitHub/GitLab** — Just open this file there, diagrams render automatically
@@ -415,7 +415,7 @@ stateDiagram-v2
 - **No-Go** → Project ends (fix issues and restart later)
 
 <details>
-<summary>⚠️ What happens at a No-Go decision?</summary>
+<summary> What happens at a No-Go decision?</summary>
 
 A No-Go decision isn't failure—it's quality control. Here's what happens:
 
@@ -498,7 +498,7 @@ flowchart TB
 - Keeps context usage efficient
 
 <details>
-<summary>💡 What's a "token"?</summary>
+<summary> What's a "token"?</summary>
 
 A token is a chunk of text—roughly 3/4 of a word. Think of tokens as pieces of a puzzle:
 
@@ -661,7 +661,7 @@ flowchart TB
 | 8: Operations | Security monitoring | Quality monitoring | Compliance audits |
 
 <details>
-<summary>🛡️ Why "shift-left" matters</summary>
+<summary> Why "shift-left" matters</summary>
 
 "Shift-left" means doing things earlier in the process (shifting left on the timeline).
 
@@ -838,7 +838,7 @@ Ask Claude: "Initialize a new OCTALUME project for a [describe your project]"
 **8. Repeat until Phase 8!**
 
 <details>
-<summary>🎯 First project tips</summary>
+<summary> First project tips</summary>
 
 **Tip 1: Start small**
 - Don't pick a massive enterprise system for your first project
@@ -912,7 +912,7 @@ Want to learn more?
 
 **Version:** 1.0.0
 **Last Updated:** 2026-01-20
-**Expert Mentor Style**: Warm, guided, visually engaging documentation
+OCTALUME Enterprise Lifecycle Framework
 
 ---
 

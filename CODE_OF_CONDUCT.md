@@ -132,7 +132,7 @@ We don't want that here. We want a community where:
 **Please report it.** We know speaking up can be scary, but we've got your back.
 
 **How to report:**
-- Email: mohamed@harery.com
+- Email: octalume@harery.com
 - Include what happened, who was involved, and any context (screenshots, links, etc.)
 
 **What happens next:**
@@ -265,7 +265,7 @@ We've added our own voice and emphasis because:
 
 **No problem!** Reach out anytime:
 
-- **Email:** mohamed@harery.com
+- **Email:** octalume@harery.com
 - **Website:** https://www.harery.com/
 
 **We're happy to discuss anything in this document.** Your feedback helps us create a better community.

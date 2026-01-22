@@ -1,279 +1,79 @@
-# CLAUDE.md — Your OCTALUME Context
+# CLAUDE.md - OCTALUME Framework Context
 
-**Auto-loaded when you start Claude Code in this directory**
-
----
-
-## 🎯 What This File Does
-
-When you start Claude Code from an OCTALUME directory, this file loads automatically. It gives Claude everything needed to understand your project and guide you through the software development lifecycle.
-
-**Think of this as Claude's "operating manual" for working with your project.**
+This file is auto-loaded when Claude Code starts in this directory. It provides the complete context for understanding and working with the OCTALUME Enterprise Lifecycle Framework.
 
 ---
 
-## 🚀 Quick Start: What Can You Do?
+## Framework Overview
 
-<details>
-<summary><strong>Starting a new project?</strong></summary>
+OCTALUME (Octa = 8 phases, Lume = light/guidance) is an enterprise software development lifecycle framework that guides projects from initial vision through production operations.
 
-```bash
-claude --prompt "Initialize a new lifecycle project for [describe your project]"
-```
+### Core Principles
 
-**What happens:** Claude creates your project structure, generates a comprehensive feature list (200-500 features), sets up git, and configures your development environment.
-
-**Example prompt:**
-```
-"Initialize a new lifecycle project for an e-commerce platform with:
-- User authentication and authorization
-- Product catalog with search and filtering
-- Shopping cart and checkout process
-- Payment integration (Stripe/PayPal)
-- Order management and tracking
-- Admin dashboard for inventory management
-
-Target market: Small to medium businesses
-Budget: Project resources allocated
-Timeline: 6 months
-Team: 5 developers, 1 QA, 1 DevOps
-Compliance: PCI DSS required"
-```
-
-</details>
-
-<details>
-<summary><strong>Continuing an existing project?</strong></summary>
-
-```bash
-claude
-```
-
-**What happens:** Claude detects your existing project, reads its state, and continues from where you left off. It knows your current phase, progress, and what to work on next.
-
-**Example interaction:**
-```
-You: "What's the current project status?"
-
-Claude: "You're in Phase 3 (Architecture & Design). You've completed:
-✓ System architecture document
-✓ Technology stack decisions
-✓ Database design
-
-Still to do:
-○ Threat modeling
-○ Security architecture
-○ Deployment architecture
-
-Shall we continue with threat modeling?"
-```
-
-</details>
-
-<details>
-<summary><strong>Moving to the next phase?</strong></summary>
-
-```bash
-# In Claude Code:
-"We've completed Phase [X]. Run go/no-go and move to Phase [X+1]."
-```
-
-**What happens:** Claude validates exit criteria for your current phase, validates entry criteria for the next phase, gets approvals, updates project state, and spawns the phase-specific agent.
-
-**Example:**
-```
-You: "We've completed Phase 2. Run go/no-go and move to Phase 3."
-
-Claude: "Let me validate Phase 2 exit criteria...
-
-✓ All requirements approved
-✓ Traceability matrix created
-✓ Stakeholders signed off
-
-Now validating Phase 3 entry criteria...
-
-✓ Approved requirements available
-✓ CTA assigned
-✓ Architecture team ready
-
-Go/No-Go Decision: GO ✓
-
-Updating project state... Spawning Phase 3 agent...
-You're now in Phase 3: Architecture & Design."
-```
-
-</details>
-
-<details>
-<summary><strong>Hit a blocker?</strong></summary>
-
-```bash
-# In Claude Code:
-"We're blocked on [describe the blocker]."
-```
-
-**What happens:** Claude diagnoses the issue, spawns an escalation agent if needed, facilitates decision-making, and helps you resolve the blocker.
-
-**Example:**
-```
-You: "We're blocked. The team can't agree on microservices vs monolith."
-
-Claude: "I understand — this is a common architecture debate. Let me help you work through it.
-
-**Considerations for microservices:**
-- Pros: Scalability, team autonomy, technology flexibility
-- Cons: Complexity, distributed transactions, operational overhead
-
-**Considerations for monolith:**
-- Pros: Simplicity, easier debugging, faster development
-- Cons: Scalability limits, tight coupling, difficult to parallelize
-
-**Questions to guide your decision:**
-1. What's your expected scale? (users, data volume, transaction rate)
-2. How big is your team? (microservices need more DevOps capacity)
-3. What's your timeline? (monoliths are faster to build initially)
-4. What are your scaling requirements? (vertical vs horizontal)
-
-Based on your project (e-commerce, 6-month timeline, 6-person team), I'd recommend: **start with monolith, design for future microservices extraction.**
-
-Want me to explain this approach in more detail?"
-```
-
-</details>
+1. Sequential phase progression with quality gates
+2. Complete traceability from requirements to deployment
+3. Security and compliance integrated from the start
+4. Clear role ownership at every stage
+5. Hybrid methodology: formal phases with agile execution
 
 ---
 
-## 📁 Framework Structure
+## Directory Structure
 
 ```
 OCTALUME/
-├── CLAUDE.md                    # ← This file (auto-loaded by Claude)
-├── README.md                    # Main framework documentation
-├── SETUP_GUIDE.md               # Installation and setup
-├── FRAMEWORK_VISUALIZATION.md   # Visual workflow diagrams
-├── DIRECTORY_STRUCTURE.md       # What's where
-│
-├── .claude/                     # Agent configurations
-│   ├── ORCHESTRATOR.md          # Multi-agent coordinator
-│   ├── CONTEXT_ENGINEERING.md   # Context management
-│   ├── agents/                  # Agent harnesses
-│   │   ├── INITIALIZER.md       # First-run setup
-│   │   └── CODING.md            # Incremental development
-│   └── tools/                   # Tool definitions
-│       └── TOOL_SEARCH.md       # Tool discovery
-│
-└── skills/                      # Agent skills (modular)
-    ├── phase_01_vision_strategy/     # Phase 1: Vision & Strategy
-    ├── phase_02_requirements_scope/  # Phase 2: Requirements & Scope
-    ├── phase_03_architecture_design/ # Phase 3: Architecture & Design
-    ├── phase_04_development_planning/# Phase 4: Development Planning
-    ├── phase_05_development_execution/# Phase 5: Development Execution
-    ├── phase_06_quality_security/     # Phase 6: Quality & Security
-    ├── phase_07_deployment_release/  # Phase 7: Deployment & Release
-    ├── phase_08_operations_maintenance/# Phase 8: Operations & Maintenance
-    │
-    └── shared/                      # Cross-cutting skills
-        ├── roles/SKILL.md            # All 16 role definitions
-        ├── security/SKILL.md         # Security framework
-        ├── quality/SKILL.md          # Quality framework
-        ├── compliance/SKILL.md      # Compliance framework
-        └── governance/SKILL.md       # Decision-making framework
+├── CLAUDE.md                         # This file (auto-loaded)
+├── README.md                         # Framework overview
+├── SETUP_GUIDE.md                    # Installation and setup
+├── FRAMEWORK_VISUALIZATION.md        # Visual workflow diagrams
+├── DIRECTORY_STRUCTURE.md            # File organization reference
+├── .claude/                          # Agent configurations
+│   ├── ORCHESTRATOR.md               # Multi-agent coordinator
+│   ├── CONTEXT_ENGINEERING.md        # Context management
+│   ├── agents/                       # Agent harnesses
+│   ├── memory/                       # Persistent memory storage
+│   ├── hooks/                        # Event triggers
+│   └── tools/                        # Tool definitions
+└── skills/                           # Phase-specific skills
+    ├── phase_01_vision_strategy/
+    ├── phase_02_requirements_scope/
+    ├── phase_03_architecture_design/
+    ├── phase_04_development_planning/
+    ├── phase_05_development_execution/
+    ├── phase_06_quality_security/
+    ├── phase_07_deployment_release/
+    ├── phase_08_operations_maintenance/
+    └── shared/                       # Cross-cutting concerns
+        ├── roles/
+        ├── security/
+        ├── quality/
+        ├── compliance/
+        └── governance/
 ```
 
 ---
 
-## 🔄 The 8 Phases: Your Complete Journey
+## The 8 Phases
 
-| Phase | What | Who | Duration | Key Deliverables |
-|:-----:|------|-----|:--------:|------------------|
-| 1 | Vision & Strategy | Product Owner | 4-6 weeks | PRD, Business Case |
-| 2 | Requirements & Scope | Product Owner | 4-8 weeks | Requirements, Traceability Matrix |
-| 3 | Architecture & Design | CTA | 6-10 weeks | System Architecture, Threat Models |
+| Phase | Name | Owner | Duration | Key Deliverables |
+|:-----:|------|-------|:--------:|------------------|
+| 1 | Vision and Strategy | Product Owner | 4-6 weeks | PRD, Business Case |
+| 2 | Requirements and Scope | Product Owner | 4-8 weeks | Requirements, Traceability Matrix |
+| 3 | Architecture and Design | CTA | 6-10 weeks | System Architecture, Threat Models |
 | 4 | Development Planning | Project Manager | 2-4 weeks | WBS, Resource Plan, Sprint Plan |
-| 5 | Development Execution | Tech Lead | Variable (sprints) | Working Software |
-| 6 | Quality & Security Validation | QA Lead | 4-8 weeks | Test Results, Security Sign-off |
-| 7 | Deployment & Release | DevOps | 1-2 weeks | Production Deployment |
-| 8 | Operations & Maintenance | SRE | Ongoing | Monitoring, Incidents, Improvements |
+| 5 | Development Execution | Tech Lead | Variable | Working Software |
+| 6 | Quality and Security | QA Lead | 4-8 weeks | Test Results, Security Sign-off |
+| 7 | Deployment and Release | DevOps | 1-2 weeks | Production Deployment |
+| 8 | Operations and Maintenance | SRE | Ongoing | Monitoring, Incidents |
 
 ---
 
-## 👥 The 16 Roles: Who Does What
+## Quality Gates
 
-<details>
-<summary><strong>See all roles and responsibilities</strong></summary>
+Each phase has entry and exit criteria. Progression requires passing the quality gate.
 
-### Executive & Leadership (3)
-
-1. **Executive Sponsor** — Executive authority and budget approval
-2. **Product Owner** — Product vision, requirements, ROI
-3. **Project Manager** — Project execution, timeline, budget
-
-### Technical Leadership (2)
-
-4. **CTA** — Technical vision and architecture decisions
-5. **Tech Lead** — Delivery execution and team leadership
-
-### Security & Compliance (3)
-
-6. **CISO** — Overall security strategy
-7. **Security Architect** — Security design and implementation
-8. **Compliance Officer** — Regulatory compliance and audits
-
-### Quality & Testing (3)
-
-9. **QA Lead** — Quality strategy and testing governance
-10. **QA Engineers** — Test design and execution
-11. **Performance Engineer** — Performance testing
-
-### Development & Infrastructure (3)
-
-12. **Developers** — Code development and testing
-13. **DevOps** — CI/CD and infrastructure automation
-14. **SRE** — Production reliability and monitoring
-
-### Data & Infrastructure (2)
-
-15. **Data Architect** — Data modeling and integration
-16. **Cloud Architect** — Cloud infrastructure design
-
-</details>
-
-> **See `skills/shared/roles/SKILL.md` for complete role definitions.**
-
----
-
-## 🔗 Traceability: Tracking Everything
-
-**Every artifact follows: `P{N}-{SECTION}-###`**
-
-**Examples:**
-- `P1-VISION-001` — Phase 1, Vision document, item 1
-- `P3-ARCH-042` — Phase 3, Architecture, item 42
-- `P5-CODE-789` — Phase 5, Code commit, item 789
-
-**The traceability chain:**
-
-```
-Epic → Feature → Story → Commit → Build → Artifact → Release → Test → Result
-```
-
-**Why this matters:** When issues arise (or when something goes brilliantly), you can trace back to understand:
-- What requirement prompted this?
-- Who approved this decision?
-- What test covers this?
-- What release includes this?
-
----
-
-## 🚦 Quality Gates: Don't Proceed Until Ready
-
-Each phase has entry and exit criteria. **You cannot proceed without meeting quality gates.**
-
-<details>
-<summary><strong>See all quality gates</strong></summary>
-
-| Phase | Enter When | Exit When |
-|:-----:|------------|-----------|
+| Phase | Entry Criteria | Exit Criteria |
+|:-----:|----------------|---------------|
 | 1 | Business idea identified | Business case approved, PRD completed |
 | 2 | Approved PRD | Requirements approved, traceability matrix created |
 | 3 | Approved requirements | Architecture approved, threat models completed |
@@ -283,251 +83,279 @@ Each phase has entry and exit criteria. **You cannot proceed without meeting qua
 | 7 | Validated build | Deployed to production, smoke tests passing |
 | 8 | Released to production | Monitoring active, SLAs met |
 
-**What this prevents:**
-- Building the wrong thing (Phase 1 gate)
-- Scope creep (Phase 2 gate)
-- Wrong architecture (Phase 3 gate)
-- Unrealistic plans (Phase 4 gate)
-- Incomplete features (Phase 5 gate)
-- Bugs in production (Phase 6 gate)
-- Failed deployments (Phase 7 gate)
-- Unstable operations (Phase 8 gate)
+---
 
-</details>
+## The 16 Roles
+
+### Executive and Leadership
+1. Executive Sponsor - Executive authority and budget approval
+2. Product Owner - Product vision, requirements, ROI
+3. Project Manager - Project execution, timeline, budget
+
+### Technical Leadership
+4. CTA (Chief Technology Architect) - Technical vision and architecture decisions
+5. Tech Lead - Delivery execution and team leadership
+
+### Security and Compliance
+6. CISO - Overall security strategy
+7. Security Architect - Security design and implementation
+8. Compliance Officer - Regulatory compliance and audits
+
+### Quality and Testing
+9. QA Lead - Quality strategy and testing governance
+10. QA Engineers - Test design and execution
+11. Performance Engineer - Performance testing
+
+### Development and Infrastructure
+12. Developers - Code development and testing
+13. DevOps - CI/CD and infrastructure automation
+14. SRE - Production reliability and monitoring
+
+### Data and Cloud
+15. Data Architect - Data modeling and integration
+16. Cloud Architect - Cloud infrastructure design
 
 ---
 
-## 💻 Working with Claude: Best Practices
+## Artifact Traceability
 
-### ✅ DO:
+All artifacts follow the naming convention: P{N}-{SECTION}-{###}
 
-| Practice | Why It Matters |
-|----------|----------------|
-| **Start with context** | Let Claude read the framework first |
-| **Be specific** | Clear prompts get clear results |
-| **Follow the phases** | Work through sequentially (there's a reason for the order) |
-| **Test everything** | Never mark features complete without testing |
-| **Commit often** | Small, incremental commits are easier to review and revert |
-| **Update progress** | Keep progress files current for continuity |
+Examples:
+- P1-VISION-001: Phase 1, Vision document, item 1
+- P2-REQ-015: Phase 2, Requirements, item 15
+- P3-ARCH-042: Phase 3, Architecture, item 42
+- P5-CODE-789: Phase 5, Code commit, item 789
+- P6-TEST-123: Phase 6, Test case, item 123
 
-### ❌ DON'T:
-
-| Pitfall | Why It's Problematic |
-|---------|---------------------|
-| **Skip phases** | Each phase has important deliverables that feed into later phases |
-| **Ignore quality gates** | Entry/exit criteria exist for good reasons |
-| **Work on multiple features** | One thing at a time reduces cognitive load and errors |
-| **Declare victory early** | Only mark complete after testing and validation |
-| **Leave broken code** | Always leave clean, working state for the next session |
+Traceability chain:
+Epic to Feature to Story to Commit to Build to Artifact to Release to Test to Result
 
 ---
 
-## 🛠️ Bash Commands: Your Quick Reference
+## Commands and Workflows
 
-### Project Initialization
+### Initialize New Project
 
-```bash
-# Initialize git repository
-git init
+When a user requests project initialization:
 
-# Set up project structure
-mkdir -p docs/{vision,requirements,architecture,design,testing,operations}
-mkdir -p src tests scripts
-mkdir -p artifacts/{P1,P2,P3,P4,P5,P6,P7,P8}
+1. Gather project details (description, timeline, team size, compliance requirements)
+2. Create project structure in artifacts/ directory
+3. Generate comprehensive feature list (200-500 features)
+4. Initialize git repository
+5. Create project-state.json
+6. Begin Phase 1
 
-# Create feature list
-touch feature_list.json
-
-# Create progress tracking
-touch claude-progress.txt
-touch .claude/project-state.json
-
-# Create initialization script
-cat > scripts/init.sh <<'EOF'
-#!/bin/bash
-# Development environment setup
-set -e
-echo "Setting up development environment..."
-# Add your setup commands here
-EOF
-chmod +x scripts/init.sh
+Example user prompt:
+```
+Initialize a new lifecycle project for an e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Timeline: 6 months, Team: 5 developers.
 ```
 
-### Git Workflow
+### Continue Existing Project
 
-```bash
-# Commit with artifact traceability
-git add .
-git commit -m "feat: [description]
+When resuming work:
+
+1. Read .claude/project-state.json for current state
+2. Read claude-progress.txt for recent progress
+3. Check git log for recent commits
+4. Identify current phase and pending tasks
+5. Continue from last checkpoint
+
+### Phase Transition
+
+When user requests phase transition:
+
+1. Validate all exit criteria for current phase
+2. Document completion in progress file
+3. Validate entry criteria for next phase
+4. Update project-state.json
+5. Load next phase skill from skills/phase_XX/
+6. Begin next phase activities
+
+Example user prompt:
+```
+We have completed Phase 2. Run go/no-go and move to Phase 3.
+```
+
+### Handle Blockers
+
+When user reports a blocker:
+
+1. Identify the blocker type (technical, resource, decision, dependency)
+2. Check relevant skill files for guidance
+3. Propose resolution options
+4. Document decision in memory bank
+5. Update project state if needed
+
+---
+
+## Project State Management
+
+### State File Location
+.claude/project-state.json
+
+### State Structure
+```json
+{
+  "project_name": "string",
+  "current_phase": 1-8,
+  "phase_status": "not_started|in_progress|blocked|complete",
+  "created_at": "ISO8601",
+  "updated_at": "ISO8601",
+  "phases": {
+    "phase_1": { "status": "string", "started": "date", "completed": "date" }
+  }
+}
+```
+
+### Memory Bank Location
+.claude/memory/memory.json
+
+### Memory Categories
+- decisions: Architecture and design decisions
+- progress: Completed milestones
+- blockers: Current impediments
+- notes: General observations
+
+---
+
+## Git Workflow
+
+### Commit Message Format
+```
+type: description (artifact-id)
+
+- Detail 1
+- Detail 2
 
 Artifacts: P{N}-{SECTION}-{###}
 Feature: F-{XXX}
 Status: passing
-"
-
-# View recent work
-git log --oneline -20
-
-# Check status
-git status
 ```
 
-### Testing
-
-```bash
-# Run unit tests
-npm test  # or pytest, jest, etc.
-
-# Run integration tests
-npm run test:integration
-
-# Run E2E tests
-npm run test:e2e
-
-# Run all tests
-npm run test:all
-```
+### Types
+- feat: New feature
+- fix: Bug fix
+- docs: Documentation
+- refactor: Code refactoring
+- test: Adding tests
+- chore: Maintenance
 
 ---
 
-## 📋 Methodology: Hybrid Approach
+## Methodology
 
-**Not 100% Agile — not fully Waterfall. You get the best of both.**
+OCTALUME uses a hybrid approach:
 
 ### Formal Phases (1-4, 6-8)
-- Structured deliverables
-- Go/No-Go decisions
+- Structured deliverables with templates
+- Go/No-Go decisions at transitions
 - Documentation requirements
-- Quality gates
+- Quality gates with approval
 
-### Agile Execution (Phase 5 only)
-- Sprint planning (2-week sprints)
-- Daily standups
-- Sprint reviews
-- Retrospectives
-
-**Why this works:**
-- **Upfront planning** prevents expensive mistakes
-- **Architecture decisions** made before coding begins
-- **Agile execution** gives flexibility and rapid feedback
-- **Quality gates** ensure nothing slips through
+### Agile Execution (Phase 5)
+- 2-week sprints
+- Sprint planning at start
+- Daily standups (15 minutes)
+- Sprint reviews with stakeholders
+- Retrospectives for improvement
 
 ---
 
-## 🔒 Security, Quality, Compliance: Built From Day One
+## Security, Quality, Compliance
 
-**These aren't add-ons — they're foundational.**
+These are integrated throughout, not added later.
 
-### Security First
-- Requirements identified in Phase 2
-- Architecture designed in Phase 3
-- Threat modeling in Phase 3
-- Testing in Phase 6
-- Operations in Phase 8
+### Security Integration
+- Phase 2: Security requirements identified
+- Phase 3: Security architecture designed, threat modeling
+- Phase 6: Security testing, penetration testing
+- Phase 8: Security operations, monitoring
 
-### Quality First
-- Metrics defined in Phase 1
-- Testable requirements in Phase 2
-- Testability designed in Phase 3
-- Test strategy in Phase 4
-- Continuous testing throughout
+### Quality Integration
+- Phase 1: Quality metrics defined
+- Phase 2: Testable requirements written
+- Phase 3: Testability designed in
+- Phase 4: Test strategy planned
+- Phase 5: Continuous testing
+- Phase 6: Comprehensive validation
 
-### Compliance First
-- Regulations identified in Phase 1
-- Requirements in Phase 2
-- Controls designed in Phase 3
-- Testing in Phase 6
-- Audit readiness in Phase 8
+### Compliance Integration
+- Phase 1: Regulations identified
+- Phase 2: Compliance requirements documented
+- Phase 3: Controls designed
+- Phase 6: Compliance testing
+- Phase 8: Audit readiness
 
----
-
-## 📜 Regulatory Frameworks Supported
-
-| Regulation | Industry | What's Covered |
-|------------|----------|----------------|
-| **HIPAA** | Healthcare | PHI protection, breach notification |
-| **SOC 2** | Services | Security, availability, privacy controls |
-| **PCI DSS** | Payments | Card data security, vulnerability scanning |
-| **SOX** | Public companies | Financial controls, audit trail |
-| **GDPR** | EU data | Data subject rights, breach notification |
-| **DoD/ITAR** | Defense | CMMC, controlled technical data |
+### Supported Regulations
+- HIPAA: Healthcare data protection
+- SOC 2: Service organization controls
+- PCI DSS: Payment card security
+- SOX: Financial controls
+- GDPR: EU data protection
+- DoD/ITAR: Defense requirements
 
 ---
 
-## 📝 Documentation Style Guide
+## Skill Loading
 
-### Code Comments
+Each phase has a dedicated skill file at skills/phase_XX_name/SKILL.md
 
-```typescript
-/**
- * Validates email format
- * @param email - Email address to validate
- * @returns true if valid, false otherwise
- */
-export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-```
+Skill files contain:
+- Phase metadata (owner, participants, duration)
+- Entry criteria
+- Exit criteria
+- Step-by-step activities
+- Templates and examples
+- Best practices
 
-### Commit Messages
-
-```
-feat: add user authentication (P5-CODE-001)
-
-- Implement email/password authentication
-- Add JWT token management
-- Add password hashing with bcrypt
-- Add unit tests for auth module
-- Add integration tests for login flow
-
-Artifacts: P5-CODE-001, P5-TEST-001
-Feature: F-001
-Status: passing
-```
-
-### Artifact Naming
-
-```
-Format: P{N}-{SECTION}-{###}
-
-Examples:
-P1-VISION-001  (Phase 1, Vision, item 1)
-P2-REQ-015     (Phase 2, Requirements, item 15)
-P3-ARCH-042    (Phase 3, Architecture, item 42)
-P5-CODE-789    (Phase 5, Code, item 789)
-P6-TEST-123    (Phase 6, Test, item 123)
-```
+Load the appropriate skill when:
+- Starting a new phase
+- User asks about phase-specific activities
+- Generating phase deliverables
 
 ---
 
-## ⚠️ Important Notes
+## Best Practices
 
-1. **One Framework** — This is a single unified framework, not multiple tiers
-2. **Clear Authority** — Every task has a designated owner
-3. **Complete Lifecycle** — Covers PRD/MVP through delivery to operations
-4. **Enterprise Grade** — Security, audit, governance built-in
-5. **Full Traceability** — Every decision and deliverable tracked
-6. **Quality First** — Testing, security, compliance integrated throughout
+### Do
+- Start with context: Read project state before acting
+- Be specific: Generate detailed, actionable deliverables
+- Follow phases: Work sequentially through the lifecycle
+- Test everything: Never mark complete without validation
+- Commit often: Small, incremental commits with traceability
+- Update progress: Keep state files current
 
----
-
-## 📚 Getting Help
-
-| Topic | Where to Look |
-|-------|---------------|
-| **Framework Overview** | `README.md` |
-| **Phase Details** | `skills/phase_*/SKILL.md` |
-| **Role Definitions** | `skills/shared/roles/SKILL.md` |
-| **Security Guidance** | `skills/shared/security/SKILL.md` |
-| **Quality Guidance** | `skills/shared/quality/SKILL.md` |
-| **Compliance Guidance** | `skills/shared/compliance/SKILL.md` |
-| **Governance Guidance** | `skills/shared/governance/SKILL.md` |
+### Do Not
+- Skip phases: Each phase feeds into the next
+- Ignore quality gates: Entry/exit criteria exist for good reasons
+- Work on multiple features: One task at a time
+- Declare victory early: Only mark complete after testing
+- Leave broken code: Always maintain working state
 
 ---
 
-**Version:** 1.0.0 | **Last Updated:** 2026-01-20
+## Reference Files
+
+| Topic | Location |
+|-------|----------|
+| Framework Overview | README.md |
+| Installation | SETUP_GUIDE.md |
+| Phase 1-8 Details | skills/phase_XX/SKILL.md |
+| Role Definitions | skills/shared/roles/SKILL.md |
+| Security Guidance | skills/shared/security/SKILL.md |
+| Quality Guidance | skills/shared/quality/SKILL.md |
+| Compliance Guidance | skills/shared/compliance/SKILL.md |
+| Governance | skills/shared/governance/SKILL.md |
 
 ---
 
-> **You've got this.** Building software is complex, but you don't have to figure it out alone. OCTALUME + Claude Code = your expert guide through every step of the journey. Let's build something great together.
+## Contact
+
+- Repository: https://github.com/Harery/OCTALUME
+- Email: octalume@harery.com
+- Website: https://harery.com
+
+---
+
+Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework

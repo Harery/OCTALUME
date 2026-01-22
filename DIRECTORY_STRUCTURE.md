@@ -27,9 +27,9 @@ Before we dive into details, here's how OCTALUME is organized:
 
 ```
 OCTALUME/
-├── 📄 Root files (guides, documentation)
-├── 📁 .claude/ (framework brain & configuration)
-└── 📁 skills/ (8 phase skills + 5 shared skills)
+├──  Root files (guides, documentation)
+├──  .claude/ (framework brain & configuration)
+└──  skills/ (8 phase skills + 5 shared skills)
 ```
 
 **Three main areas:**
@@ -80,7 +80,7 @@ OCTALUME/
 | `.gitignore` | Git exclusions | When committing to git |
 
 <details>
-<summary>💡 Why are these files at the root?</summary>
+<summary> Why are these files at the root?</summary>
 
 **Accessibility:** Put frequently-used files where they're easy to find.
 
@@ -148,11 +148,11 @@ OCTALUME/
 │   │   ├── pre-tool-use.sh         # Before tool use
 │   │   └── post-tool-response.sh   # After tool response
 │
-├── 🔧 Tools (1 file)
+├──  Tools (1 file)
 │   └── tools/
 │       └── TOOL_SEARCH.md          # Tool discovery system
 │
-├── 📋 Templates (2 files)
+├──  Templates (2 files)
 │   └── templates/
 │       ├── example-project-state.json # Example project state
 │       └── example-feature-list.json  # Example 50-feature list
@@ -367,7 +367,7 @@ OCTALUME/
 
 ```
 skills/
-├── 📊 Phase Skills (8 phases)
+├──  Phase Skills (8 phases)
 │   ├── phase_01_vision_strategy/
 │   │   ├── SKILL.md                   # Phase 1 instructions
 │   │   ├── templates/
@@ -846,11 +846,11 @@ OCTALUME/
 
 You've just toured the entire OCTALUME structure:
 
-✅ **Root files** — Documentation at your fingertips
-✅ **.claude/** — The framework's engine
-✅ **skills/** — Modular instructions
-✅ **Naming conventions** — Traceability in action
-✅ **Patterns** — Once you see them, they make sense
+ **Root files** — Documentation at your fingertips
+ **.claude/** — The framework's engine
+ **skills/** — Modular instructions
+ **Naming conventions** — Traceability in action
+ **Patterns** — Once you see them, they make sense
 
 **Remember:**
 - You don't need to understand everything at once
@@ -862,7 +862,7 @@ You've just toured the entire OCTALUME structure:
 
 **Version:** 1.0.0
 **Last Updated:** 2026-01-20
-**Expert Mentor Style**: Navigable, annotated, confidence-building documentation
+OCTALUME Enterprise Lifecycle Framework
 
 ---
 

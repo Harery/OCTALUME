@@ -56,7 +56,7 @@ Seriously. Don't. This is the one time we'll ask you NOT to use normal channels.
 
 **Step 2: Send us an email.**
 
-📧 **mohamed@harery.com**
+📧 **octalume@harery.com**
 
 **Step 3: Include what you can:**
 
@@ -385,7 +385,7 @@ npm audit fix
 
 **No such thing as a stupid security question.** Ask away:
 
-- **Email:** mohamed@harery.com
+- **Email:** octalume@harery.com
 - **Website:** https://www.harery.com/
 
 **Whether you're:**

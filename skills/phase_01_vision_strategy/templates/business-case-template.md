@@ -15,7 +15,7 @@
 ---
 
 **Copyright (c) 2026 Mohamed ElHarery**
-**Email:** mohamed@harery.com
+**Email:** octalume@harery.com
 **Website:** https://www.harery.com/
 **GitHub:** https://github.com/Harery
 **License:** MIT License - See LICENSE file for details

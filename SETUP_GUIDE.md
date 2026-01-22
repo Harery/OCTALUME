@@ -1,736 +1,299 @@
 # OCTALUME Setup Guide
 
-**Your step-by-step journey to getting OCTALUME running on Linux**
+Complete installation and setup instructions for the OCTALUME Enterprise Lifecycle Framework.
 
 ---
 
-## 🎯 What You'll Accomplish
+## Quick Start (2 Minutes)
 
-In the next 10 minutes, you'll:
+```bash
+# Clone the repository
+git clone https://github.com/Harery/OCTALUME.git
+cd OCTALUME
 
-✅ Verify your system is ready
-✅ Install OCTALUME
-✅ Configure Claude Code
-✅ Run your first OCTALUME project
+# Start Claude Code
+claude
+```
 
-**Sound good? Let's get started.**
+OCTALUME loads automatically. No additional installation required.
 
 ---
 
-## 👥 Who This Guide Is For
+## Table of Contents
 
-**This guide is perfect for you if:**
-
-| Your Role | What You'll Get From This Guide |
-|-----------|--------------------------------|
-| **Developer** | Setup OCTALUME on your local machine |
-| **DevOps Engineer** | Install in production environments |
-| **Technical Lead** | Evaluate for team adoption |
-| **System Administrator** | Configure on Linux systems |
-
-**Prerequisite:** Basic comfort with command-line interfaces and package managers.
+1. [Prerequisites](#prerequisites)
+2. [Installation](#installation)
+3. [First Project](#first-project)
+4. [Daily Workflow](#daily-workflow)
+5. [Common Issues](#common-issues)
+6. [Reference](#reference)
 
 ---
 
-## 📋 Table of Contents
+## Prerequisites
 
-1. [Prerequisites](#prerequisites) — What you need before starting
-2. [Installation](#installation) — Step-by-step setup
-3. [Quick Start](#quick-start) — Your first project
-4. [How OCTALUME Works](#how-octalume-works) — Understanding the framework
-5. [Common Issues](#common-issues) — When things don't go as planned
+### Required Software
 
----
+| Software | Version | Check Command |
+|----------|---------|---------------|
+| Node.js | 18.0+ | `node --version` |
+| npm | 9.0+ | `npm --version` |
+| git | 2.0+ | `git --version` |
+| jq | 1.6+ | `jq --version` |
 
-## ✅ Prerequisites
+### Install Missing Dependencies
 
-### Let's Verify Your System
-
-**Before we begin, let's make sure your system is ready:**
-
+**Ubuntu/Debian:**
 ```bash
-# Check Node.js version (need 18+)
-node --version
+sudo apt update
+sudo apt install nodejs npm git jq
 ```
 
-**Expected output:** `v18.x.x` or higher
-
-**If you see an older version:** Upgrade at [nodejs.org](https://nodejs.org)
-
+**CentOS/RHEL:**
 ```bash
-# Check npm version (need 9+)
-npm --version
+sudo yum install nodejs npm git jq
 ```
 
-**Expected output:** `9.x.x` or higher
-
-**If you see an older version:** Update Node.js and npm will update too
-
+**macOS:**
 ```bash
-# Check git version (need 2.0+)
-git --version
+brew install node git jq
 ```
-
-**Expected output:** `git version 2.x.x` or higher
-
-**If not installed:** Get it at [git-scm.com](https://git-scm.com)
-
-```bash
-# Check jq version (required for memory scripts)
-jq --version
-```
-
-**Expected output:** `jq-1.6` or higher
-
-**If not installed:** Install with your package manager:
-- **Ubuntu/Debian:** `sudo apt install jq`
-- **CentOS/RHEL:** `sudo yum install jq`
-- **macOS:** `brew install jq`
-- **Arch:** `sudo pacman -S jq`
-
-### Minimum Requirements
-
-| Component | Minimum Version |
-|-----------|-----------------|
-| Node.js | 18.0.0+ |
-| npm | 9.0.0+ |
-| git | 2.0+ |
-| jq | 1.6+ |
-| Linux | Ubuntu 20.04+, Debian 11+, CentOS 8+, or compatible |
 
 ### Platform Support
 
-**Fully Supported:**
-- ✅ **Linux** (Ubuntu, Debian, CentOS, RHEL, Arch, and compatible)
-
-**Community Support:**
-- ⚠️ **macOS** (Intel and Apple Silicon) — May work with minor adjustments
-- ⚠️ **Windows 10/11** with WSL2 — Requires Windows Subsystem for Linux 2
-
-> **Note:** This guide focuses on Linux. For macOS or Windows, adapt these instructions or check community resources.
+| Platform | Status |
+|----------|--------|
+| Linux (Ubuntu, Debian, CentOS) | Fully Supported |
+| macOS (Intel and Apple Silicon) | Supported |
+| Windows with WSL2 | Supported |
 
 ---
 
-## 🚀 Installation
+## Installation
 
-### Step 1: Copy OCTALUME (1 minute)
-
-**Let's put OCTALUME somewhere convenient:**
+### Step 1: Clone the Repository
 
 ```bash
-# Navigate to your preferred location
-cd ~/projects/
-
-# Copy OCTALUME folder
-cp -r /path/to/OCTALUME ./
-
-# Navigate into OCTALUME
+cd ~/projects
+git clone https://github.com/Harery/OCTALUME.git
 cd OCTALUME
 ```
 
-**What just happened:** You now have OCTALUME in your projects directory, ready to use.
+### Step 2: Install MCP Server (Optional)
 
-### Step 2: Install MCP Server Dependencies (2 minutes)
-
-**OCTALUME includes an MCP server for enhanced functionality:**
+The MCP server provides enhanced functionality:
 
 ```bash
-# Navigate to MCP server directory
 cd .claude/mcp-server
-
-# Install dependencies
 npm install
-```
-
-**Expected output:** Lots of package installation text, ending with `added XXX packages`
-
-**If you see errors:**
-- `EACCES` permission error → Try with `sudo npm install`
-- `network timeout` → Check your internet connection and try again
-- `version mismatch` → Ensure Node.js 18+ is installed
-
-```bash
-# Return to root directory
 cd ../..
 ```
 
-### Step 3: Install Claude Code (2 minutes)
-
-**Claude Code is the AI assistant that powers OCTALUME:**
+### Step 3: Install Claude Code
 
 ```bash
-# Install Claude Code globally
 npm install -g @anthropic-ai/claude-code
 ```
 
-**Expected output:** `+ @anthropic-ai/claude-code@X.X.X`
+### Step 4: Login to Claude
 
 ```bash
-# Verify installation
-claude --version
-```
-
-**Expected output:** Claude Code version information
-
-```bash
-# Login to your Anthropic account
 claude login
 ```
 
-**What happens:** Your browser opens — follow the prompts to authenticate
+Follow the browser prompts to authenticate.
 
-**If login fails:**
-- Check your network connection
-- Verify your Anthropic account is active
-- Try `claude auth status` to check if already logged in
-
-### Step 4: Verify Installation (1 minute)
-
-**Let's make sure everything is ready:**
+### Step 5: Verify Installation
 
 ```bash
-# Verify OCTALUME structure
 ls -la
 ```
 
-**You should see:**
-```
-✓ SETUP_GUIDE.md
-✓ README.md
-✓ FRAMEWORK_VISUALIZATION.md
-✓ DIRECTORY_STRUCTURE.md
-✓ CLAUDE.md
-✓ LICENSE
-✓ .gitignore
-✓ .claude/          <-- HIDDEN but REQUIRED
-✓ skills/
-```
-
-```bash
-# Verify .claude directory exists
-ls -la .claude/
-```
-
-**You should see:**
-```
-✓ ORCHESTRATOR.md
-✓ CONTEXT_ENGINEERING.md
-✓ agents/
-✓ mcp-server/
-✓ tools/
-```
-
-```bash
-# Verify MCP server is ready
-ls .claude/mcp-server/node_modules/
-```
-
-**You should see:** A long list of installed packages
-
-**If any of these checks fail:**
-- Missing `.claude/` directory → Re-copy OCTALUME including hidden files
-- Empty `node_modules/` → Run `npm install` again in `.claude/mcp-server`
-- Missing files → Re-copy OCTALUME from source
+You should see:
+- CLAUDE.md
+- README.md
+- SETUP_GUIDE.md
+- skills/
+- .claude/
 
 ---
 
-## 🎯 Quick Start
+## First Project
 
-### Your First OCTALUME Project
-
-**You're ready! Let's create your first project:**
+### Start Claude Code
 
 ```bash
-# Navigate to OCTALUME directory
 cd ~/projects/OCTALUME
-
-# Start Claude Code
 claude
-
-# Your first prompt:
-Initialize a new OCTALUME project for [your project idea]
 ```
 
-**Example prompt:**
+### Initialize Your Project
+
+Type this prompt:
+
 ```
-Initialize a new OCTALUME project for a task management app with:
-- User registration and authentication
-- Task creation, editing, and deletion
-- Task categorization with tags
+Initialize a new lifecycle project for [describe your project]
+```
+
+**Example:**
+```
+Initialize a new lifecycle project for a task management app with:
+- User authentication
+- Task creation and editing
 - Due dates and reminders
-- Team collaboration features
-
-Target market: Small teams and freelancers
-Budget: Project resources - $50,000
+- Team collaboration
 Timeline: 4 months
-Team: 3 developers, 1 QA
+Team: 3 developers
 ```
 
-**What happens next:**
+### What Happens Next
+
 1. Claude asks clarifying questions
-2. Creates your project structure
-3. Generates a comprehensive feature list
+2. Creates project structure
+3. Generates 200-500 features
 4. Sets up git repository
-5. Configures development environment
-6. Starts Phase 1: Vision & Strategy
+5. Starts Phase 1: Vision and Strategy
 
 ---
 
-## 📖 How OCTALUME Works
+## Daily Workflow
 
-### The Big Picture
-
-**OCTALUME guides you through 8 phases:**
-
-```
-1. START → Claude Code session in OCTALUME directory
-2. INITIALIZE → Create new project with /lifecycle-init
-3. PHASE 1 → Vision & Strategy (Business Case + PRD)
-4. PHASE 2 → Requirements (Requirements List)
-5. PHASE 3-4 → Architecture & Planning (System Design + Sprint Plan)
-6. PHASE 5 → Development (Build MVP with Agile sprints)
-7. PHASE 6-8 → Quality, Deploy, Operations (Production)
-```
-
-### Creating a Business Case
-
-**What is it?** A document that justifies why this project is worth investing in.
-
-**What it includes:**
-- Executive summary
-- Business problem statement
-- Proposed solution
-- Market analysis
-- Financial projections (ROI, cost estimates)
-- Risk assessment
-- Implementation timeline
-
-**How OCTALUME creates it:**
+### Starting Your Day
 
 ```bash
-# Start Claude Code
-claude
-
-# Use this prompt:
-Initialize a new OCTALUME project for a task management app with:
-- User registration and authentication
-- Task creation, editing, and deletion
-- Task categorization with tags
-- Due dates and reminders
-- Team collaboration features
-
-Target market: Small teams and freelancers
-Budget: Project resources - $50,000
-Timeline: 4 months
-Team: 3 developers, 1 QA
-```
-
-**What OCTALUME does:**
-1. Analyzes your project description
-2. Generates comprehensive Business Case
-3. Creates financial projections with ROI
-4. Identifies risks and mitigation strategies
-5. Saves to: `artifacts/P1/P1-VISION-001-business-case.md`
-
-**Example output:**
-
-<details>
-<summary><strong>See what a Business Case looks like</strong></summary>
-
-```markdown
-# Business Case: TeamSync Task Management
-
-## Executive Summary
-TeamSync is a task management application designed for small teams and freelancers
-who need simple, powerful collaboration tools without enterprise complexity.
-
-## Business Problem
-Current solutions are either:
-- Too simple (lack team features)
-- Too complex (enterprise overload, expensive)
-- Poor user experience (steep learning curve)
-
-## Proposed Solution
-TeamSync provides:
-- Simple, intuitive task management
-- Powerful collaboration features
-- Affordable pricing per user
-- Quick onboarding (5 minutes)
-
-## Market Analysis
-- Total addressable market: 50M freelancers worldwide
-- Serviceable market: 5M using task management tools
-- Target market: 500K small teams (2-10 people)
-
-## Financial Projections
-- Development cost: Project investment,000
-- Monthly operating cost: Operational expenses,000
-- Break-even: Estimated timeline based on user adoption
-- Year 1 revenue projection: $180,000 (3,000 users avg)
-
-## Risk Assessment
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Competition | High | Focus on simplicity and UX |
-| Technical complexity | Medium | Use proven technologies |
-| Time to market | Medium | MVP-first approach |
-
-## Implementation Timeline
-- Phase 1-2: 8 weeks (Vision & Requirements)
-- Phase 3-4: 6 weeks (Architecture & Planning)
-- Phase 5: 12 weeks (Development - 6 sprints)
-- Phase 6: 4 weeks (Quality & Security)
-- Phase 7: 2 weeks (Deployment)
-- Total: 32 weeks (under 4-month target with buffer)
-```
-
-</details>
-
-### Creating a PRD (Product Requirements Document)
-
-**What is it?** A detailed document describing what you're building.
-
-**What it includes:**
-- Product vision and goals
-- User personas
-- User stories
-- Functional requirements
-- Non-functional requirements
-- Success metrics
-- Acceptance criteria
-
-**How to create it (after Business Case):**
-
-```bash
-# In the same Claude Code session:
-Now create the PRD for this task management app
-
-Include:
-- 3-5 user personas with demographics and goals
-- 10-15 key user stories
-- Functional requirements for each major feature
-- Non-functional requirements (performance, security, scalability)
-- Success metrics and KPIs
-```
-
-**What OCTALUME does:**
-1. Reads the Business Case as context
-2. Generates detailed PRD with user stories
-3. Defines functional and non-functional requirements
-4. Sets measurable success criteria
-5. Saves to: `artifacts/P1/P1-VISION-002-prd.md`
-
-### Building an MVP
-
-**What is it?** The simplest version of your product that:
-- Solves the core user problem
-- Demonstrates key functionality
-- Can be released to early users
-- Provides feedback for future development
-
-**When to build it:** Phase 5 (after completing Phases 1-4)
-
-```bash
-# In Claude Code, after completing planning:
-We've completed the architecture and planning phases.
-Now let's start Phase 5 and build the MVP.
-
-Focus on these core features first:
-1. User registration and login
-2. Task creation and editing
-3. Task lists and organization
-4. Basic collaboration (assign tasks)
-
-Use Python with Django framework, PostgreSQL database,
-and Bootstrap for frontend.
-```
-
-**MVP Development Process:**
-
-| Sprint | Duration | Features |
-|--------|----------|----------|
-| Sprint 1 | 2 weeks | User authentication, Database setup, Basic project structure |
-| Sprint 2 | 2 weeks | Task CRUD operations, Task lists |
-| Sprint 3 | 2 weeks | Task assignment, Comments, Basic notifications |
-
-**Result:** MVP ready for user testing!
-
----
-
-## 🔧 Common Issues: When Things Don't Go as Planned
-
-<details>
-<summary><strong>Claude Code not loading CLAUDE.md?</strong></summary>
-
-**Symptom:** CLAUDE.md content not available when you start Claude Code
-
-**Most likely cause:** You're not in the OCTALUME directory
-
-**Quick fix:**
-```bash
-# Check where you are
-pwd
-# Should show: ~/projects/OCTALUME
-
-# If not, navigate there
 cd ~/projects/OCTALUME
-
-# Try again
 claude
 ```
 
-**Still not working?** Make sure the `.claude` directory exists:
-```bash
-ls -la | grep .claude
-# You should see: .claude/
+Claude reads your project state and continues where you left off.
 
-# If not present, re-copy including hidden files
-cp -r /source/OCTALUME/ ~/projects/OCTALUME/
+### Check Status
+
+```
+What is the current project status?
 ```
 
-</details>
+### Move to Next Phase
 
-<details>
-<summary><strong>Hidden .claude folder not visible?</strong></summary>
-
-**Symptom:** Can't see the `.claude` directory
-
-**Why this happens:** Files starting with `.` are hidden by default
-
-**Quick fix:**
-```bash
-# Show hidden files
-ls -la | grep .claude
-
-# If you see .claude/, everything is fine!
-# It's there, just hidden from normal ls
+```
+We have completed Phase 2. Run go/no-go and move to Phase 3.
 ```
 
-**To verify it exists:**
-```bash
-# Try to access it
-cd .claude
-pwd
-# Should show: ~/projects/OCTALUME/.claude
+### Handle Blockers
+
+```
+We are blocked on [describe the issue]
 ```
 
-</details>
+### Continue Development
 
-<details>
-<summary><strong>npm install fails?</strong></summary>
-
-**Symptom:** `npm install` command fails
-
-**Most likely cause:** Node.js version is too old
-
-**Quick fix:**
-```bash
-# Check Node.js version
-node --version
-# Must be 18+
-
-# If too old, install Node.js 18+
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Verify
-node --version
-# Should now show v18.x.x or higher
+```
+Continue with the next feature
 ```
 
-**Other reasons npm install might fail:**
-- **Network timeout** → Check internet connection
-- **Permission denied** → Try with `sudo npm install`
-- **Disk space** → Check available disk space with `df -h`
+---
 
-</details>
+## Common Issues
 
-<details>
-<summary><strong>claude login fails?</strong></summary>
+### Claude Code Not Loading Context
 
-**Symptom:** Can't authenticate with Anthropic
+**Problem:** Claude does not recognize OCTALUME commands.
 
-**Quick checks:**
+**Solution:** Ensure you are in the OCTALUME directory:
 ```bash
-# Check network
-ping api.anthropic.com
-# Should get responses
-
-# Check if already logged in
-claude auth status
-# Might show you're already authenticated
+pwd  # Should show path to OCTALUME
 ```
 
-**If you need to re-login:**
+### MCP Server Issues
+
+**Problem:** npm install fails in .claude/mcp-server
+
+**Solution:**
 ```bash
-claude login
-# Browser opens → follow prompts
-```
-
-**Common issues:**
-- **Wrong credentials** → Verify your Anthropic account email/password
-- **Network blocked** → Check firewall/proxy settings
-- **Browser issues** → Try a different browser
-
-</details>
-
-<details>
-<summary><strong>MCP tools not available?</strong></summary>
-
-**Symptom:** MCP tools don't appear in Claude Code
-
-**Quick fix:**
-```bash
-cd .claude/mcp-server
 rm -rf node_modules package-lock.json
 npm install
-cd ../..
 ```
 
-**Verify installation:**
+### Permission Errors
+
+**Problem:** Permission denied when running scripts
+
+**Solution:**
 ```bash
-ls .claude/mcp-server/node_modules/
-# Should see lots of packages
+chmod +x scripts/*.sh
+chmod +x .claude/hooks/*.sh
+chmod +x .claude/memory/*.sh
 ```
 
-**Still failing?** Check Node.js version:
+### Node Version Too Old
+
+**Problem:** Requires Node.js 18+
+
+**Solution:**
 ```bash
-node --version
-# Must be 18+ for MCP server compatibility
+# Using nvm
+nvm install 18
+nvm use 18
 ```
-
-</details>
 
 ---
 
-## 📚 Quick Reference
+## Reference
 
 ### Essential Commands
 
-```bash
-# Navigate to OCTALUME
-cd ~/projects/OCTALUME
-
-# Start Claude Code
-claude
-
-# Initialize new project
-"Initialize a new OCTALUME project for [describe your project]"
-
-# Continue existing project
-"Continue working on Phase [X]"
-
-# Check project status
-"What is the current project status?"
-
-# Move to next phase
-"We've completed Phase [X]. Run go/no-go decision."
-
-# Work on next feature
-"Continue with the next feature"
-```
+| Action | Command |
+|--------|---------|
+| Start Claude Code | `claude` |
+| Initialize project | `Initialize a new lifecycle project for...` |
+| Check status | `What is the current project status?` |
+| Move to next phase | `We have completed Phase X. Run go/no-go.` |
+| Continue work | `Continue with the next feature` |
 
 ### File Locations
 
 | What | Where |
 |------|-------|
-| Main docs | `~/projects/OCTALUME/*.md` |
-| Framework internals | `~/projects/OCTALUME/.claude/` |
-| Phase skills | `~/projects/OCTALUME/skills/phase_*/` |
-| Shared skills | `~/projects/OCTALUME/skills/shared/` |
-| Artifacts | `~/projects/OCTALUME/artifacts/P*/` |
+| Framework context | CLAUDE.md |
+| Phase skills | skills/phase_XX/ |
+| Shared skills | skills/shared/ |
+| Memory bank | .claude/memory/ |
+| Project state | .claude/project-state.json |
+
+### The 8 Phases
+
+| Phase | Name | Owner |
+|:-----:|------|-------|
+| 1 | Vision and Strategy | Product Owner |
+| 2 | Requirements and Scope | Product Owner |
+| 3 | Architecture and Design | CTA |
+| 4 | Development Planning | Project Manager |
+| 5 | Development Execution | Tech Lead |
+| 6 | Quality and Security | QA Lead |
+| 7 | Deployment and Release | DevOps |
+| 8 | Operations and Maintenance | SRE |
 
 ---
 
-## 🎓 Next Steps
+## Next Steps
 
-**After completing setup:**
+After setup:
 
-1. ✅ Read [README.md](README.md) — Understand the full framework
-2. ✅ Review [FRAMEWORK_VISUALIZATION.md](FRAMEWORK_VISUALIZATION.md) — See the 8-phase flow
-3. ✅ Test the installation — Follow [TESTING_GUIDE.md](TESTING_GUIDE.md)
-4. ✅ Start your first project — Use Claude Code to initialize
-5. ✅ Create Business Case — Phase 1 deliverable
-6. ✅ Create PRD — Phase 1 deliverable
-7. ✅ Build MVP — Phase 5 deliverable
+1. Read [README.md](README.md) for framework overview
+2. Review [FRAMEWORK_VISUALIZATION.md](FRAMEWORK_VISUALIZATION.md) for visual workflows
+3. Run [TESTING_GUIDE.md](TESTING_GUIDE.md) to verify installation
+4. Start your first project with Claude Code
 
 ---
 
-## 🏆 What You'll Create
+## Support
 
-**With OCTALUME, you'll create:**
-
-| Deliverable | Why It Matters |
-|-------------|----------------|
-| **Business Case** | Justifies your project investment |
-| **PRD** | Defines what you're building |
-| **MVP** | Proves your concept works |
-| **Full Product** | Scales through all 8 phases |
-
-**All with AI assistance via Claude Code!**
+| Channel | Details |
+|---------|---------|
+| Repository | https://github.com/Harery/OCTALUME |
+| Email | octalume@harery.com |
+| Website | https://harery.com |
 
 ---
 
-## 💡 Pro Tips
-
-### Tip #1: Always Start in the Right Directory
-
-```bash
-# Make this your first command
-cd ~/projects/OCTALUME
-
-# Then start Claude Code
-claude
-```
-
-**Why:** Claude Code only loads CLAUDE.md if you're in the OCTALUME directory.
-
-### Tip #2: Keep .claude Directory Intact
-
-**Never delete or rename the `.claude` directory.** It contains:
-- Auto-loaded context
-- Agent configurations
-- MCP server
-- Tool definitions
-
-### Tip #3: Verify Before You Begin
-
-```bash
-# Quick pre-flight check
-pwd                    # Should show ~/projects/OCTALUME
-node --version         # Should be v18+
-claude --version       # Should show version info
-```
-
-**Pass all checks?** You're ready to go!
-
-### Tip #4: Use Specific Prompts
-
-**Vague:** "Help me with OCTALUME"
-
-**Specific:** "Initialize a new OCTALUME project for a CRM system with lead tracking, contact management, and sales pipeline features."
-
-**Why:** Specific prompts get specific results.
-
----
-
-## 🎉 You're Ready!
-
-**Congratulations!** You've completed the OCTALUME setup. You're now ready to:
-
-- ✅ Create your first project
-- ✅ Build software with confidence
-- ✅ Deliver on time and on budget
-- ✅ Maintain quality and security throughout
-
-**Welcome to the OCTALUME community. Let's build something great together!**
-
----
-
-**Platform:** Linux
-**Version:** 1.0.0
-**Last Updated:** 2026-01-20
-
----
-
-> **One more thing:** Setup is just the beginning. As you use OCTALUME, you'll discover patterns, shortcuts, and best practices that work for your team. Don't be afraid to experiment — the framework is here to guide you, not constrain you.
+Version 1.0.0 | OCTALUME Enterprise Lifecycle Framework

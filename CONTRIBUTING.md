@@ -236,7 +236,7 @@ Embrace tests. They'll save you more than once.
 **Please reach out. Seriously.**
 
 - **Open an issue** with the "question" label
-- **Email us:** mohamed@harery.com
+- **Email us:** octalume@harery.com
 - **Website:** https://www.harery.com/
 
 **There are no stupid questions.** Every expert was once a beginner. If you're wondering about something, chances are someone else is too.
@@ -302,7 +302,7 @@ Thank you for your time, your skills, and your willingness to contribute. Thank 
 
 ---
 
-**Need immediate help?** Email mohamed@harery.com
+**Need immediate help?** Email octalume@harery.com
 
 **Want to learn more?** Check out our documentation and join the conversation!
 
