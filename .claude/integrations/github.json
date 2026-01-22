@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "repo": null,
+  "owner": null,
+  "defaultLabels": ["enhancement", "octalume"],
+  "templates": {
+    "issue": {
+      "default": "### Description\n\n{description}\n\n### Acceptance Criteria\n\n- [ ] {criteria}\n\n### Additional Context\n\n{context}\n\n---\n*Created via OCTALUME v2.0*",
+      "bug": "### Bug Description\n\n{description}\n\n### Steps to Reproduce\n\n1. {steps}\n\n### Expected Behavior\n\n{expected}\n\n### Actual Behavior\n\n{actual}\n\n### Environment\n\n- OS: \n- Version: \n\n---\n*Created via OCTALUME v2.0*",
+      "feature": "### Feature Request\n\n{description}\n\n### Use Case\n\n{useCase}\n\n### Proposed Solution\n\n{solution}\n\n### Alternatives Considered\n\n{alternatives}\n\n---\n*Created via OCTALUME v2.0*"
+    },
+    "pr": {
+      "default": "## Summary\n\n{summary}\n\n## Changes\n\n{changes}\n\n## Testing\n\n- [ ] Unit tests added/updated\n- [ ] Integration tests pass\n- [ ] Manual testing completed\n\n## Checklist\n\n- [ ] Code follows project style\n- [ ] Documentation updated\n- [ ] QA checks pass\n\n---\n*Created via OCTALUME v2.0*"
+    }
+  },
+  "automation": {
+    "autoLinkIssues": true,
+    "autoLabel": true,
+    "autoAssign": false,
+    "autoMilestone": false
+  },
+  "labelMapping": {
+    "P1": "phase:init",
+    "P2": "phase:planning",
+    "P3": "phase:development",
+    "P4": "phase:testing",
+    "P5": "phase:security",
+    "P6": "phase:documentation",
+    "P7": "phase:deployment",
+    "P8": "phase:maintenance"
+  }
+}

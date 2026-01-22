@@ -1,0 +1,87 @@
+{
+  "phase": "P6",
+  "name": "Documentation",
+  "description": "Documentation completeness and quality",
+  "criteria": [
+    {
+      "id": "P6-001",
+      "name": "README Complete",
+      "description": "README has all required sections",
+      "type": "file",
+      "required": true,
+      "check": {
+        "file": "README.md",
+        "containsPatterns": [
+          "# ",
+          "## Installation",
+          "## Usage",
+          "## Configuration"
+        ]
+      }
+    },
+    {
+      "id": "P6-002",
+      "name": "API Documentation",
+      "description": "API endpoints documented",
+      "type": "structure",
+      "required": false,
+      "check": {
+        "anyOf": [
+          "docs/api.md",
+          "docs/api/**/*.md",
+          "swagger.json",
+          "openapi.yaml"
+        ]
+      }
+    },
+    {
+      "id": "P6-003",
+      "name": "Code Comments",
+      "description": "Public functions have JSDoc/comments",
+      "type": "coverage",
+      "required": false,
+      "check": {
+        "tool": "documentation-coverage",
+        "minCoverage": 60,
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P6-004",
+      "name": "Contributing Guide",
+      "description": "CONTRIBUTING.md exists",
+      "type": "file",
+      "required": false,
+      "check": {
+        "file": "CONTRIBUTING.md",
+        "minSize": 200
+      }
+    },
+    {
+      "id": "P6-005",
+      "name": "Changelog",
+      "description": "CHANGELOG.md maintained",
+      "type": "file",
+      "required": false,
+      "check": {
+        "file": "CHANGELOG.md",
+        "containsPatterns": ["## [", "### Added", "### Changed"]
+      }
+    },
+    {
+      "id": "P6-006",
+      "name": "Architecture Docs",
+      "description": "Architecture documentation exists",
+      "type": "structure",
+      "required": false,
+      "check": {
+        "anyOf": [
+          "docs/architecture.md",
+          "ARCHITECTURE.md",
+          "docs/design/**/*.md"
+        ]
+      }
+    }
+  ],
+  "passThreshold": 70
+}

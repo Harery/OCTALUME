@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "worktrees": [],
+  "history": [],
+  "settings": {
+    "defaultBaseBranch": "main",
+    "worktreesDirectory": "../worktrees",
+    "autoSync": false,
+    "cleanupAfterMerge": true
+  }
+}

@@ -1,0 +1,108 @@
+================================================================================
+                              OCTALUME LICENSE
+                    Enterprise Lifecycle Framework v1.0
+================================================================================
+
+                              MIT License
+
+    Copyright (c) 2026 Mohamed ElHarery / Harery Technologies
+                        All Rights Reserved
+
+--------------------------------------------------------------------------------
+                              GRANT OF LICENSE
+--------------------------------------------------------------------------------
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to:
+
+    * USE        - Run and execute the Software for any purpose
+    * COPY       - Make copies of the Software
+    * MODIFY     - Adapt and alter the Software
+    * MERGE      - Combine with other software
+    * PUBLISH    - Make the Software publicly available
+    * DISTRIBUTE - Share copies with others
+    * SUBLICENSE - Grant these rights to others
+    * SELL       - Offer copies for commercial purposes
+
+subject to the following conditions:
+
+--------------------------------------------------------------------------------
+                              CONDITIONS
+--------------------------------------------------------------------------------
+
+1. COPYRIGHT NOTICE REQUIREMENT
+
+   The above copyright notice and this permission notice shall be included
+   in all copies or substantial portions of the Software.
+
+2. ATTRIBUTION REQUIREMENT
+
+   When using OCTALUME in your projects, attribution to the original author
+   is appreciated but not required. If you choose to provide attribution,
+   please use:
+
+   "Built with OCTALUME by Harery Technologies"
+   https://github.com/Harery/OCTALUME
+
+--------------------------------------------------------------------------------
+                              DISCLAIMER
+--------------------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF:
+
+    * MERCHANTABILITY       - Fitness for sale
+    * FITNESS FOR PURPOSE   - Suitability for intended use
+    * NONINFRINGEMENT       - Freedom from third-party claims
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+--------------------------------------------------------------------------------
+                              TRADEMARK NOTICE
+--------------------------------------------------------------------------------
+
+"OCTALUME" and the OCTALUME logo are trademarks of Mohamed ElHarery.
+
+Use of the OCTALUME name and logo is permitted for:
+    * Referring to this framework in documentation
+    * Indicating compatibility with this framework
+    * Educational and informational purposes
+
+Use is NOT permitted for:
+    * Implying endorsement without written permission
+    * Creating derivative products with confusingly similar names
+    * Any use that suggests official affiliation without authorization
+
+--------------------------------------------------------------------------------
+                              CONTRIBUTIONS
+--------------------------------------------------------------------------------
+
+By submitting contributions to this project, you agree that your contributions
+will be licensed under the same MIT License that covers the project.
+
+--------------------------------------------------------------------------------
+                              CONTACT
+--------------------------------------------------------------------------------
+
+    Author:     Mohamed ElHarery
+    Email:      octalume@harery.com
+    Website:    https://harery.com
+    Repository: https://github.com/Harery/OCTALUME
+
+--------------------------------------------------------------------------------
+                              THIRD-PARTY NOTICES
+--------------------------------------------------------------------------------
+
+This software may include or depend on third-party software components, each
+governed by their own license terms. Please refer to the respective license
+files in the node_modules directory or accompanying documentation.
+
+================================================================================
+                    Thank you for using OCTALUME!
+          Building enterprise software, one phase at a time.
+================================================================================

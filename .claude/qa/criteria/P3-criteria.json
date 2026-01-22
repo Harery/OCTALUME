@@ -1,0 +1,93 @@
+{
+  "phase": "P3",
+  "name": "Development",
+  "description": "Verify code quality and development standards",
+  "criteria": [
+    {
+      "id": "P3-001",
+      "name": "Lint Clean",
+      "description": "No linting errors",
+      "type": "command",
+      "required": true,
+      "check": {
+        "command": "npm run lint",
+        "expectExitCode": 0,
+        "timeout": 60
+      }
+    },
+    {
+      "id": "P3-002",
+      "name": "Type Safety",
+      "description": "TypeScript type checking passes",
+      "type": "command",
+      "required": true,
+      "check": {
+        "command": "npm run type-check",
+        "expectExitCode": 0,
+        "timeout": 120,
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P3-003",
+      "name": "Unit Tests",
+      "description": "Unit tests pass",
+      "type": "command",
+      "required": true,
+      "check": {
+        "command": "npm test",
+        "expectExitCode": 0,
+        "timeout": 300
+      }
+    },
+    {
+      "id": "P3-004",
+      "name": "Test Coverage",
+      "description": "Minimum test coverage threshold",
+      "type": "coverage",
+      "required": false,
+      "check": {
+        "command": "npm run test:coverage",
+        "minCoverage": 80,
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P3-005",
+      "name": "No Console Logs",
+      "description": "No debug console.log in production code",
+      "type": "grep",
+      "required": false,
+      "check": {
+        "pattern": "console\\.log",
+        "exclude": ["*.test.*", "*.spec.*", "tests/**"],
+        "maxMatches": 0
+      }
+    },
+    {
+      "id": "P3-006",
+      "name": "No TODO in Code",
+      "description": "No unresolved TODOs in production code",
+      "type": "grep",
+      "required": false,
+      "check": {
+        "pattern": "TODO:|FIXME:|HACK:",
+        "exclude": ["*.md"],
+        "maxMatches": 5
+      }
+    },
+    {
+      "id": "P3-007",
+      "name": "Code Complexity",
+      "description": "Cyclomatic complexity within limits",
+      "type": "complexity",
+      "required": false,
+      "check": {
+        "maxComplexity": 15,
+        "tool": "eslint-plugin-complexity",
+        "skipIfMissing": true
+      }
+    }
+  ],
+  "passThreshold": 85
+}

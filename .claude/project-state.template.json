@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "",
+    "description": "",
+    "created_at": null,
+    "updated_at": null
+  },
+  "team": {
+    "executive_sponsor": null,
+    "product_owner": null,
+    "project_manager": null,
+    "cta": null,
+    "tech_lead": null,
+    "security_lead": null,
+    "qa_lead": null,
+    "devops_lead": null,
+    "sre_lead": null
+  },
+  "compliance": {
+    "requirements": [],
+    "frameworks": []
+  },
+  "current_phase": "phase_01_vision_strategy",
+  "phase_status": "not_started",
+  "completed_phases": [],
+  "blocked_reason": null,
+  "artifacts": {},
+  "task_executions": [],
+  "escalations": [],
+  "handoffs": [],
+  "phase_validation": {
+    "phase_01_vision_strategy": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_02_requirements_scope": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_03_architecture_design": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_04_development_planning": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_05_development_execution": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_06_quality_security": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_07_deployment_release": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    },
+    "phase_08_operations_maintenance": {
+      "entry_criteria": {},
+      "exit_criteria": {}
+    }
+  },
+  "decisions": {},
+  "blockers": {},
+  "memory_progress": {},
+  "received_deliverables": [],
+  "feature_list": {
+    "total_features": 0,
+    "completed_features": 0,
+    "features": []
+  },
+  "traceability": {
+    "artifact_counter": {
+      "P1": 0,
+      "P2": 0,
+      "P3": 0,
+      "P4": 0,
+      "P5": 0,
+      "P6": 0,
+      "P7": 0,
+      "P8": 0
+    }
+  },
+  "last_memory_sync": null
+}

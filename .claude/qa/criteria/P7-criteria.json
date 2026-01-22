@@ -1,0 +1,81 @@
+{
+  "phase": "P7",
+  "name": "Deployment",
+  "description": "Deployment readiness checks",
+  "criteria": [
+    {
+      "id": "P7-001",
+      "name": "Build Succeeds",
+      "description": "Production build completes without errors",
+      "type": "command",
+      "required": true,
+      "check": {
+        "command": "npm run build",
+        "expectExitCode": 0,
+        "timeout": 300
+      }
+    },
+    {
+      "id": "P7-002",
+      "name": "Environment Config",
+      "description": "Production environment variables documented",
+      "type": "file",
+      "required": true,
+      "check": {
+        "anyOf": [".env.example", ".env.production.example", "docs/deployment.md"]
+      }
+    },
+    {
+      "id": "P7-003",
+      "name": "Docker Ready",
+      "description": "Dockerfile exists and is valid",
+      "type": "file",
+      "required": false,
+      "check": {
+        "file": "Dockerfile",
+        "containsPatterns": ["FROM", "COPY", "CMD"],
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P7-004",
+      "name": "CI/CD Pipeline",
+      "description": "CI/CD configuration exists",
+      "type": "structure",
+      "required": false,
+      "check": {
+        "anyOf": [
+          ".github/workflows/*.yml",
+          ".gitlab-ci.yml",
+          "Jenkinsfile",
+          ".circleci/config.yml"
+        ]
+      }
+    },
+    {
+      "id": "P7-005",
+      "name": "Health Check",
+      "description": "Health check endpoint or mechanism",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["src/**/*.{js,ts}"],
+        "patterns": ["/health", "/healthz", "/ready", "healthCheck"],
+        "minMatches": 1,
+        "skipIfNotWebApp": true
+      }
+    },
+    {
+      "id": "P7-006",
+      "name": "No Dev Dependencies in Prod",
+      "description": "devDependencies properly separated",
+      "type": "file",
+      "required": false,
+      "check": {
+        "file": "package.json",
+        "hasFields": ["dependencies", "devDependencies"]
+      }
+    }
+  ],
+  "passThreshold": 75
+}

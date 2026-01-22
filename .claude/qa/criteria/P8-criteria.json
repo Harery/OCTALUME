@@ -1,0 +1,83 @@
+{
+  "phase": "P8",
+  "name": "Maintenance & Monitoring",
+  "description": "Long-term maintenance and monitoring readiness",
+  "criteria": [
+    {
+      "id": "P8-001",
+      "name": "Logging Configured",
+      "description": "Structured logging implemented",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["src/**/*.{js,ts}"],
+        "patterns": ["logger", "winston", "pino", "bunyan", "console.error"],
+        "minMatches": 1
+      }
+    },
+    {
+      "id": "P8-002",
+      "name": "Error Handling",
+      "description": "Global error handling configured",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["src/**/*.{js,ts}"],
+        "patterns": ["errorHandler", "catch", "try.*catch", "process.on.*error"],
+        "minMatches": 3
+      }
+    },
+    {
+      "id": "P8-003",
+      "name": "Monitoring Ready",
+      "description": "Metrics/monitoring hooks available",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["src/**/*.{js,ts}", "package.json"],
+        "patterns": ["prometheus", "metrics", "statsd", "datadog", "newrelic"],
+        "minMatches": 0,
+        "optional": true
+      }
+    },
+    {
+      "id": "P8-004",
+      "name": "Graceful Shutdown",
+      "description": "Graceful shutdown handling",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["src/**/*.{js,ts}"],
+        "patterns": ["SIGTERM", "SIGINT", "graceful", "shutdown"],
+        "minMatches": 1,
+        "skipIfNotServer": true
+      }
+    },
+    {
+      "id": "P8-005",
+      "name": "Dependency Updates",
+      "description": "Dependencies reasonably up to date",
+      "type": "command",
+      "required": false,
+      "check": {
+        "command": "npm outdated --json",
+        "maxOutdated": 10,
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P8-006",
+      "name": "Backup Strategy",
+      "description": "Data backup considerations documented",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["docs/**/*.md", "README.md"],
+        "patterns": ["backup", "restore", "disaster recovery"],
+        "minMatches": 0,
+        "optional": true
+      }
+    }
+  ],
+  "passThreshold": 60
+}

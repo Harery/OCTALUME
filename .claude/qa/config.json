@@ -1,0 +1,60 @@
+{
+  "version": "2.0.0",
+  "enabled": true,
+  "autoRun": {
+    "onCommit": false,
+    "onPush": true,
+    "onMerge": true,
+    "schedule": null
+  },
+  "phases": {
+    "P1": { "enabled": true, "blocking": true },
+    "P2": { "enabled": true, "blocking": true },
+    "P3": { "enabled": true, "blocking": true },
+    "P4": { "enabled": true, "blocking": true },
+    "P5": { "enabled": true, "blocking": false },
+    "P6": { "enabled": true, "blocking": false },
+    "P7": { "enabled": true, "blocking": false },
+    "P8": { "enabled": true, "blocking": false }
+  },
+  "validators": {
+    "lint": {
+      "enabled": true,
+      "command": "npm run lint",
+      "timeout": 60
+    },
+    "typeCheck": {
+      "enabled": true,
+      "command": "npm run type-check",
+      "timeout": 120
+    },
+    "test": {
+      "enabled": true,
+      "command": "npm test",
+      "timeout": 300
+    },
+    "security": {
+      "enabled": true,
+      "command": "npm audit --audit-level=high",
+      "timeout": 60
+    },
+    "build": {
+      "enabled": true,
+      "command": "npm run build",
+      "timeout": 180
+    }
+  },
+  "thresholds": {
+    "testCoverage": 80,
+    "lintWarnings": 10,
+    "complexityMax": 15,
+    "duplicateCode": 5
+  },
+  "reporting": {
+    "format": "json",
+    "outputDir": ".claude/qa/reports",
+    "keepHistory": 30,
+    "notifyOnFailure": true
+  },
+  "customRules": []
+}

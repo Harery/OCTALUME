@@ -1,0 +1,62 @@
+{
+  "phase": "P2",
+  "name": "Requirements & Planning",
+  "description": "Verify requirements documentation and planning artifacts",
+  "criteria": [
+    {
+      "id": "P2-001",
+      "name": "Requirements Document",
+      "description": "Requirements documented in specs directory",
+      "type": "structure",
+      "required": true,
+      "check": {
+        "directories": [".claude/specs"],
+        "filesPattern": "*.md"
+      }
+    },
+    {
+      "id": "P2-002",
+      "name": "User Stories",
+      "description": "User stories or acceptance criteria defined",
+      "type": "file",
+      "required": false,
+      "check": {
+        "anyOf": ["docs/user-stories.md", "docs/requirements.md", ".claude/specs/requirements.md"]
+      }
+    },
+    {
+      "id": "P2-003",
+      "name": "Architecture Decision Records",
+      "description": "ADRs for major decisions",
+      "type": "structure",
+      "required": false,
+      "check": {
+        "directories": ["docs/adr", "docs/decisions"],
+        "optional": true
+      }
+    },
+    {
+      "id": "P2-004",
+      "name": "Technical Constraints",
+      "description": "Constraints and dependencies documented",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["README.md", "docs/*.md"],
+        "patterns": ["constraint", "dependency", "requirement"]
+      }
+    },
+    {
+      "id": "P2-005",
+      "name": "Phase Tracking",
+      "description": "OCTALUME phase properly set",
+      "type": "memory",
+      "required": true,
+      "check": {
+        "memoryFile": ".claude/memory/memory.json",
+        "hasField": "current_context.phase"
+      }
+    }
+  ],
+  "passThreshold": 70
+}

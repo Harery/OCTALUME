@@ -1,0 +1,32 @@
+{
+  "version": "2.0",
+  "schema": "octalume-memory-v2",
+  "project": {
+    "name": "",
+    "type": "",
+    "stack": [],
+    "initialized": "",
+    "description": ""
+  },
+  "sessions": [],
+  "knowledge_base": {
+    "architecture_decisions": [],
+    "code_patterns": [],
+    "gotchas": [],
+    "best_practices": [],
+    "lessons_learned": []
+  },
+  "feature_history": [],
+  "current_context": {
+    "active_phase": "",
+    "active_feature": "",
+    "pending_tasks": [],
+    "last_session_id": ""
+  },
+  "statistics": {
+    "total_sessions": 0,
+    "total_artifacts": 0,
+    "total_decisions": 0,
+    "phases_completed": []
+  }
+}

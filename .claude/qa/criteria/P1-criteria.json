@@ -1,0 +1,78 @@
+{
+  "phase": "P1",
+  "name": "Project Initialization",
+  "description": "Verify project structure and initial setup",
+  "criteria": [
+    {
+      "id": "P1-001",
+      "name": "Project Structure",
+      "description": "Required directories exist",
+      "type": "structure",
+      "required": true,
+      "check": {
+        "directories": [
+          "src",
+          "docs",
+          "tests",
+          ".github"
+        ]
+      }
+    },
+    {
+      "id": "P1-002",
+      "name": "Package Configuration",
+      "description": "package.json properly configured",
+      "type": "file",
+      "required": true,
+      "check": {
+        "file": "package.json",
+        "hasFields": ["name", "version", "description", "scripts"]
+      }
+    },
+    {
+      "id": "P1-003",
+      "name": "Git Configuration",
+      "description": "Git repository initialized with .gitignore",
+      "type": "git",
+      "required": true,
+      "check": {
+        "hasGit": true,
+        "hasGitignore": true
+      }
+    },
+    {
+      "id": "P1-004",
+      "name": "Documentation",
+      "description": "README.md exists with required sections",
+      "type": "file",
+      "required": true,
+      "check": {
+        "file": "README.md",
+        "minSize": 500,
+        "containsPatterns": ["#", "## Installation", "## Usage"]
+      }
+    },
+    {
+      "id": "P1-005",
+      "name": "License",
+      "description": "LICENSE file present",
+      "type": "file",
+      "required": false,
+      "check": {
+        "file": "LICENSE",
+        "exists": true
+      }
+    },
+    {
+      "id": "P1-006",
+      "name": "Editor Config",
+      "description": "Editor configuration for consistency",
+      "type": "file",
+      "required": false,
+      "check": {
+        "anyOf": [".editorconfig", ".prettierrc", ".eslintrc"]
+      }
+    }
+  ],
+  "passThreshold": 80
+}

@@ -1,0 +1,82 @@
+{
+  "phase": "P4",
+  "name": "Testing",
+  "description": "Comprehensive testing validation",
+  "criteria": [
+    {
+      "id": "P4-001",
+      "name": "All Tests Pass",
+      "description": "Complete test suite passes",
+      "type": "command",
+      "required": true,
+      "check": {
+        "command": "npm test -- --coverage",
+        "expectExitCode": 0,
+        "timeout": 600
+      }
+    },
+    {
+      "id": "P4-002",
+      "name": "Integration Tests",
+      "description": "Integration tests pass",
+      "type": "command",
+      "required": false,
+      "check": {
+        "command": "npm run test:integration",
+        "expectExitCode": 0,
+        "timeout": 600,
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P4-003",
+      "name": "E2E Tests",
+      "description": "End-to-end tests pass",
+      "type": "command",
+      "required": false,
+      "check": {
+        "command": "npm run test:e2e",
+        "expectExitCode": 0,
+        "timeout": 900,
+        "skipIfMissing": true
+      }
+    },
+    {
+      "id": "P4-004",
+      "name": "Coverage Threshold",
+      "description": "Test coverage meets minimum threshold",
+      "type": "coverage",
+      "required": true,
+      "check": {
+        "statements": 80,
+        "branches": 75,
+        "functions": 80,
+        "lines": 80
+      }
+    },
+    {
+      "id": "P4-005",
+      "name": "Test Organization",
+      "description": "Tests follow naming conventions",
+      "type": "structure",
+      "required": false,
+      "check": {
+        "pattern": "**/*.{test,spec}.{js,ts,jsx,tsx}",
+        "minFiles": 1
+      }
+    },
+    {
+      "id": "P4-006",
+      "name": "No Skipped Tests",
+      "description": "No tests marked as skip/only",
+      "type": "grep",
+      "required": false,
+      "check": {
+        "pattern": "\\.skip\\(|\\.only\\(|xit\\(|xdescribe\\(",
+        "include": ["**/*.test.*", "**/*.spec.*"],
+        "maxMatches": 0
+      }
+    }
+  ],
+  "passThreshold": 90
+}

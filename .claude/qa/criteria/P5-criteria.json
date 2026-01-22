@@ -1,0 +1,84 @@
+{
+  "phase": "P5",
+  "name": "Security & Compliance",
+  "description": "Security validation and compliance checks",
+  "criteria": [
+    {
+      "id": "P5-001",
+      "name": "Dependency Audit",
+      "description": "No high/critical vulnerabilities in dependencies",
+      "type": "command",
+      "required": true,
+      "check": {
+        "command": "npm audit --audit-level=high",
+        "expectExitCode": 0,
+        "timeout": 120
+      }
+    },
+    {
+      "id": "P5-002",
+      "name": "No Secrets in Code",
+      "description": "No hardcoded secrets or API keys",
+      "type": "grep",
+      "required": true,
+      "check": {
+        "patterns": [
+          "api_key\\s*=\\s*['\"][^'\"]+['\"]",
+          "password\\s*=\\s*['\"][^'\"]+['\"]",
+          "secret\\s*=\\s*['\"][^'\"]+['\"]",
+          "-----BEGIN.*PRIVATE KEY-----"
+        ],
+        "exclude": ["*.example", "*.sample", "*.test.*", "*.md"],
+        "maxMatches": 0
+      }
+    },
+    {
+      "id": "P5-003",
+      "name": "Environment Variables",
+      "description": "Sensitive config uses environment variables",
+      "type": "file",
+      "required": false,
+      "check": {
+        "anyOf": [".env.example", ".env.sample", "docs/environment.md"]
+      }
+    },
+    {
+      "id": "P5-004",
+      "name": "HTTPS Only",
+      "description": "No hardcoded HTTP URLs (should be HTTPS)",
+      "type": "grep",
+      "required": false,
+      "check": {
+        "pattern": "http://(?!localhost|127\\.0\\.0\\.1)",
+        "exclude": ["*.md", "*.txt"],
+        "maxMatches": 0
+      }
+    },
+    {
+      "id": "P5-005",
+      "name": "Security Headers",
+      "description": "Security middleware/headers configured",
+      "type": "content",
+      "required": false,
+      "check": {
+        "searchIn": ["src/**/*.{js,ts}"],
+        "patterns": ["helmet", "cors", "Content-Security-Policy"],
+        "minMatches": 1,
+        "skipIfNotWebApp": true
+      }
+    },
+    {
+      "id": "P5-006",
+      "name": "License Compliance",
+      "description": "Dependencies have compatible licenses",
+      "type": "command",
+      "required": false,
+      "check": {
+        "command": "npx license-checker --summary",
+        "expectExitCode": 0,
+        "skipIfMissing": true
+      }
+    }
+  ],
+  "passThreshold": 80
+}
