@@ -75,6 +75,19 @@ git --version
 
 **If not installed:** Get it at [git-scm.com](https://git-scm.com)
 
+```bash
+# Check jq version (required for memory scripts)
+jq --version
+```
+
+**Expected output:** `jq-1.6` or higher
+
+**If not installed:** Install with your package manager:
+- **Ubuntu/Debian:** `sudo apt install jq`
+- **CentOS/RHEL:** `sudo yum install jq`
+- **macOS:** `brew install jq`
+- **Arch:** `sudo pacman -S jq`
+
 ### Minimum Requirements
 
 | Component | Minimum Version |
@@ -82,6 +95,7 @@ git --version
 | Node.js | 18.0.0+ |
 | npm | 9.0.0+ |
 | git | 2.0+ |
+| jq | 1.6+ |
 | Linux | Ubuntu 20.04+, Debian 11+, CentOS 8+, or compatible |
 
 ### Platform Support

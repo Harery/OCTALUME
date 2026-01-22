@@ -1,6 +1,12 @@
 #!/bin/bash
 # .claude/memory/load.sh - Load entry from memory bank
 
+# Check for jq dependency
+if ! command -v jq &> /dev/null; then
+    echo '{"error": "jq is required but not installed. Install with: sudo apt install jq (Ubuntu) or brew install jq (macOS)"}'
+    exit 1
+fi
+
 MEMORY_FILE=".claude/memory/memory.json"
 
 # Check if memory file exists
@@ -26,7 +32,7 @@ if [ -n "$CATEGORY" ]; then
         echo '{"error": "Category must be: decision, progress, blocker, or note"}'
         exit 1
     fi
-    jq -r --arg key "$KEY" --arg category "$category" \
+    jq -r --arg key "$KEY" --arg category "$CATEGORY" \
        '.memory[$category][$key] // empty' "$MEMORY_FILE"
 else
     # Search in all categories

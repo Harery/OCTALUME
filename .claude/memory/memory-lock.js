@@ -8,7 +8,7 @@
  * - RF-004: Memory race conditions
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 
 const LOCK_DIR = '.claude/memory/locks';
@@ -175,7 +175,6 @@ function listLocks() {
     return { locks: [] };
   }
 
-  const { readdirSync } = require('fs');
   const locks = [];
 
   try {
@@ -226,7 +225,6 @@ function cleanupExpiredLocks() {
     return { cleaned: 0, locks: [] };
   }
 
-  const { readdirSync, unlinkSync } = require('fs');
   const cleaned = [];
   const now = Date.now();
 

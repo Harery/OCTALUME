@@ -1,6 +1,12 @@
 #!/bin/bash
 # .claude/memory/search.sh - Search memory bank
 
+# Check for jq dependency
+if ! command -v jq &> /dev/null; then
+    echo '{"error": "jq is required but not installed. Install with: sudo apt install jq (Ubuntu) or brew install jq (macOS)"}'
+    exit 1
+fi
+
 MEMORY_FILE=".claude/memory/memory.json"
 
 # Check if memory file exists

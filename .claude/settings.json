@@ -43,6 +43,12 @@
     }
   },
 
+  "hooks": {
+    "userPromptSubmit": ".claude/hooks/user-prompt-submit.sh",
+    "preToolUse": ".claude/hooks/pre-tool-use.sh",
+    "postToolResponse": ".claude/hooks/post-tool-response.sh"
+  },
+
   "agents": {
     "initializer": {
       "description": "Initializes new lifecycle projects with complete structure, feature list, and configuration",

@@ -10,6 +10,7 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { runValidator, VALIDATORS } from '../validators/task-validators.js';
 
 // Task to skill mappings for each phase
 const TASK_SKILL_BINDINGS = {

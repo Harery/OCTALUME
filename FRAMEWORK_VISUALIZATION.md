@@ -189,39 +189,20 @@ Gates = Quality control. They catch problems early.
 **Question:** "How long does all this take?" This timeline shows when activities happen across all 8 phases.
 
 ```mermaid
-timeline
-    title OCTALUME Framework - Complete Project Timeline
-    section Phase 1: Vision
-        Product Owner : Create PRD : Business case : Market analysis
-        Security Lead : Security considerations
-    section Phase 2: Requirements
-        Product Owner : Functional requirements : NFRs
-        Security Lead : Security requirements
-        Compliance Officer : Compliance requirements
-    section Phase 3: Architecture
-        CTA : System architecture : Security architecture
-        Data Architect : Data architecture
-        Cloud Architect : Infrastructure design
-    section Phase 4: Planning
-        Project Manager : WBS : Resource plan : Sprint plan
-        QA Lead : Test strategy
-        DevOps : CI/CD plan
-    section Phase 5: Development
-        Tech Lead : Sprint planning : Code reviews
-        Developers : Code development : Unit tests
-        Security Lead : Shift-left security
-    section Phase 6: Quality
-        QA Lead : Test execution : Defect management
-        Security Lead : Security testing : Pen testing
-        Performance Engineer : Performance testing
-        Compliance Officer : Compliance validation
-    section Phase 7: Deployment
-        DevOps : Deployment execution : Release
-        SRE : Monitoring setup
-    section Phase 8: Operations
-        SRE : Monitoring : Incidents : Maintenance
-        Security Lead : Security operations
-        Compliance Officer : Audit readiness
+flowchart LR
+    Phase1[Phase 1: Vision<br/>Product Owner: PRD, Business case<br/>Security considerations]
+    Phase2[Phase 2: Requirements<br/>Product Owner: Functional requirements, NFRs<br/>Security requirements]
+    Phase3[Phase 3: Architecture<br/>CTA: System & Security Architecture<br/>Data & Cloud Architects]
+    Phase4[Phase 4: Planning<br/>Project Manager: WBS, Sprint plan<br/>DevOps: CI/CD plan]
+    Phase5[Phase 5: Development<br/>Tech Lead: Sprint planning, Reviews<br/>Developers: Code, Unit Tests]
+    Phase6[Phase 6: Quality<br/>QA Lead: Test execution, Defect management<br/>Security & Compliance validation]
+    Phase7[Phase 7: Deployment<br/>DevOps: Deployment & Release<br/>SRE: Monitoring setup]
+    Phase8[Phase 8: Operations<br/>SRE: Monitoring, Incidents & Maintenance<br/>Security & Compliance]
+
+    Phase1 --> Phase2 --> Phase3 --> Phase4 --> Phase5 --> Phase6 --> Phase7 --> Phase8
+
+    classDef phase fill:#e1f0ff,stroke:#333;
+    class Phase1,Phase2,Phase3,Phase4,Phase5,Phase6,Phase7,Phase8 phase;
 ```
 
 ### What This Tells You
@@ -795,8 +776,8 @@ flowchart TD
     Start([Start Here]) --> Install[Install Claude Code<br/>npm install -g @anthropic-ai/claude-code]
     Install --> Login[claude login]
     Login --> Navigate[cd to project directory]
-    Navigate --> Init[/lifecycle-init<br/>Initialize new project]
-    Init --> Create[Framework creates:<br/>• Project structure<br/>• 200-500 features<br/>• Git repository<br/>• Configuration files]
+    Navigate --> Init[lifecycle-init<br/>Initialize new project]
+    Init --> Create[Framework creates:<br/>- Project structure<br/>- 200-500 features<br/>- Git repository<br/>- Configuration files]
     Create --> Work[Claude works on features<br/>ONE AT A TIME]
     Work --> Test[Test each feature<br/>thoroughly]
     Test --> Commit[Commit to git<br/>with artifacts]

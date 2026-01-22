@@ -724,7 +724,7 @@ See `./templates/` for:
 
 ---
 
-**Transformed by:** OCTALIME EXPERT MENTOR
+**Transformed by:** OCTALUME EXPERT MENTOR
 **Date:** 2026-01-20
 **Transformation:** Complete rewrite to Expert Mentor style (warm, story-driven, emotionally intelligent, progressive disclosure, plain language, 2026 trends)
 **Next Review Recommended:** After major governance updates or every 6 months

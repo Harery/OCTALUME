@@ -1,6 +1,12 @@
 #!/bin/bash
 # .claude/memory/delete.sh - Delete entry from memory bank
 
+# Check for jq dependency
+if ! command -v jq &> /dev/null; then
+    echo '{"error": "jq is required but not installed. Install with: sudo apt install jq (Ubuntu) or brew install jq (macOS)"}'
+    exit 1
+fi
+
 MEMORY_FILE=".claude/memory/memory.json"
 
 # Check if memory file exists
@@ -47,7 +53,7 @@ if [ -n "$CATEGORY" ]; then
         elif ($category == "note") then
             .statistics.notes = (.statistics.notes - 1)
         end |
-        .updated_at = now_iso8601
+        .updated_at = (now | strftime("%Y-%m-%dT%H:%M:%SZ"))
         ' "$MEMORY_FILE" > "$TMP_FILE"
 
     if [ $? -eq 0 ]; then
@@ -87,7 +93,7 @@ else
         elif ($category == "note") then
             .statistics.notes = (.statistics.notes - 1)
         end |
-        .updated_at = now_iso8601
+        .updated_at = (now | strftime("%Y-%m-%dT%H:%M:%SZ"))
         ' "$MEMORY_FILE" > "$TMP_FILE"
 
     if [ $? -eq 0 ]; then
