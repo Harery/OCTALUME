@@ -1,0 +1,65 @@
+{
+  "version": "2.2",
+  "description": "Phase-aware thinking level configuration for OCTALUME",
+  "source": "Auto-Claude v2.7.4 phase_config.py",
+  
+  "budget_map": {
+    "none": null,
+    "low": 1024,
+    "medium": 4096,
+    "high": 16384,
+    "ultrathink": 65536
+  },
+  
+  "budget_descriptions": {
+    "none": "No extended thinking - fast coding tasks",
+    "low": "Light analysis - commit messages, merge resolution (1K tokens)",
+    "medium": "Moderate analysis - research, context gathering (4K tokens)",
+    "high": "Deep thinking - QA review, planning (16K tokens)",
+    "ultrathink": "Maximum reasoning - spec critique, discovery (64K tokens)"
+  },
+  
+  "phase_defaults": {
+    "P1_DISCOVERY": "ultrathink",
+    "P2_RESEARCH": "medium",
+    "P3_PLANNING": "high",
+    "P4_IMPLEMENTATION": "none",
+    "P5_VALIDATION": "high",
+    "P6_REVIEW": "high",
+    "P7_CRITIQUE": "ultrathink",
+    "P8_DEPLOYMENT": "medium"
+  },
+  
+  "agent_defaults": {
+    "architect": "ultrathink",
+    "tech_lead": "high",
+    "senior_dev": "medium",
+    "developer": "none",
+    "qa_lead": "high",
+    "qa_engineer": "medium",
+    "reviewer": "high",
+    "security_analyst": "high",
+    "devops": "medium",
+    "documenter": "low"
+  },
+  
+  "task_type_overrides": {
+    "spec_writing": "ultrathink",
+    "self_critique": "ultrathink",
+    "discovery": "ultrathink",
+    "code_review": "high",
+    "debugging": "high",
+    "implementation": "none",
+    "documentation": "low",
+    "commit_message": "low",
+    "merge_resolution": "low",
+    "test_writing": "medium"
+  },
+  
+  "cost_optimization": {
+    "enabled": true,
+    "downgrade_on_simple_tasks": true,
+    "upgrade_on_errors": true,
+    "max_budget_per_session": 200000
+  }
+}

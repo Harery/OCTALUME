@@ -1,12 +1,33 @@
-# CLAUDE.md - OCTALUME Framework Context v2.1
+# CLAUDE.md - OCTALUME Framework Context v2.2
 
 This file is auto-loaded when Claude Code starts in this directory. It provides the complete context for understanding and working with the OCTALUME Enterprise Lifecycle Framework.
 
 ---
 
-## 🚀 What's New in v2.1 (Retrofit Release)
+## 🚀 What's New in v2.2 (Auto-Claude Deep Retrofit)
 
-OCTALUME v2.1 brings Auto-Claude-inspired features to the governance-first framework:
+OCTALUME v2.2 brings deep Auto-Claude internals to the framework—extracted directly from the Auto-Claude v2.7.4 AppImage:
+
+| Feature | Description | Command |
+|---------|-------------|---------|
+| **🧠 Thinking Levels** | 5-tier thinking budget system (none→ultrathink) | `/thinking-config` |
+| **🗜️ Context Compaction** | Phase output summarization (~500 words) | `/compact-context` |
+| **💡 Insight Extraction** | AI-powered post-session analysis | `/extract-insights` |
+| **🔧 Recovery System** | Failure classification & auto-recovery | `/recovery-status` |
+| **🤖 Agent Registry** | 14+ specialized agent configurations | `/agent-config` |
+| **📊 Attempt Tracking** | Record attempts, detect circular fixes | `/recovery-action` |
+
+### Thinking Budget Tiers
+
+| Level | Tokens | Use Case |
+|-------|--------|----------|
+| `none` | 0 | Simple responses, formatting |
+| `low` | 1,024 | Single file edits, docs |
+| `medium` | 4,096 | Multi-file features (default) |
+| `high` | 16,384 | Complex algorithms, architecture |
+| `ultrathink` | 65,536 | System-wide changes, security |
+
+### v2.1 Features (Still Available)
 
 | Feature | Description | Command |
 |---------|-------------|---------|
@@ -61,7 +82,22 @@ OCTALUME/
 │   ├── ORCHESTRATOR.md               # Multi-agent coordinator
 │   ├── CONTEXT_ENGINEERING.md        # Context management
 │   ├── agents/                       # Agent harnesses
+│   │   └── agent-configs.json        # 🆕 v2.2 Agent registry
+│   ├── thinking/                     # 🆕 v2.2 Thinking system
+│   │   ├── thinking-levels.json
+│   │   └── thinking-manager.js
+│   ├── compaction/                   # 🆕 v2.2 Context compaction
+│   │   ├── compaction-config.json
+│   │   └── context-compactor.js
+│   ├── insights/                     # 🆕 v2.2 Insight extraction
+│   │   ├── insight-schema.json
+│   │   └── insight-extractor.js
+│   ├── recovery/                     # 🆕 v2.2 Recovery system
+│   │   ├── recovery-config.json
+│   │   ├── recovery-manager.js
+│   │   └── attempt-history.json
 │   ├── commands/                     # Slash commands
+│   │   ├── v2.2-slash-commands.md    # 🆕 v2.2 Command reference
 │   │   ├── memory-search.md
 │   │   ├── memory-save.md
 │   │   ├── memory-semantic-search.md # 🆕 v2.1
@@ -129,6 +165,50 @@ OCTALUME/
     ├── phase_08_operations_maintenance/
     └── shared/
 ```
+
+---
+
+## 🆕 v2.2 Commands Reference
+
+### Thinking Level Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/thinking-config [level]` | Set thinking budget level | `/thinking-config high` |
+| `/thinking-config show` | Show current configuration | `/thinking-config show` |
+| `/thinking-budget` | Get budget for current context | `/thinking-budget --phase spec` |
+
+### Context Compaction Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/compact-context` | Compact phase outputs | `/compact-context --phase discovery` |
+| `/compact-context --inject` | Inject into target phase | `/compact-context --inject code` |
+| `/context-summary` | Quick context summary | `/context-summary --format markdown` |
+
+### Insight Extraction Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/extract-insights` | Extract session insights | `/extract-insights --save` |
+| `/show-insights` | Display saved insights | `/show-insights --aggregate` |
+
+### Recovery Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/recovery-status` | Check recovery state | `/recovery-status` |
+| `/recovery-classify` | Classify an error | `/recovery-classify "SyntaxError..."` |
+| `/recovery-action` | Get recovery recommendation | `/recovery-action --subtask task-001` |
+| `/recovery-rollback` | Rollback to last good commit | `/recovery-rollback --confirm` |
+| `/pause` | Create PAUSE file for human intervention | `/pause "Need clarification"` |
+
+### Agent Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/agent-config [type]` | Show agent configuration | `/agent-config coder --tools` |
+| `/list-agents` | List all agent types | `/list-agents --verbose` |
 
 ---
 
@@ -398,5 +478,6 @@ Scripts also work standalone:
 
 ---
 
-**OCTALUME v2.0.0** | Enterprise Lifecycle Framework
+**OCTALUME v2.2.0** | Enterprise Lifecycle Framework
 *Combining governance with automation for modern software delivery*
+*Auto-Claude Deep Retrofit: Thinking Levels • Context Compaction • Recovery System*

@@ -1,0 +1,155 @@
+{
+  "version": "2.2",
+  "description": "Recovery system configuration for failure handling and rollback",
+  "source": "Auto-Claude v2.7.4 services/recovery.py",
+  
+  "failure_types": {
+    "BROKEN_BUILD": {
+      "description": "Code doesn't compile or run",
+      "patterns": [
+        "syntax error",
+        "compilation error",
+        "module not found",
+        "import error",
+        "cannot find module",
+        "unexpected token",
+        "indentation error",
+        "parse error",
+        "type error",
+        "reference error"
+      ],
+      "recovery": "rollback",
+      "severity": "high"
+    },
+    
+    "VERIFICATION_FAILED": {
+      "description": "Subtask verification failed",
+      "patterns": [
+        "verification failed",
+        "test failed",
+        "assertion error",
+        "expected .* but got",
+        "test case failed",
+        "validation failed"
+      ],
+      "recovery": "retry",
+      "severity": "medium"
+    },
+    
+    "CIRCULAR_FIX": {
+      "description": "Same fix attempted multiple times",
+      "patterns": [],
+      "recovery": "escalate",
+      "severity": "high",
+      "detection": "attempt_history"
+    },
+    
+    "CONTEXT_EXHAUSTED": {
+      "description": "Ran out of context mid-subtask",
+      "patterns": [
+        "context limit",
+        "token limit",
+        "too long",
+        "maximum context",
+        "context window"
+      ],
+      "recovery": "compact",
+      "severity": "medium"
+    },
+    
+    "PERMISSION_DENIED": {
+      "description": "File or command permission issues",
+      "patterns": [
+        "permission denied",
+        "access denied",
+        "eacces",
+        "eperm"
+      ],
+      "recovery": "escalate",
+      "severity": "high"
+    },
+    
+    "DEPENDENCY_ERROR": {
+      "description": "Missing or incompatible dependencies",
+      "patterns": [
+        "dependency",
+        "peer dep",
+        "version mismatch",
+        "requires .* but found",
+        "unmet dependency"
+      ],
+      "recovery": "retry",
+      "severity": "medium"
+    },
+    
+    "UNKNOWN": {
+      "description": "Unclassified failure",
+      "patterns": [],
+      "recovery": "retry",
+      "severity": "low"
+    }
+  },
+  
+  "recovery_actions": {
+    "rollback": {
+      "description": "Rollback to last known good commit",
+      "steps": [
+        "Identify last good commit",
+        "Git reset to that commit",
+        "Record the rollback",
+        "Retry with different approach"
+      ]
+    },
+    "retry": {
+      "description": "Retry the subtask with different approach",
+      "steps": [
+        "Record the failed attempt",
+        "Analyze what went wrong",
+        "Suggest alternative approach",
+        "Continue with new strategy"
+      ]
+    },
+    "compact": {
+      "description": "Compact context and retry",
+      "steps": [
+        "Summarize previous phases",
+        "Clear non-essential context",
+        "Inject compacted context",
+        "Retry the subtask"
+      ]
+    },
+    "escalate": {
+      "description": "Escalate to human intervention",
+      "steps": [
+        "Create PAUSE file",
+        "Document the issue",
+        "List attempted approaches",
+        "Wait for human guidance"
+      ]
+    },
+    "skip": {
+      "description": "Skip this subtask and continue",
+      "steps": [
+        "Mark subtask as skipped",
+        "Document reason",
+        "Continue to next subtask",
+        "Report at end"
+      ]
+    }
+  },
+  
+  "thresholds": {
+    "max_attempts_per_subtask": 3,
+    "circular_fix_threshold": 2,
+    "escalation_threshold": 3,
+    "rollback_safety_commits": 5,
+    "max_consecutive_failures": 3
+  },
+  
+  "circular_fix_detection": {
+    "enabled": true,
+    "similarity_threshold": 0.8,
+    "window_size": 5,
+    "fields_to_compare": ["approach", "error"]
+  }
+}

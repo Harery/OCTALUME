@@ -1,0 +1,48 @@
+{
+  "subtasks": {},
+  "stuck_subtasks": [],
+  "metadata": {
+    "version": "2.2",
+    "description": "Attempt history for OCTALUME recovery system",
+    "created_at": "",
+    "last_updated": ""
+  },
+  "schema": {
+    "subtask_entry": {
+      "attempts": [
+        {
+          "session": "number - session number",
+          "success": "boolean - whether attempt succeeded",
+          "approach": "string - description of approach taken",
+          "error": "string|null - error message if failed",
+          "timestamp": "string - ISO timestamp"
+        }
+      ],
+      "created_at": "string - ISO timestamp",
+      "stuck": "boolean - whether subtask is stuck",
+      "stuck_reason": "string - reason for being stuck"
+    }
+  },
+  "examples": {
+    "subtask-001": {
+      "attempts": [
+        {
+          "session": 1,
+          "success": false,
+          "approach": "Direct implementation of feature",
+          "error": "SyntaxError: Unexpected token at line 45",
+          "timestamp": "2025-01-15T10:30:00Z"
+        },
+        {
+          "session": 2,
+          "success": true,
+          "approach": "Refactored to use async/await pattern",
+          "error": null,
+          "timestamp": "2025-01-15T11:15:00Z"
+        }
+      ],
+      "created_at": "2025-01-15T10:30:00Z",
+      "stuck": false
+    }
+  }
+}

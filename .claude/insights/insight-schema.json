@@ -1,0 +1,142 @@
+{
+  "version": "2.2",
+  "description": "Structured insight extraction schema for post-session learning",
+  "source": "Auto-Claude v2.7.4 insight_extractor.py",
+  
+  "schema": {
+    "file_insights": {
+      "type": "array",
+      "description": "Per-file discoveries and understanding",
+      "items": {
+        "type": "object",
+        "required": ["file", "purpose"],
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "File path relative to project root"
+          },
+          "purpose": {
+            "type": "string",
+            "description": "What this file does and why it exists"
+          },
+          "patterns": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Design patterns or conventions used"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Key dependencies or imports"
+          },
+          "key_functions": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Important functions or methods"
+          }
+        }
+      }
+    },
+    
+    "patterns_discovered": {
+      "type": "array",
+      "description": "Reusable patterns found during the session",
+      "items": {
+        "type": "object",
+        "required": ["pattern"],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "Description of the pattern"
+          },
+          "applies_to": {
+            "type": "string",
+            "description": "Where this pattern can be applied"
+          },
+          "example": {
+            "type": "string",
+            "description": "Example code or usage"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "Confidence in the pattern"
+          }
+        }
+      }
+    },
+    
+    "gotchas_discovered": {
+      "type": "array",
+      "description": "Pitfalls and issues to avoid",
+      "items": {
+        "type": "object",
+        "required": ["gotcha"],
+        "properties": {
+          "gotcha": {
+            "type": "string",
+            "description": "Description of the pitfall"
+          },
+          "solution": {
+            "type": "string",
+            "description": "How to avoid or fix it"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "How serious is this gotcha"
+          },
+          "trigger": {
+            "type": "string",
+            "description": "What causes this gotcha"
+          }
+        }
+      }
+    },
+    
+    "approach_outcome": {
+      "type": "object",
+      "description": "What was tried and how it went",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Did the session succeed"
+        },
+        "approach_used": {
+          "type": "string",
+          "description": "The main approach taken"
+        },
+        "why_it_worked": {
+          "type": "string",
+          "description": "Why the approach succeeded (if it did)"
+        },
+        "why_it_failed": {
+          "type": "string",
+          "description": "Why the approach failed (if it did)"
+        },
+        "alternatives_tried": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Other approaches that were attempted"
+        }
+      }
+    },
+    
+    "recommendations": {
+      "type": "array",
+      "description": "Recommendations for future sessions",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  
+  "extraction_config": {
+    "model": "claude-haiku-4-5-20251001",
+    "max_diff_chars": 15000,
+    "max_attempts_to_include": 3,
+    "enabled_by_default": true
+  },
+  
+  "extraction_prompt_template": "Extract structured insights from this coding session.\n\nOutput ONLY valid JSON matching this schema:\n{\n  \"file_insights\": [...],\n  \"patterns_discovered\": [...],\n  \"gotchas_discovered\": [...],\n  \"approach_outcome\": {...},\n  \"recommendations\": [...]\n}\n\nFocus on extracting ACTIONABLE insights that will help future sessions.\n\n## SESSION DATA\n\n### Subtask\n- **ID**: {subtask_id}\n- **Description**: {subtask_description}\n- **Session Number**: {session_num}\n- **Outcome**: {outcome}\n\n### Files Changed\n{changed_files}\n\n### Commit Messages\n{commit_messages}\n\n### Git Diff\n```diff\n{diff}\n```\n\n### Previous Attempts\n{attempt_history}\n\n---\n\nNow analyze this session and output ONLY the JSON object."
+}

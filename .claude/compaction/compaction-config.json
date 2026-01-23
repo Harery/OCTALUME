@@ -1,0 +1,80 @@
+{
+  "version": "2.2",
+  "description": "Context compaction configuration for token optimization",
+  "source": "Auto-Claude v2.7.4 spec/compaction.py",
+  
+  "settings": {
+    "max_input_chars": 15000,
+    "target_words": 500,
+    "truncation_marker": "\n\n[... content truncated for summarization ...]",
+    "fallback_on_error": true,
+    "fallback_chars": 2000
+  },
+  
+  "phase_outputs": {
+    "P1_DISCOVERY": {
+      "files": ["context.json", "project-index.json", "discoveries.json"],
+      "priority": "high",
+      "summarize": true
+    },
+    "P2_RESEARCH": {
+      "files": ["research.json", "dependencies.json", "api-docs.json"],
+      "priority": "high",
+      "summarize": true
+    },
+    "P3_PLANNING": {
+      "files": ["implementation-plan.json", "spec.md", "task-breakdown.json"],
+      "priority": "high",
+      "summarize": true
+    },
+    "P4_IMPLEMENTATION": {
+      "files": [],
+      "priority": "none",
+      "summarize": false
+    },
+    "P5_VALIDATION": {
+      "files": ["qa-report.json", "test-results.json"],
+      "priority": "medium",
+      "summarize": true
+    },
+    "P6_REVIEW": {
+      "files": ["review-notes.md", "review-checklist.json"],
+      "priority": "medium",
+      "summarize": true
+    },
+    "P7_CRITIQUE": {
+      "files": ["critique-report.json", "improvements.md"],
+      "priority": "low",
+      "summarize": false
+    },
+    "P8_DEPLOYMENT": {
+      "files": [],
+      "priority": "none",
+      "summarize": false
+    }
+  },
+  
+  "summary_template": {
+    "header": "## Context from Previous Phases\n\n_Summarized from completed phases to optimize token usage._\n\n",
+    "phase_header": "### {phase_name}\n",
+    "phase_content": "{summary}\n\n",
+    "footer": "---\n\n_Full details available in spec directory._\n"
+  },
+  
+  "extraction_focus": {
+    "always_include": [
+      "Key decisions made and their rationale",
+      "Critical files, components, or patterns identified",
+      "Important constraints or requirements discovered",
+      "Actionable insights for implementation"
+    ],
+    "always_exclude": [
+      "Boilerplate text",
+      "Meta-commentary",
+      "Redundant information",
+      "Verbose explanations"
+    ]
+  },
+  
+  "summarization_prompt": "Summarize the key findings from the \"{phase_name}\" phase in {target_words} words or less.\n\nFocus on extracting ONLY the most critical information that subsequent phases need:\n- Key decisions made and their rationale\n- Critical files, components, or patterns identified\n- Important constraints or requirements discovered\n- Actionable insights for implementation\n\nBe concise and use bullet points. Skip boilerplate and meta-commentary.\n\n## Phase Output:\n{content}\n\n## Summary:"
+}

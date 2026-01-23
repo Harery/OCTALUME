@@ -1,0 +1,193 @@
+{
+  "version": "2.2",
+  "description": "Centralized agent configuration registry for OCTALUME",
+  "source": "Auto-Claude v2.7.4 agents/tools_pkg/models.py",
+  
+  "tool_sets": {
+    "base_read": ["Read", "Glob", "Grep"],
+    "base_write": ["Write", "Edit", "Bash"],
+    "web": ["WebFetch", "WebSearch"],
+    "all": ["Read", "Glob", "Grep", "Write", "Edit", "Bash", "WebFetch", "WebSearch"]
+  },
+  
+  "mcp_servers": {
+    "context7": {
+      "description": "Documentation lookup",
+      "tools": ["mcp__context7__resolve-library-id", "mcp__context7__get-library-docs"]
+    },
+    "linear": {
+      "description": "Project management",
+      "tools": ["list_teams", "list_projects", "list_issues", "create_issue", "update_issue"]
+    },
+    "gitlab": {
+      "description": "GitLab integration",
+      "tools": ["list_merge_requests", "create_merge_request", "approve_merge_request"]
+    }
+  },
+  
+  "agents": {
+    "discovery": {
+      "description": "Analyze project structure and gather context",
+      "tools": ["Read", "Glob", "Grep", "WebFetch", "WebSearch"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "ultrathink",
+      "phases": ["P1_DISCOVERY"],
+      "custom_tools": ["record_discovery"]
+    },
+    
+    "researcher": {
+      "description": "Research external APIs, libraries, and best practices",
+      "tools": ["Read", "WebFetch", "WebSearch"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "medium",
+      "phases": ["P2_RESEARCH"],
+      "custom_tools": []
+    },
+    
+    "spec_writer": {
+      "description": "Write detailed specifications",
+      "tools": ["Read", "Write", "Edit"],
+      "mcp_servers": [],
+      "thinking_default": "high",
+      "phases": ["P3_PLANNING"],
+      "custom_tools": []
+    },
+    
+    "spec_critic": {
+      "description": "Self-critique specifications with deep analysis",
+      "tools": ["Read"],
+      "mcp_servers": [],
+      "thinking_default": "ultrathink",
+      "phases": ["P7_CRITIQUE"],
+      "custom_tools": []
+    },
+    
+    "planner": {
+      "description": "Create implementation plans and subtask breakdown",
+      "tools": ["Read", "Write", "Edit", "WebFetch"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "high",
+      "phases": ["P3_PLANNING"],
+      "custom_tools": ["get_build_progress", "get_session_context", "record_discovery"]
+    },
+    
+    "coder": {
+      "description": "Implement code changes",
+      "tools": ["Read", "Write", "Edit", "Bash", "WebFetch"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "none",
+      "phases": ["P4_IMPLEMENTATION"],
+      "custom_tools": ["update_subtask_status", "get_build_progress", "record_discovery", "record_gotcha"]
+    },
+    
+    "qa_reviewer": {
+      "description": "Review code quality and validate implementation",
+      "tools": ["Read", "Glob", "Grep", "Bash"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "high",
+      "phases": ["P5_VALIDATION", "P6_REVIEW"],
+      "custom_tools": ["get_build_progress", "update_qa_status"]
+    },
+    
+    "qa_fixer": {
+      "description": "Fix issues found during QA review",
+      "tools": ["Read", "Write", "Edit", "Bash"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "medium",
+      "phases": ["P5_VALIDATION"],
+      "custom_tools": ["update_subtask_status", "record_gotcha"]
+    },
+    
+    "merge_resolver": {
+      "description": "Resolve merge conflicts",
+      "tools": [],
+      "mcp_servers": [],
+      "thinking_default": "low",
+      "phases": [],
+      "custom_tools": []
+    },
+    
+    "commit_message": {
+      "description": "Generate commit messages",
+      "tools": [],
+      "mcp_servers": [],
+      "thinking_default": "low",
+      "phases": [],
+      "custom_tools": []
+    },
+    
+    "insights": {
+      "description": "Extract insights from sessions",
+      "tools": ["Read"],
+      "mcp_servers": [],
+      "thinking_default": "medium",
+      "phases": [],
+      "custom_tools": []
+    },
+    
+    "roadmap_discovery": {
+      "description": "Discover and plan roadmap items",
+      "tools": ["Read", "Glob", "Grep", "WebFetch", "WebSearch"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "high",
+      "phases": [],
+      "custom_tools": []
+    },
+    
+    "ideation": {
+      "description": "Generate ideas and improvements",
+      "tools": ["Read", "WebFetch", "WebSearch"],
+      "mcp_servers": [],
+      "thinking_default": "high",
+      "phases": [],
+      "custom_tools": []
+    },
+    
+    "competitor_analysis": {
+      "description": "Analyze competitors and market",
+      "tools": ["Read", "WebFetch", "WebSearch"],
+      "mcp_servers": ["context7"],
+      "thinking_default": "high",
+      "phases": [],
+      "custom_tools": []
+    }
+  },
+  
+  "custom_tools": {
+    "update_subtask_status": {
+      "description": "Update the status of a subtask",
+      "parameters": ["subtask_id", "status", "notes"]
+    },
+    "get_build_progress": {
+      "description": "Get current build progress",
+      "parameters": []
+    },
+    "record_discovery": {
+      "description": "Record a codebase discovery",
+      "parameters": ["file_path", "description", "category"]
+    },
+    "record_gotcha": {
+      "description": "Record a gotcha/pitfall",
+      "parameters": ["description", "solution", "severity"]
+    },
+    "get_session_context": {
+      "description": "Get context from previous sessions",
+      "parameters": []
+    },
+    "update_qa_status": {
+      "description": "Update QA review status",
+      "parameters": ["status", "issues", "passed"]
+    }
+  },
+  
+  "role_mappings": {
+    "architect": "discovery",
+    "tech_lead": "planner",
+    "senior_dev": "coder",
+    "developer": "coder",
+    "qa_lead": "qa_reviewer",
+    "qa_engineer": "qa_fixer",
+    "reviewer": "qa_reviewer",
+    "documenter": "insights"
+  }
+}
