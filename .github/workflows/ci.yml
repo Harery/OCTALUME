@@ -1,0 +1,162 @@
+# OCTALUME CI Pipeline
+# Runs on push to main/develop and on pull requests
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop, 'release/**']
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '20'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # ============================================
+  # LINT & FORMAT CHECK
+  # ============================================
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📋 Check markdown formatting
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: '**/*.md'
+          config: '.markdownlint.json'
+        continue-on-error: true
+
+      - name: 📋 Check shell scripts
+        run: |
+          find . -name "*.sh" -not -path "./.git/*" -exec shellcheck {} \;
+        continue-on-error: true
+
+      - name: 📋 Validate YAML files
+        run: |
+          find . -name "*.yml" -o -name "*.yaml" | head -20 | while read f; do
+            if command -v yamllint &> /dev/null; then
+              yamllint "$f" || true
+            fi
+          done
+        continue-on-error: true
+
+  # ============================================
+  # SECURITY SCAN
+  # ============================================
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+        continue-on-error: true
+
+      - name: 📤 Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+        continue-on-error: true
+
+      - name: 🔍 Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          extra_args: --only-verified
+        continue-on-error: true
+
+  # ============================================
+  # DOCUMENTATION BUILD
+  # ============================================
+  docs:
+    name: Documentation Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📚 Validate documentation structure
+        run: |
+          echo "Checking documentation files..."
+          REQUIRED_FILES=("README.md" "CONTRIBUTING.md" "SECURITY.md" "LICENSE")
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ Found: $file"
+            else
+              echo "⚠️ Missing: $file"
+            fi
+          done
+
+      - name: 🔗 Check internal links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          use-verbose-mode: 'no'
+          config-file: '.markdown-link-check.json'
+        continue-on-error: true
+
+  # ============================================
+  # BUILD & TEST
+  # ============================================
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔨 Run build scripts
+        run: |
+          if [ -f "scripts/build.sh" ]; then
+            chmod +x scripts/build.sh
+            ./scripts/build.sh
+          else
+            echo "No build script found, skipping..."
+          fi
+
+      - name: 🧪 Run tests
+        run: |
+          if [ -f "scripts/test.sh" ]; then
+            chmod +x scripts/test.sh
+            ./scripts/test.sh
+          elif [ -f "Makefile" ] && grep -q "^test:" Makefile; then
+            make test
+          else
+            echo "No test script found, skipping..."
+          fi
+
+  # ============================================
+  # NOTIFY ON FAILURE
+  # ============================================
+  notify-failure:
+    name: Notify on Failure
+    runs-on: ubuntu-latest
+    needs: [lint, security, docs, build]
+    if: failure()
+    steps:
+      - name: 📢 Create issue on failure
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 CI Failed on ${context.ref}`,
+              body: `## CI Pipeline Failed\n\n**Branch:** ${context.ref}\n**Commit:** ${context.sha}\n**Run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\nPlease investigate and fix the issues.`,
+              labels: ['ci-failure', 'automated']
+            })

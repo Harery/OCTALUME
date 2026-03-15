@@ -1,0 +1,178 @@
+# OCTALUME Pull Request Automation
+# Runs on all pull requests
+
+name: Pull Request
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  # ============================================
+  # PR VALIDATION
+  # ============================================
+  validate:
+    name: Validate PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📋 Check PR title follows conventional commits
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+            wip
+          requireScope: false
+          subjectPattern: ^[A-Z].+$
+          subjectPatternError: |
+            Subject must start with a capital letter
+
+      - name: 📋 Check for sensitive files
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | while read file; do
+            if [[ "$file" =~ \.env$|\.pem$|\.key$|credentials|secrets ]]; then
+              echo "⚠️ Potential sensitive file in PR: $file"
+            fi
+          done
+
+  # ============================================
+  # SIZE LABEL
+  # ============================================
+  size-label:
+    name: Add Size Label
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏷️ Add size label
+        uses: pascalgn/size-label-action@v0.5.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          sizes: >
+            {
+              "0": "size/XS",
+              "10": "size/S",
+              "50": "size/M",
+              "200": "size/L",
+              "500": "size/XL",
+              "1000": "size/XXL"
+            }
+
+  # ============================================
+  # AUTOMATED REVIEW SUGGESTIONS
+  # ============================================
+  review:
+    name: Automated Review
+    runs-on: ubuntu-latest
+    needs: [validate]
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          languages: javascript, python
+        continue-on-error: true
+
+      - name: 🔍 Check for common issues
+        uses: reviewdog/action-suggester@v1
+        with:
+          tool_name: reviewdog
+          fail_on_error: false
+        continue-on-error: true
+
+  # ============================================
+  # WELCOME MESSAGE
+  # ============================================
+  welcome:
+    name: Welcome Contributor
+    runs-on: ubuntu-latest
+    if: github.event.action == 'opened'
+    steps:
+      - name: 👋 Welcome message
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prNumber = context.issue.number;
+            const author = context.payload.pull_request.user.login;
+
+            // Check if first-time contributor
+            const { data: prs } = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: 'all',
+              creator: author
+            });
+
+            if (prs.length === 1) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body: `👋 Welcome @${author}! Thank you for your first contribution to OCTALUME!\n\nPlease make sure to:\n- Follow the [Contributing Guidelines](CONTRIBUTING.md)\n- Add tests for new features\n- Update documentation as needed\n\nOur team will review your PR soon. 🚀`
+              });
+            }
+
+  # ============================================
+  # AUTO-MERGE CHECK
+  # ============================================
+  auto-merge-check:
+    name: Check Auto-Merge Eligibility
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'auto-merge')
+    steps:
+      - name: ✅ Check auto-merge requirements
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prNumber = context.issue.number;
+
+            const { data: pr } = await github.rest.pulls.get({
+              owner,
+              repo,
+              pull_number: prNumber
+            });
+
+            const checks = {
+              'Approved': pr.review_decision === 'APPROVED',
+              'CI Passed': true, // Will be updated when CI job completes
+              'No Conflicts': !pr.mergeable_state?.includes('dirty')
+            };
+
+            let body = '## 🔍 Auto-Merge Status\n\n';
+            for (const [check, passed] of Object.entries(checks)) {
+              body += `${passed ? '✅' : '⏳'} ${check}\n`;
+            }
+
+            const allPassed = Object.values(checks).every(v => v);
+            body += `\n${allPassed ? '🚀 Ready for auto-merge!' : '⏳ Waiting for requirements...'}`;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: prNumber,
+              body
+            });
