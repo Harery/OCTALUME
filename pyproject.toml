@@ -101,17 +101,20 @@ dev = [
 redis = [
     "redis>=5.2.0",
 ]
+celery = [
+    "celery>=5.4.0",
+    "redis>=5.2.0",
+]
 postgres = [
     "asyncpg>=0.30.0",
     "psycopg2-binary>=2.9.0",
 ]
 enterprise = [
-    # Enterprise features (separate license)
     "python3-saml>=1.16.0",
     "cryptography>=44.0.0",
 ]
 all = [
-    "octalume[dev,redis,postgres]",
+    "octalume[dev,redis,celery,postgres]",
 ]
 
 [project.scripts]
