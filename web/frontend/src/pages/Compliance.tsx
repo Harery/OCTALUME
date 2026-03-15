@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Shield, AlertTriangle, CheckCircle, RefreshCw } from 'lucide-react'
+import { Shield, CheckCircle, RefreshCw } from 'lucide-react'
 import api from '@/lib/api'
 import { useState } from 'react'
 
@@ -7,6 +7,16 @@ interface Standard {
   id: string
   name: string
   description: string
+}
+
+interface ScanResult {
+  scan_id: string
+  timestamp: string
+  summary: {
+    overall_status: string
+    total_findings: number
+    critical_findings: number
+  }
 }
 
 interface ScanResult {
@@ -33,9 +43,9 @@ export default function Compliance() {
     queryFn: () => api.get('/api/compliance/status').then(r => r.data),
   })
 
-  const scanMutation = useMutation({
+  const scanMutation = useMutation<ScanResult, Error, string[]>({
     mutationFn: (standards: string[]) =>
-      api.post('/api/compliance/scan', null, { params: { standards: standards.join(',') } }),
+      api.post('/api/compliance/scan', null, { params: { standards: standards.join(',') } }).then(r => r.data),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['compliance'] }),
   })
 

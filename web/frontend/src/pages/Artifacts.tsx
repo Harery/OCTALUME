@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { FileText, Link } from 'lucide-react'
+import { FileText } from 'lucide-react'
 import api from '@/lib/api'
 import { useState } from 'react'
 

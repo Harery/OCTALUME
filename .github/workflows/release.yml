@@ -1,6 +1,3 @@
-# OCTALUME Release Pipeline
-# Automated releases with semantic versioning
-
 name: Release
 
 on:
@@ -20,12 +17,12 @@ on:
 
 permissions:
   contents: write
-  packages: write
+  id-token: write
+
+env:
+  PYTHON_VERSION: '3.11'
 
 jobs:
-  # ============================================
-  # VALIDATE RELEASE
-  # ============================================
   validate:
     name: Validate Release
     runs-on: ubuntu-latest
@@ -33,12 +30,11 @@ jobs:
       version: ${{ steps.version.outputs.version }}
       is_prerelease: ${{ steps.version.outputs.is_prerelease }}
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🔍 Extract version
+      - name: Extract version
         id: version
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.version }}" ]; then
@@ -54,74 +50,134 @@ jobs:
             echo "is_prerelease=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 📋 Validate version format
+      - name: Validate version format
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]; then
-            echo "❌ Invalid version format: $VERSION"
+            echo "Invalid version format: $VERSION"
             echo "Expected: X.Y.Z or X.Y.Z-prerelease"
             exit 1
           fi
-          echo "✅ Version format valid: $VERSION"
+          echo "Version format valid: $VERSION"
 
-  # ============================================
-  # BUILD RELEASE ARTIFACTS
-  # ============================================
-  build:
-    name: Build Release Artifacts
+      - name: Check version matches pyproject.toml
+        run: |
+          PYPROJECT_VERSION=$(grep -m1 'version = "' pyproject.toml | cut -d'"' -f2)
+          RELEASE_VERSION="${{ steps.version.outputs.version }}"
+          if [ "$PYPROJECT_VERSION" != "$RELEASE_VERSION" ]; then
+            echo "Warning: pyproject.toml version ($PYPROJECT_VERSION) doesn't match release version ($RELEASE_VERSION)"
+          fi
+
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
     needs: [validate]
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 🔨 Build artifacts
-        run: |
-          if [ -f "scripts/build-release.sh" ]; then
-            chmod +x scripts/build-release.sh
-            ./scripts/build-release.sh ${{ needs.validate.outputs.version }}
-          else
-            echo "No release build script found"
-          fi
-
-      - name: 📦 Package release
-        run: |
-          mkdir -p release-artifacts
-          # Add any artifacts to package here
-          if [ -d "dist" ]; then
-            tar -czvf release-artifacts/octalume-${{ needs.validate.outputs.version }}.tar.gz dist/
-          fi
-
-      - name: 📤 Upload artifacts
-        uses: actions/upload-artifact@v4
+      - uses: actions/setup-python@v5
         with:
-          name: release-artifacts-${{ needs.validate.outputs.version }}
-          path: release-artifacts/
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests
+        run: pytest tests/ -v
+
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    needs: [validate, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install build tools
+        run: pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check package
+        run: twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ needs.validate.outputs.version }}
+          path: dist/
           retention-days: 30
 
-  # ============================================
-  # CREATE GITHUB RELEASE
-  # ============================================
-  release:
+  publish-pypi:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    if: needs.validate.outputs.is_prerelease != 'true'
+    environment:
+      name: pypi
+      url: https://pypi.org/p/octalume
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-${{ needs.validate.outputs.version }}
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-testpypi:
+    name: Publish to TestPyPI
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    if: needs.validate.outputs.is_prerelease == 'true'
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/octalume
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-${{ needs.validate.outputs.version }}
+          path: dist/
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  github-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
     needs: [validate, build]
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 📥 Download artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
-          name: release-artifacts-${{ needs.validate.outputs.version }}
-          path: release-artifacts/
+          name: dist-${{ needs.validate.outputs.version }}
+          path: dist/
 
-      - name: 📝 Generate changelog
+      - name: Generate changelog
         id: changelog
         run: |
-          # Get previous tag
           PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
 
           if [ -n "$PREV_TAG" ]; then
@@ -132,7 +188,7 @@ jobs:
             git log --pretty=format:"- %s (%h)" HEAD~10..HEAD > CHANGELOG_TEMP.md
           fi
 
-      - name: 🚀 Create GitHub Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ needs.validate.outputs.version }}
@@ -141,24 +197,21 @@ jobs:
           prerelease: ${{ needs.validate.outputs.is_prerelease == 'true' }}
           draft: false
           generate_release_notes: true
-          files: |
-            release-artifacts/*
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🧹 Cleanup
+      - name: Cleanup
         run: rm -f CHANGELOG_TEMP.md
 
-  # ============================================
-  # POST-RELEASE NOTIFICATION
-  # ============================================
   notify:
     name: Post-Release Notification
     runs-on: ubuntu-latest
-    needs: [release]
-    if: success()
+    needs: [validate, publish-pypi, github-release]
+    if: success() && needs.validate.outputs.is_prerelease != 'true'
     steps:
-      - name: 📢 Release announcement
+      - name: Release announcement
         run: |
-          echo "🎉 Release v${{ needs.validate.outputs.version }} published successfully!"
-          echo "View: https://github.com/${{ github.repository }}/releases/tag/v${{ needs.validate.outputs.version }}"
+          echo "Release v${{ needs.validate.outputs.version }} published!"
+          echo "PyPI: https://pypi.org/project/octalume/${{ needs.validate.outputs.version }}/"
+          echo "GitHub: https://github.com/${{ github.repository }}/releases/tag/v${{ needs.validate.outputs.version }}"

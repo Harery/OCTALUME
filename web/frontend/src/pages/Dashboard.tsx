@@ -4,8 +4,6 @@ import {
   Bot,
   FileText,
   CheckCircle,
-  AlertCircle,
-  Clock,
   TrendingUp
 } from 'lucide-react'
 import api from '@/lib/api'
@@ -25,6 +23,34 @@ interface Metrics {
   gates: { passed: number; failed: number }
 }
 
+interface TimelinePhase {
+  phase: number
+  name: string
+  owner: string
+  status: string
+}
+
+interface TimelineResponse {
+  timeline: TimelinePhase[]
+}
+
+interface Metrics {
+  artifacts: { total: number }
+  agents: { total: number; active: number }
+  gates: { passed: number; failed: number }
+}
+
+interface TimelinePhase {
+  phase: number
+  name: string
+  owner: string
+  status: string
+}
+
+interface TimelineResponse {
+  timeline: TimelinePhase[]
+}
+
 export default function Dashboard() {
   const { data: summary, isLoading: summaryLoading } = useQuery<DashboardSummary>({
     queryKey: ['dashboard', 'summary'],
@@ -36,7 +62,7 @@ export default function Dashboard() {
     queryFn: () => api.get('/api/dashboard/metrics').then(r => r.data),
   })
 
-  const { data: timeline } = useQuery({
+  const { data: timeline } = useQuery<TimelineResponse>({
     queryKey: ['dashboard', 'timeline'],
     queryFn: () => api.get('/api/dashboard/timeline').then(r => r.data),
   })
@@ -124,7 +150,7 @@ export default function Dashboard() {
       <div className="card">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Phase Timeline</h2>
         <div className="space-y-3">
-          {timeline?.timeline?.map((phase: any) => (
+          {timeline?.timeline?.map((phase: TimelinePhase) => (
             <div
               key={phase.phase}
               className="flex items-center gap-4 p-3 rounded-lg bg-gray-50"

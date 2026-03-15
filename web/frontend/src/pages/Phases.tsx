@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Play, CheckCircle, AlertCircle } from 'lucide-react'
+import { Play, CheckCircle } from 'lucide-react'
 import api from '@/lib/api'
-import { useState } from 'react'
 
 interface Phase {
   number: number
@@ -13,11 +12,15 @@ interface Phase {
   completed_at: string | null
 }
 
+interface PhasesResponse {
+  current_phase: number
+  phases: Phase[]
+}
+
 export default function Phases() {
   const queryClient = useQueryClient()
-  const [selectedPhase, setSelectedPhase] = useState<number | null>(null)
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<PhasesResponse>({
     queryKey: ['phases'],
     queryFn: () => api.get('/api/phases').then(r => r.data),
   })

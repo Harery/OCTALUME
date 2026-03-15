@@ -1,6 +1,3 @@
-# OCTALUME Pull Request Automation
-# Runs on all pull requests
-
 name: Pull Request
 
 on:
@@ -12,20 +9,19 @@ permissions:
   pull-requests: write
   issues: write
 
+env:
+  PYTHON_VERSION: '3.11'
+
 jobs:
-  # ============================================
-  # PR VALIDATION
-  # ============================================
   validate:
     name: Validate PR
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 📋 Check PR title follows conventional commits
+      - name: Check PR title follows conventional commits
         uses: amannn/action-semantic-pull-request@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,29 +38,67 @@ jobs:
             ci
             chore
             revert
-            wip
           requireScope: false
           subjectPattern: ^[A-Z].+$
           subjectPatternError: |
             Subject must start with a capital letter
 
-      - name: 📋 Check for sensitive files
+      - name: Check for sensitive files
         run: |
           git diff --name-only origin/${{ github.base_ref }}...HEAD | while read file; do
             if [[ "$file" =~ \.env$|\.pem$|\.key$|credentials|secrets ]]; then
-              echo "⚠️ Potential sensitive file in PR: $file"
+              echo "Potential sensitive file in PR: $file"
             fi
           done
 
-  # ============================================
-  # SIZE LABEL
-  # ============================================
+  lint:
+    name: Lint Python
+    runs-on: ubuntu-latest
+    needs: [validate]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install linters
+        run: pip install ruff black mypy
+
+      - name: Run Ruff
+        run: ruff check octalume tests --output-format=github
+
+      - name: Check formatting
+        run: black --check octalume tests
+
+      - name: Type check
+        run: mypy octalume --ignore-missing-imports
+        continue-on-error: true
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: [validate]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
+
   size-label:
     name: Add Size Label
     runs-on: ubuntu-latest
     steps:
-      - name: 🏷️ Add size label
-        uses: pascalgn/size-label-action@v0.5.0
+      - uses: pascalgn/size-label-action@v0.5.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -78,47 +112,40 @@ jobs:
               "1000": "size/XXL"
             }
 
-  # ============================================
-  # AUTOMATED REVIEW SUGGESTIONS
-  # ============================================
-  review:
-    name: Automated Review
+  security:
+    name: Security Scan
     runs-on: ubuntu-latest
     needs: [validate]
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 🔍 Run CodeQL analysis
-        uses: github/codeql-action/analyze@v3
+      - uses: actions/setup-python@v5
         with:
-          languages: javascript, python
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install security tools
+        run: pip install bandit pip-audit
+
+      - name: Run Bandit
+        run: bandit -r octalume -ll
         continue-on-error: true
 
-      - name: 🔍 Check for common issues
-        uses: reviewdog/action-suggester@v1
-        with:
-          tool_name: reviewdog
-          fail_on_error: false
+      - name: Audit dependencies
+        run: pip-audit
         continue-on-error: true
 
-  # ============================================
-  # WELCOME MESSAGE
-  # ============================================
   welcome:
     name: Welcome Contributor
     runs-on: ubuntu-latest
     if: github.event.action == 'opened'
     steps:
-      - name: 👋 Welcome message
-        uses: actions/github-script@v7
+      - uses: actions/github-script@v7
         with:
           script: |
             const { owner, repo } = context.repo;
             const prNumber = context.issue.number;
             const author = context.payload.pull_request.user.login;
 
-            // Check if first-time contributor
             const { data: prs } = await github.rest.pulls.list({
               owner,
               repo,
@@ -131,48 +158,6 @@ jobs:
                 owner,
                 repo,
                 issue_number: prNumber,
-                body: `👋 Welcome @${author}! Thank you for your first contribution to OCTALUME!\n\nPlease make sure to:\n- Follow the [Contributing Guidelines](CONTRIBUTING.md)\n- Add tests for new features\n- Update documentation as needed\n\nOur team will review your PR soon. 🚀`
+                body: `## Welcome @${author}!\n\nThank you for your first contribution to OCTALUME!\n\nPlease make sure to:\n- Follow the [Contributing Guidelines](../blob/main/CONTRIBUTING.md)\n- Add tests for new features\n- Update documentation as needed\n- Run \`ruff check\` and \`black\` before committing\n\nOur team will review your PR soon.`
               });
             }
-
-  # ============================================
-  # AUTO-MERGE CHECK
-  # ============================================
-  auto-merge-check:
-    name: Check Auto-Merge Eligibility
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'auto-merge')
-    steps:
-      - name: ✅ Check auto-merge requirements
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { owner, repo } = context.repo;
-            const prNumber = context.issue.number;
-
-            const { data: pr } = await github.rest.pulls.get({
-              owner,
-              repo,
-              pull_number: prNumber
-            });
-
-            const checks = {
-              'Approved': pr.review_decision === 'APPROVED',
-              'CI Passed': true, // Will be updated when CI job completes
-              'No Conflicts': !pr.mergeable_state?.includes('dirty')
-            };
-
-            let body = '## 🔍 Auto-Merge Status\n\n';
-            for (const [check, passed] of Object.entries(checks)) {
-              body += `${passed ? '✅' : '⏳'} ${check}\n`;
-            }
-
-            const allPassed = Object.values(checks).every(v => v);
-            body += `\n${allPassed ? '🚀 Ready for auto-merge!' : '⏳ Waiting for requirements...'}`;
-
-            await github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number: prNumber,
-              body
-            });

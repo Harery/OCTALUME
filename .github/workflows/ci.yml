@@ -1,6 +1,3 @@
-# OCTALUME CI Pipeline
-# Runs on push to main/develop and on pull requests
-
 name: CI
 
 on:
@@ -10,153 +7,140 @@ on:
     branches: [main, develop]
 
 env:
-  NODE_VERSION: '20'
   PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20'
 
 jobs:
-  # ============================================
-  # LINT & FORMAT CHECK
-  # ============================================
   lint:
     name: Lint & Format Check
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 📋 Check markdown formatting
-        uses: DavidAnson/markdownlint-cli2-action@v16
+      - uses: actions/setup-python@v5
         with:
-          globs: '**/*.md'
-          config: '.markdownlint.json'
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install linting tools
+        run: pip install ruff black mypy
+
+      - name: Run Ruff
+        run: ruff check octalume tests --output-format=github
+
+      - name: Check formatting with Black
+        run: black --check octalume tests
+
+      - name: Run MyPy
+        run: mypy octalume --ignore-missing-imports
         continue-on-error: true
 
-      - name: 📋 Check shell scripts
-        run: |
-          find . -name "*.sh" -not -path "./.git/*" -exec shellcheck {} \;
-        continue-on-error: true
-
-      - name: 📋 Validate YAML files
-        run: |
-          find . -name "*.yml" -o -name "*.yaml" | head -20 | while read f; do
-            if command -v yamllint &> /dev/null; then
-              yamllint "$f" || true
-            fi
-          done
-        continue-on-error: true
-
-  # ============================================
-  # SECURITY SCAN
-  # ============================================
   security:
     name: Security Scan
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 🔍 Run Trivy vulnerability scanner
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install pip-audit bandit
+
+      - name: Run Bandit security scan
+        run: bandit -r octalume -ll
+        continue-on-error: true
+
+      - name: Check dependencies for vulnerabilities
+        run: pip-audit
+        continue-on-error: true
+
+      - name: Run Trivy scanner
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
         continue-on-error: true
 
-      - name: 📤 Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-results.sarif'
-        continue-on-error: true
-
-      - name: 🔍 Check for secrets
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          base: ${{ github.event.repository.default_branch }}
-          extra_args: --only-verified
-        continue-on-error: true
-
-  # ============================================
-  # DOCUMENTATION BUILD
-  # ============================================
-  docs:
-    name: Documentation Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 📚 Validate documentation structure
-        run: |
-          echo "Checking documentation files..."
-          REQUIRED_FILES=("README.md" "CONTRIBUTING.md" "SECURITY.md" "LICENSE")
-          for file in "${REQUIRED_FILES[@]}"; do
-            if [ -f "$file" ]; then
-              echo "✅ Found: $file"
-            else
-              echo "⚠️ Missing: $file"
-            fi
-          done
-
-      - name: 🔗 Check internal links
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-quiet-mode: 'yes'
-          use-verbose-mode: 'no'
-          config-file: '.markdown-link-check.json'
-        continue-on-error: true
-
-  # ============================================
-  # BUILD & TEST
-  # ============================================
-  build:
-    name: Build & Test
+  test:
+    name: Test (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     needs: [lint]
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+      fail-fast: false
+
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 🔨 Run build scripts
-        run: |
-          if [ -f "scripts/build.sh" ]; then
-            chmod +x scripts/build.sh
-            ./scripts/build.sh
-          else
-            echo "No build script found, skipping..."
-          fi
-
-      - name: 🧪 Run tests
-        run: |
-          if [ -f "scripts/test.sh" ]; then
-            chmod +x scripts/test.sh
-            ./scripts/test.sh
-          elif [ -f "Makefile" ] && grep -q "^test:" Makefile; then
-            make test
-          else
-            echo "No test script found, skipping..."
-          fi
-
-  # ============================================
-  # NOTIFY ON FAILURE
-  # ============================================
-  notify-failure:
-    name: Notify on Failure
-    runs-on: ubuntu-latest
-    needs: [lint, security, docs, build]
-    if: failure()
-    steps:
-      - name: 📢 Create issue on failure
-        uses: actions/github-script@v7
+      - uses: actions/setup-python@v5
         with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `🚨 CI Failed on ${context.ref}`,
-              body: `## CI Pipeline Failed\n\n**Branch:** ${context.ref}\n**Commit:** ${context.sha}\n**Run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\nPlease investigate and fix the issues.`,
-              labels: ['ci-failure', 'automated']
-            })
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests with coverage
+        run: |
+          pytest tests/ -v --cov=octalume --cov-report=xml --cov-report=term-missing
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: matrix.python-version == '3.11'
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install build tools
+        run: pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check package
+        run: twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-packages
+          path: dist/
+          retention-days: 7
+
+  frontend:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: web/frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web/frontend
+        run: npm ci || npm install
+
+      - name: Build frontend
+        working-directory: web/frontend
+        run: npm run build
+
+      - name: Lint frontend
+        working-directory: web/frontend
+        run: npm run lint || true
