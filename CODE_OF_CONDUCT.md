@@ -1,4 +1,4 @@
-# Our Community Promise 
+# Our Community Promise
 
 **Hi there! We're really glad you're here.**
 
@@ -278,14 +278,14 @@ We've added our own voice and emphasis because:
 
 The fact that you care enough to read our entire code of conduct tells us you're exactly the kind of person we want in this community.
 
-**Welcome. We're genuinely glad you're here.** 
+**Welcome. We're genuinely glad you're here.**
 
 Now let's build something amazing—together.
 
 ---
 
 
-**P.S.** If you made it this far, you're awesome. Just wanted to say that. 
+**P.S.** If you made it this far, you're awesome. Just wanted to say that.
 
 ---
 

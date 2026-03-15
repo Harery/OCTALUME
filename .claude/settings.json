@@ -30,14 +30,14 @@
   },
 
   "mcpServers": {
-    "lifecycle-tools": {
-      "command": "node",
-       "args": [".claude/mcp-server/index.js"],
+    "octalume": {
+      "command": "python",
+      "args": ["-m", "octalume.mcp.server"],
       "env": {
-        "NODE_ENV": "production"
+        "OCTALUME_LOG_LEVEL": "INFO"
       }
     },
-    "lifecycle-filesystem": {
+    "octalume-filesystem": {
       "command": "npx",
       "args": ["-y", "@anthropic/mcp-server-filesystem", "."]
     }

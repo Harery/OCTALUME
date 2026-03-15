@@ -1,4 +1,4 @@
-# Security at OCTALUME 
+# Security at OCTALUME
 
 **Hey! Thanks for caring about security.**
 
@@ -404,12 +404,12 @@ npm audit fix
 
 Thank you for caring about security. Thank you for helping us protect OCTALUME users. Thank you for being part of a security-conscious community.
 
-**Together, we're building software that's not just powerful—it's trustworthy.** 
+**Together, we're building software that's not just powerful—it's trustworthy.**
 
 ---
 
 
-**P.S.** If you find a vulnerability, remember: you're a hero in our book. Report it responsibly, and let's make OCTALUME safer together. 
+**P.S.** If you find a vulnerability, remember: you're a hero in our book. Report it responsibly, and let's make OCTALUME safer together.
 
 ---
 

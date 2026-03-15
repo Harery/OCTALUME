@@ -1,4 +1,4 @@
-# Welcome to OCTALUME! 
+# Welcome to OCTALUME!
 
 **Hey there! We're genuinely excited you're here.**
 
@@ -298,7 +298,7 @@ You're now part of a global network of developers, designers, testers, and users
 
 Thank you for your time, your skills, and your willingness to contribute. Thank you for making OCTALUME better. Thank you for being part of this community.
 
-**Now let's build something amazing together.** 
+**Now let's build something amazing together.**
 
 ---
 
@@ -309,7 +309,7 @@ Thank you for your time, your skills, and your willingness to contribute. Thank 
 ---
 
 
-**P.S.** We meant it—you're going to do great. 
+**P.S.** We meant it—you're going to do great.
 
 ---
 

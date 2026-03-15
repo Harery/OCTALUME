@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://octalume.dev/schemas/phase.schema.json",
+  "title": "Phase",
+  "description": "A lifecycle phase in the OCTALUME framework",
+  "type": "object",
+  "required": ["number", "name", "description", "status", "owner"],
+  "properties": {
+    "number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "description": "Phase number (1-8)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Phase name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Phase description"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["not_started", "in_progress", "blocked", "completed", "skipped"],
+      "description": "Phase status"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Role responsible for this phase"
+    },
+    "duration_estimate_days": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Estimated duration in days"
+    },
+    "entry_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Criteria to enter this phase"
+    },
+    "exit_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Criteria to exit this phase"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Artifact IDs produced in this phase"
+    },
+    "quality_gates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Quality gate IDs for this phase"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Phase start timestamp"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Phase completion timestamp"
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Current blockers"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

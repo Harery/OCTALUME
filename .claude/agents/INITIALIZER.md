@@ -290,7 +290,7 @@ Create `.claude/claude-progress.txt`:
 
 ### Phase 1: Vision & Strategy
 - Status: not_started
-- Entry Criteria: Business idea identified 
+- Entry Criteria: Business idea identified
 - Exit Criteria:
   - [ ] Business case approved
   - [ ] PRD completed

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://octalume.dev/schemas/artifact.schema.json",
+  "title": "Artifact",
+  "description": "A traceable artifact in the OCTALUME framework",
+  "type": "object",
+  "required": ["id", "phase", "name", "artifact_type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^P[1-8]-[A-Z]+-[0-9]{3}$",
+      "description": "Artifact ID (e.g., P1-PRD-001)"
+    },
+    "phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "description": "Phase number where artifact was created"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Artifact name"
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": ["document", "code", "test", "configuration", "design", "report", "decision"],
+      "description": "Type of artifact"
+    },
+    "content": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "object" }
+      ],
+      "description": "Artifact content"
+    },
+    "file_path": {
+      "type": "string",
+      "description": "Path to artifact file if applicable"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata"
+    },
+    "linked_artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs of linked artifacts"
+    },
+    "compliance_tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"]
+      },
+      "description": "Compliance standards this artifact relates to"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

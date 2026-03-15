@@ -813,7 +813,7 @@ ls -la .claude/hooks/*.sh
 
 ---
 
-## Congratulations, Tester! 
+## Congratulations, Tester!
 
 You've completed the OCTALUME testing guide! Here's what you accomplished:
 

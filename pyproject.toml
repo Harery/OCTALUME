@@ -1,0 +1,231 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "octalume"
+version = "2.0.0"
+description = "AI-Native Enterprise SDLC Framework - 8 Phases, Quality Gates, Multi-Agent Orchestration"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "Mohamed ElHarery", email = "mohamed@harery.com"}
+]
+maintainers = [
+    {name = "OCTALUME Team", email = "octalume@harery.com"}
+]
+keywords = [
+    "sdlc",
+    "enterprise",
+    "ai-agents",
+    "mcp",
+    "model-context-protocol",
+    "quality-gates",
+    "compliance",
+    "hipaa",
+    "soc2",
+    "gdpr",
+    "lifecycle",
+    "orchestration",
+    "claude-code",
+    "langgraph",
+    "multi-agent",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: System :: Systems Administration",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    # MCP Server
+    "mcp>=1.0.0",
+
+    # Web Framework
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+
+    # Agent Framework
+    "langchain>=0.3.0",
+    "langgraph>=0.2.0",
+    "anthropic>=0.42.0",
+
+    # State Management
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.14.0",
+    "aiosqlite>=0.20.0",
+
+    # Observability
+    "opentelemetry-api>=1.28.0",
+    "opentelemetry-sdk>=1.28.0",
+    "structlog>=24.5.0",
+
+    # CLI
+    "click>=8.1.0",
+    "rich>=13.9.0",
+
+    # Utilities
+    "pyyaml>=6.0.0",
+    "httpx>=0.28.0",
+    "python-dateutil>=2.9.0",
+    "uuid6>=2024.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.14.0",
+    "black>=24.10.0",
+    "ruff>=0.7.0",
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.0",
+    "types-PyYAML>=6.0.0",
+    "httpx>=0.28.0",
+]
+redis = [
+    "redis>=5.2.0",
+]
+postgres = [
+    "asyncpg>=0.30.0",
+    "psycopg2-binary>=2.9.0",
+]
+enterprise = [
+    # Enterprise features (separate license)
+    "python3-saml>=1.16.0",
+    "cryptography>=44.0.0",
+]
+all = [
+    "octalume[dev,redis,postgres]",
+]
+
+[project.scripts]
+octalume = "octalume.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Harery/OCTALUME"
+Documentation = "https://docs.octalume.dev"
+Repository = "https://github.com/Harery/OCTALUME.git"
+Issues = "https://github.com/Harery/OCTALUME/issues"
+Changelog = "https://github.com/Harery/OCTALUME/blob/main/CHANGELOG.md"
+Discord = "https://discord.gg/octalume"
+
+[tool.hatch.build.targets.wheel]
+packages = ["octalume"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/octalume",
+    "/schemas",
+    "/agent-prompts",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py311", "py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | migrations
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+]
+ignore = [
+    "E501",   # line too long (handled by black)
+    "B008",   # do not perform function calls in argument defaults
+    "B904",   # raise without from inside except
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["octalume"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+    "mcp.*",
+    "langchain.*",
+    "langgraph.*",
+    "anthropic.*",
+    "structlog.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --strict-markers --asyncio-mode=auto"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "e2e: marks tests as end-to-end tests",
+]
+
+[tool.coverage.run]
+source = ["octalume"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]

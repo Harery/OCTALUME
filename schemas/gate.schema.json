@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://octalume.dev/schemas/gate.schema.json",
+  "title": "QualityGate",
+  "description": "A quality gate definition in the OCTALUME framework",
+  "type": "object",
+  "required": ["id", "phase", "name", "description"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Gate ID (e.g., G1-VISION-EXIT)"
+    },
+    "phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "description": "Phase number"
+    },
+    "name": {
+      "type": "string",
+      "description": "Gate name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Gate description"
+    },
+    "criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Validation criteria"
+    },
+    "required_artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Required artifact patterns"
+    },
+    "approvers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Roles that can approve/bypass"
+    },
+    "bypass_allowed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether bypass is allowed"
+    },
+    "compliance_required": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"]
+      },
+      "description": "Required compliance checks"
+    }
+  }
+}

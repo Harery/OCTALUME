@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #00D4AA;
+  --secondary: #1A1A2E;
+  --accent: #FF6B35;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f5f5f7;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.phase-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.phase-badge.completed {
+  @apply bg-green-100 text-green-800;
+}
+
+.phase-badge.in_progress {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.phase-badge.blocked {
+  @apply bg-red-100 text-red-800;
+}
+
+.phase-badge.not_started {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-primary-500 text-white hover:bg-primary-600;
+}
+
+.btn-secondary {
+  @apply bg-secondary-500 text-white hover:bg-secondary-600;
+}
+
+.btn-outline {
+  @apply border border-gray-300 text-gray-700 hover:bg-gray-50;
+}
