@@ -10,6 +10,7 @@ from octalume.a2a.protocol import A2AProtocol
 from octalume.core.models import (
     Agent,
     AgentStatus,
+    AgentType,
     ProjectState,
 )
 from octalume.core.state import ProjectStateManager
@@ -111,6 +112,7 @@ class AgentOrchestrator:
         agent = Agent(
             id=agent_id,
             name=type_def["name"],
+            agent_type=AgentType(agent_type),
             phase=type_def["phase"],
             status=AgentStatus.IDLE,
             current_task=task,

@@ -1,5 +1,7 @@
 """Tests for OCTALUME core engine."""
 
+from uuid import uuid4
+
 import pytest
 
 from octalume.core.engine import PhaseEngine
@@ -58,9 +60,14 @@ class TestProjectStateManager:
 
 class TestPhaseEngine:
     async def test_initialize_project(self, state_manager):
-        engine = PhaseEngine(state_manager)
+        gate_validator = GateValidator(state_manager)
+        from octalume.core.orchestrator import AgentOrchestrator
+
+        orchestrator = AgentOrchestrator(state_manager)
+        engine = PhaseEngine(state_manager, gate_validator, orchestrator)
+
         state = ProjectState(
-            id=project_state.id,
+            id=uuid4(),
             name="test",
             phases={},
             artifacts={},
