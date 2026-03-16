@@ -4,10 +4,10 @@ from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from octalume.core.models import AgentStatus
 from octalume.core.orchestrator import AgentOrchestrator
 from octalume.core.state import ProjectStateManager
-from octalume.core.models import AgentStatus
-from web.backend.main import get_orchestrator, get_state_manager
+from web.backend.dependencies import get_orchestrator, get_state_manager
 
 router = APIRouter()
 

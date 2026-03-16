@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from octalume.core.models import Artifact, ArtifactType
 from octalume.core.state import ProjectStateManager
-from web.backend.main import get_state_manager
+from web.backend.dependencies import get_state_manager
 
 router = APIRouter()
 
@@ -102,7 +102,7 @@ async def create_artifact(
         artifact_type=art_type,
         content=content,
         file_path=file_path,
-        compliance_tags=[],
+        compliance_tags=[ComplianceStandard(tag) for tag in (compliance_tags or [])],
     )
 
     state.artifacts[artifact.id] = artifact

@@ -6,6 +6,7 @@ from octalume.core.memory import MemoryBank
 from octalume.core.models import (
     Agent,
     AgentStatus,
+    AgentType,
     Artifact,
     ArtifactType,
     ComplianceStandard,
@@ -32,5 +33,6 @@ __all__ = [
     "GateResult",
     "Agent",
     "AgentStatus",
+    "AgentType",
     "ComplianceStandard",
 ]

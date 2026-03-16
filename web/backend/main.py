@@ -4,19 +4,18 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 
 from octalume.core.engine import PhaseEngine
 from octalume.core.gates import GateValidator
+from octalume.core.memory import MemoryBank
 from octalume.core.orchestrator import AgentOrchestrator
 from octalume.core.state import ProjectStateManager
-from octalume.core.memory import MemoryBank
 from octalume.utils.logging import configure_logging, get_logger
-
-from web.backend.routers import phases, agents, artifacts, compliance, dashboard
+from web.backend.routers import agents, artifacts, compliance, dashboard, phases
 
 logger = get_logger(__name__)
 
@@ -27,7 +26,7 @@ memory_bank: MemoryBank | None = None
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(_app: FastAPI):
     global state_manager, engine, orchestrator, memory_bank
 
     configure_logging(level="INFO", json_format=False)
@@ -100,7 +99,7 @@ Default: 100 requests per minute per IP.
 
     openapi_schema["info"]["x-logo"] = {
         "url": "https://octalume.dev/logo.png",
-        "altText": "OCTALUME Logo"
+        "altText": "OCTALUME Logo",
     }
 
     app.openapi_schema = openapi_schema
@@ -149,12 +148,12 @@ app.include_router(dashboard.router, prefix="/api/dashboard", tags=["Dashboard"]
                         "version": "2.0.0",
                         "status": "running",
                         "docs": "/docs",
-                        "redoc": "/redoc"
+                        "redoc": "/redoc",
                     }
                 }
-            }
+            },
         }
-    }
+    },
 )
 async def root() -> dict[str, str]:
     return {
@@ -182,22 +181,18 @@ async def root() -> dict[str, str]:
                             "state_manager": True,
                             "engine": True,
                             "orchestrator": True,
-                            "memory": True
-                        }
+                            "memory": True,
+                        },
                     }
                 }
-            }
+            },
         },
         503: {
             "description": "Service unavailable",
-            "content": {
-                "application/json": {
-                    "example": {"detail": "Service not initialized"}
-                }
-            }
-        }
+            "content": {"application/json": {"example": {"detail": "Service not initialized"}}},
+        },
     },
-    tags=["Health"]
+    tags=["Health"],
 )
 async def health() -> dict[str, Any]:
     services = {
@@ -215,7 +210,7 @@ async def health() -> dict[str, Any]:
             content={
                 "status": "degraded",
                 "services": services,
-            }
+            },
         )
 
     return {
@@ -228,38 +223,16 @@ async def health() -> dict[str, Any]:
     "/ready",
     summary="Readiness Check",
     description="Returns whether the API is ready to accept requests",
-    tags=["Health"]
+    tags=["Health"],
 )
 async def readiness() -> dict[str, bool]:
     return {
-        "ready": all([
-            state_manager is not None,
-            engine is not None,
-            orchestrator is not None,
-            memory_bank is not None,
-        ])
+        "ready": all(
+            [
+                state_manager is not None,
+                engine is not None,
+                orchestrator is not None,
+                memory_bank is not None,
+            ]
+        )
     }
-
-
-def get_state_manager() -> ProjectStateManager:
-    if state_manager is None:
-        raise HTTPException(status_code=503, detail="Service not initialized")
-    return state_manager
-
-
-def get_engine() -> PhaseEngine:
-    if engine is None:
-        raise HTTPException(status_code=503, detail="Service not initialized")
-    return engine
-
-
-def get_orchestrator() -> AgentOrchestrator:
-    if orchestrator is None:
-        raise HTTPException(status_code=503, detail="Service not initialized")
-    return orchestrator
-
-
-def get_memory() -> MemoryBank:
-    if memory_bank is None:
-        raise HTTPException(status_code=503, detail="Service not initialized")
-    return memory_bank

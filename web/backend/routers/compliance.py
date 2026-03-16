@@ -4,10 +4,10 @@ from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from octalume.compliance.scanner import ComplianceScanner
 from octalume.core.models import ComplianceStandard
 from octalume.core.state import ProjectStateManager
-from octalume.compliance.scanner import ComplianceScanner
-from web.backend.main import get_state_manager
+from web.backend.dependencies import get_state_manager
 
 router = APIRouter()
 scanner = ComplianceScanner()
@@ -17,9 +17,17 @@ scanner = ComplianceScanner()
 async def list_standards() -> dict[str, Any]:
     return {
         "standards": [
-            {"id": "hipaa", "name": "HIPAA", "description": "Health Insurance Portability and Accountability Act"},
+            {
+                "id": "hipaa",
+                "name": "HIPAA",
+                "description": "Health Insurance Portability and Accountability Act",
+            },
             {"id": "soc2", "name": "SOC 2", "description": "Service Organization Control 2"},
-            {"id": "pci_dss", "name": "PCI DSS", "description": "Payment Card Industry Data Security Standard"},
+            {
+                "id": "pci_dss",
+                "name": "PCI DSS",
+                "description": "Payment Card Industry Data Security Standard",
+            },
             {"id": "gdpr", "name": "GDPR", "description": "General Data Protection Regulation"},
             {"id": "sox", "name": "SOX", "description": "Sarbanes-Oxley Act"},
             {"id": "dod_itar", "name": "DoD/ITAR", "description": "Defense regulations"},

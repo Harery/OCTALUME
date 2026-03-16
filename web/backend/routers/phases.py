@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from octalume.core.engine import PhaseEngine
 from octalume.core.state import ProjectStateManager
-from web.backend.main import get_engine, get_state_manager
+from web.backend.dependencies import get_engine, get_state_manager
 
 router = APIRouter()
 
@@ -22,16 +22,18 @@ async def list_phases(
     phases = []
     for phase_num in sorted(state.phases.keys()):
         phase = state.phases[phase_num]
-        phases.append({
-            "number": phase.number,
-            "name": phase.name,
-            "description": phase.description,
-            "status": phase.status.value,
-            "owner": phase.owner,
-            "artifacts_count": len(phase.artifacts),
-            "started_at": phase.started_at.isoformat() if phase.started_at else None,
-            "completed_at": phase.completed_at.isoformat() if phase.completed_at else None,
-        })
+        phases.append(
+            {
+                "number": phase.number,
+                "name": phase.name,
+                "description": phase.description,
+                "status": phase.status.value,
+                "owner": phase.owner,
+                "artifacts_count": len(phase.artifacts),
+                "started_at": phase.started_at.isoformat() if phase.started_at else None,
+                "completed_at": phase.completed_at.isoformat() if phase.completed_at else None,
+            }
+        )
 
     return {
         "current_phase": state.current_phase,
@@ -118,9 +120,7 @@ async def transition_phase(
         raise HTTPException(status_code=404, detail="Project not found")
 
     try:
-        state, gate_result = await engine.transition_phase(
-            state, phase_number, phase_number + 1
-        )
+        state, gate_result = await engine.transition_phase(state, phase_number, phase_number + 1)
         return {
             "success": gate_result.passed,
             "current_phase": state.current_phase,

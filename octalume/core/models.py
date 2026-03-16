@@ -40,6 +40,20 @@ class AgentStatus(str, Enum):
     TIMEOUT = "timeout"
 
 
+class AgentType(str, Enum):
+    """Types of agents in the system."""
+
+    VISION = "vision"
+    REQUIREMENTS = "requirements"
+    ARCHITECTURE = "architecture"
+    PLANNING = "planning"
+    DEVELOPMENT = "development"
+    QUALITY = "quality"
+    DEPLOYMENT = "deployment"
+    OPERATIONS = "operations"
+    ORCHESTRATOR = "orchestrator"
+
+
 class ComplianceStandard(str, Enum):
     """Supported compliance standards."""
 
@@ -124,6 +138,7 @@ class Agent(TimestampMixin):
 
     id: str
     name: str
+    agent_type: AgentType
     phase: int | None = None
     status: AgentStatus = AgentStatus.IDLE
     current_task: str | None = None

@@ -4,9 +4,9 @@ from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from octalume.core.state import ProjectStateManager
 from octalume.core.memory import MemoryBank
-from web.backend.main import get_state_manager, get_memory
+from octalume.core.state import ProjectStateManager
+from web.backend.dependencies import get_memory, get_state_manager
 
 router = APIRouter()
 
@@ -27,9 +27,7 @@ async def get_dashboard_summary(
     summary["initialized"] = True
     summary["progress_percentage"] = 0
 
-    completed_phases = sum(
-        1 for p in state.phases.values() if p.status.value == "completed"
-    )
+    completed_phases = sum(1 for p in state.phases.values() if p.status.value == "completed")
     if len(state.phases) > 0:
         summary["progress_percentage"] = int((completed_phases / len(state.phases)) * 100)
 
@@ -47,16 +45,18 @@ async def get_timeline(
     timeline = []
     for phase_num in sorted(state.phases.keys()):
         phase = state.phases[phase_num]
-        timeline.append({
-            "phase": phase_num,
-            "name": phase.name,
-            "status": phase.status.value,
-            "started_at": phase.started_at.isoformat() if phase.started_at else None,
-            "completed_at": phase.completed_at.isoformat() if phase.completed_at else None,
-            "duration_days": phase.duration_estimate_days,
-            "artifacts_count": len(phase.artifacts),
-            "owner": phase.owner,
-        })
+        timeline.append(
+            {
+                "phase": phase_num,
+                "name": phase.name,
+                "status": phase.status.value,
+                "started_at": phase.started_at.isoformat() if phase.started_at else None,
+                "completed_at": phase.completed_at.isoformat() if phase.completed_at else None,
+                "duration_days": phase.duration_estimate_days,
+                "artifacts_count": len(phase.artifacts),
+                "owner": phase.owner,
+            }
+        )
 
     return {"timeline": timeline}
 
@@ -74,9 +74,7 @@ async def get_metrics(
 
     total_artifacts = len(state.artifacts)
     total_agents = len(state.agents)
-    active_agents = sum(
-        1 for a in state.agents.values() if a.status.value == "running"
-    )
+    active_agents = sum(1 for a in state.agents.values() if a.status.value == "running")
 
     gates_passed = sum(1 for gr in state.gate_results if gr.passed)
     gates_failed = len(state.gate_results) - gates_passed
