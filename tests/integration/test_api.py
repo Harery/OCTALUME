@@ -13,6 +13,7 @@ from web.backend.main import app
 @pytest.fixture
 def client():
     with TestClient(app) as c:
+        c.post("/api/phases/init", json={"name": "Test Project"})
         yield c
 
 

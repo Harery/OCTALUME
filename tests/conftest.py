@@ -97,7 +97,6 @@ def sample_phase() -> Phase:
         owner="Product Owner",
         status=PhaseStatus.NOT_STARTED,
         artifacts=[],
-        agents=[],
         entry_criteria=["business_idea_identified"],
         exit_criteria=["business_case_approved", "prd_completed"],
     )
@@ -123,12 +122,13 @@ def sample_agent() -> Agent:
     """Create a sample Agent instance."""
     return Agent(
         id=f"agent-vision-{uuid4().hex[:8]}",
+        name="Vision Agent",
         agent_type=AgentType.VISION,
         phase=1,
-        task="Create business case and PRD",
         status=AgentStatus.IDLE,
+        current_task="Create business case and PRD",
+        capabilities=["business_analysis", "market_research"],
         config={"max_iterations": 10},
-        artifacts_created=[],
     )
 
 
@@ -146,7 +146,6 @@ def sample_project_state() -> ProjectState:
             owner="Owner",
             status=PhaseStatus.NOT_STARTED if i > 1 else PhaseStatus.IN_PROGRESS,
             artifacts=[],
-            agents=[],
             entry_criteria=[],
             exit_criteria=[],
         )

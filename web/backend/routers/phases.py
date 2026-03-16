@@ -5,10 +5,46 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException
 
 from octalume.core.engine import PhaseEngine
+from octalume.core.models import PHASE_DEFINITIONS, Phase, PhaseStatus
 from octalume.core.state import ProjectStateManager
 from web.backend.dependencies import get_engine, get_state_manager
 
 router = APIRouter()
+
+
+@router.post("/init")
+async def init_project(
+    name: str = "My Project",
+    description: str = "",
+    state_manager: ProjectStateManager = Depends(get_state_manager),
+) -> dict[str, Any]:
+    """Initialize a new project with default phases."""
+    existing = await state_manager.load()
+    if existing:
+        return {
+            "success": True,
+            "message": "Project already exists",
+            "project_id": str(existing.id),
+        }
+
+    phases = {}
+    for phase_num, phase_def in PHASE_DEFINITIONS.items():
+        phases[phase_num] = Phase(
+            number=phase_num,
+            name=phase_def["name"],
+            description=phase_def["description"],
+            owner=phase_def["owner"],
+            duration_estimate_days=phase_def.get("duration_estimate_days", 7),
+            status=PhaseStatus.NOT_STARTED,
+            entry_criteria=phase_def.get("entry_criteria", []),
+            exit_criteria=phase_def.get("exit_criteria", []),
+        )
+
+    state = await state_manager.create(name=name, description=description)
+    state.phases = phases
+    await state_manager.save(state)
+
+    return {"success": True, "project_id": str(state.id), "name": state.name}
 
 
 @router.get("/")

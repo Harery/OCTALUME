@@ -4,7 +4,7 @@ from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from octalume.core.models import Artifact, ArtifactType
+from octalume.core.models import Artifact, ArtifactType, ComplianceStandard
 from octalume.core.state import ProjectStateManager
 from web.backend.dependencies import get_state_manager
 

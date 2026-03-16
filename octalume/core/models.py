@@ -256,7 +256,7 @@ PHASE_DEFINITIONS: dict[int, dict[str, Any]] = {
         "name": "Operations and Maintenance",
         "description": "Monitoring, incident management, and continuous improvement",
         "owner": "SRE",
-        "duration_estimate_days": 0,
+        "duration_estimate_days": 14,
         "exit_criteria": [
             "Monitoring active",
             "Runbooks published",
