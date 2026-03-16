@@ -31,7 +31,7 @@ class MemoryBank:
         try:
             with open(self.memory_file) as f:
                 return json.load(f)
-        except (json.JSONDecodeError, IOError) as e:
+        except (OSError, json.JSONDecodeError) as e:
             logger.error("memory_load_error", error=str(e))
             return self._create_empty_memory()
 
@@ -129,13 +129,12 @@ class MemoryBank:
                 continue
 
             for key, entry in self._memory["memory"][cat].items():
-                if search_term:
-                    if search_term.lower() not in key.lower():
-                        if isinstance(entry.get("value"), str):
-                            if search_term.lower() not in entry["value"].lower():
-                                continue
-                        else:
+                if search_term and search_term.lower() not in key.lower():
+                    if isinstance(entry.get("value"), str):
+                        if search_term.lower() not in entry["value"].lower():
                             continue
+                    else:
+                        continue
 
                 results.append({
                     "category": cat,

@@ -5,14 +5,14 @@ from datetime import datetime
 from typing import Any
 from uuid import uuid4
 
+from octalume.a2a.messaging import MessageBus
+from octalume.a2a.protocol import A2AProtocol
 from octalume.core.models import (
     Agent,
     AgentStatus,
     ProjectState,
 )
 from octalume.core.state import ProjectStateManager
-from octalume.a2a.protocol import A2AProtocol
-from octalume.a2a.messaging import MessageBus
 from octalume.utils.logging import get_logger
 
 logger = get_logger(__name__)

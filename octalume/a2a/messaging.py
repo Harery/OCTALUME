@@ -86,7 +86,7 @@ class MessageBus:
                 timeout=timeout,
             )
             return message
-        except asyncio.TimeoutError:
+        except TimeoutError:
             return None
 
     async def get_subscribers(self) -> list[str]:

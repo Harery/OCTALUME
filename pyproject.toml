@@ -179,7 +179,17 @@ ignore = [
     "E501",   # line too long (handled by black)
     "B008",   # do not perform function calls in argument defaults
     "B904",   # raise without from inside except
+    "UP042",  # class inherits from str and Enum (valid pattern)
 ]
+
+# Allow unused arguments in agent stub implementations
+[tool.ruff.lint.per-file-ignores]
+"octalume/agents/*.py" = ["ARG002"]  # Agent methods have task/context params for interface consistency
+"octalume/mcp/server.py" = ["ARG002"]  # MCP tool handlers have state/args for consistency
+"octalume/compliance/*.py" = ["ARG002"]  # Scanner methods have scope for interface consistency
+"octalume/core/state.py" = ["ARG002"]  # State methods have project_id for interface consistency
+"octalume/worker/tasks.py" = ["ARG001"]  # Task functions have args for Celery signature
+"tests/conftest.py" = ["F841"]  # Test fixtures may have unused vars
 
 [tool.ruff.lint.isort]
 known-first-party = ["octalume"]

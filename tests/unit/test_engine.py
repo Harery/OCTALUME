@@ -1,18 +1,18 @@
 """Tests for OCTALUME core engine."""
 
-import pytest
-from datetime import datetime
 
+import pytest
+
+from octalume.core.engine import PhaseEngine
+from octalume.core.gates import GateValidator
 from octalume.core.models import (
+    Artifact,
+    ArtifactType,
     Phase,
     PhaseStatus,
     ProjectState,
-    Artifact,
-    ArtifactType,
 )
 from octalume.core.state import ProjectStateManager
-from octalume.core.engine import PhaseEngine
-from octalume.core.gates import GateValidator
 
 
 @pytest.fixture

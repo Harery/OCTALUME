@@ -3,8 +3,8 @@
 from typing import Any
 
 from octalume.agents.base import BaseAgent
-from octalume.core.state import ProjectStateManager
 from octalume.core.memory import MemoryBank
+from octalume.core.state import ProjectStateManager
 
 
 class PlanningAgent(BaseAgent):
@@ -123,7 +123,6 @@ class PlanningAgent(BaseAgent):
         task: str,
         context: dict[str, Any],
     ) -> dict[str, Any]:
-        features = context.get("features", [])
         sprint_duration = context.get("sprint_duration", 2)
         num_sprints = context.get("num_sprints", 6)
 

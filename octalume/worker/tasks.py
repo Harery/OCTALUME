@@ -2,11 +2,9 @@
 
 from datetime import datetime, timedelta
 from typing import Any
-import json
 
-from celery import shared_task
-from octalume.worker.celery_app import celery_app, run_async
 from octalume.utils.logging import get_logger
+from octalume.worker.celery_app import celery_app, run_async
 
 logger = get_logger(__name__)
 
@@ -31,10 +29,10 @@ def run_compliance_scan(
     )
 
     try:
+
         from octalume.compliance.scanner import ComplianceScanner
         from octalume.core.models import ComplianceStandard
         from octalume.core.state import ProjectStateManager
-        from pathlib import Path
 
         manager = ProjectStateManager()
         state = run_async(manager.load())
@@ -89,8 +87,8 @@ def run_health_check(self, agent_ids: list[str] | None = None) -> dict[str, Any]
     logger.info("health_check_started", task_id=self.request.id)
 
     try:
-        from octalume.core.state import ProjectStateManager
         from octalume.core.orchestrator import AgentOrchestrator
+        from octalume.core.state import ProjectStateManager
 
         manager = ProjectStateManager()
         state = run_async(manager.load())
@@ -117,8 +115,9 @@ def cleanup_expired_data(self, days_old: int = 30) -> dict[str, Any]:
     logger.info("cleanup_started", task_id=self.request.id, days_old=days_old)
 
     try:
-        from octalume.core.memory import MemoryBank
         from pathlib import Path
+
+        from octalume.core.memory import MemoryBank
 
         memory = MemoryBank(Path(".octalume/memory"))
         cutoff = datetime.utcnow() - timedelta(days=days_old)

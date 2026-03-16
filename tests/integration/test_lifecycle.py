@@ -1,16 +1,16 @@
 """Integration tests for full lifecycle workflow."""
 
-import pytest
-from pathlib import Path
-import tempfile
 import shutil
-import asyncio
+import tempfile
+from pathlib import Path
 
-from octalume.core.state import ProjectStateManager
+import pytest
+
 from octalume.core.engine import PhaseEngine
 from octalume.core.gates import GateValidator
-from octalume.core.orchestrator import AgentOrchestrator
 from octalume.core.models import Artifact, ArtifactType, ComplianceStandard
+from octalume.core.orchestrator import AgentOrchestrator
+from octalume.core.state import ProjectStateManager
 
 
 @pytest.fixture

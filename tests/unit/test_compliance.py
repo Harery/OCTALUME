@@ -2,11 +2,17 @@
 
 import pytest
 
-from octalume.core.models import ComplianceStandard, ProjectState, Phase, PhaseStatus, Artifact, ArtifactType
-from octalume.compliance.hipaa import HIPAACompliance
-from octalume.compliance.soc2 import SOC2Compliance
 from octalume.compliance.gdpr import GDPRCompliance
+from octalume.compliance.hipaa import HIPAACompliance
 from octalume.compliance.pci import PCICompliance
+from octalume.compliance.soc2 import SOC2Compliance
+from octalume.core.models import (
+    Artifact,
+    ArtifactType,
+    Phase,
+    PhaseStatus,
+    ProjectState,
+)
 
 
 @pytest.fixture

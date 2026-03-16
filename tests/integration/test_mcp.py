@@ -1,10 +1,11 @@
 """Integration tests for MCP Server."""
 
-import pytest
 import json
-from unittest.mock import Mock, AsyncMock, patch
+from unittest.mock import Mock, patch
 
-from octalume.mcp.server import OctalumeMCPServer, TOOLS
+import pytest
+
+from octalume.mcp.server import TOOLS, OctalumeMCPServer
 
 
 class TestMCPServerInitialization:

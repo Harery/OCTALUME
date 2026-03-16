@@ -1,8 +1,8 @@
 """Celery configuration for background tasks."""
 
-from celery import Celery
-from typing import Any
 import asyncio
+
+from celery import Celery
 
 from octalume.utils.config import get_settings
 from octalume.utils.logging import get_logger

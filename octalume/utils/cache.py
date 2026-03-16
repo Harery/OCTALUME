@@ -1,14 +1,12 @@
 """Redis caching layer for OCTALUME."""
 
 import json
-from datetime import timedelta
 from typing import Any
-import hashlib
 
 import redis.asyncio as aioredis
 
-from octalume.utils.logging import get_logger
 from octalume.utils.config import settings
+from octalume.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

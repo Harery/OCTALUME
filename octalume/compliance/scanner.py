@@ -97,7 +97,7 @@ class ComplianceScanner:
         critical_findings = 0
         compliant_standards = 0
 
-        for standard, result in results.items():
+        for _standard, result in results.items():
             findings = result.get("findings", [])
             total_findings += len(findings)
 

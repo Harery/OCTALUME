@@ -1,9 +1,9 @@
 """Tests for MCP server."""
 
-import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
 
-from octalume.mcp.server import OctalumeMCPServer, TOOLS
+import pytest
+
+from octalume.mcp.server import TOOLS, OctalumeMCPServer
 
 
 class TestMCPServer:

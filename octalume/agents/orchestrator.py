@@ -3,8 +3,8 @@
 from typing import Any
 
 from octalume.agents.base import BaseAgent
-from octalume.core.state import ProjectStateManager
 from octalume.core.memory import MemoryBank
+from octalume.core.state import ProjectStateManager
 
 
 class OrchestratorAgent(BaseAgent):

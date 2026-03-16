@@ -2,10 +2,10 @@
 
 from octalume.worker.celery_app import celery_app
 from octalume.worker.tasks import (
-    run_compliance_scan,
-    run_health_check,
     cleanup_expired_data,
     generate_compliance_report,
+    run_compliance_scan,
+    run_health_check,
 )
 
 __all__ = [

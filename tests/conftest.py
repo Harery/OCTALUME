@@ -1,13 +1,16 @@
 """Pytest configuration and fixtures for OCTALUME tests."""
 
 import asyncio
+from collections.abc import AsyncGenerator, Generator
 from pathlib import Path
-from typing import AsyncGenerator, Generator
 from uuid import uuid4
 
 import pytest
 import pytest_asyncio
 
+from octalume.core.engine import PhaseEngine
+from octalume.core.gates import GateValidator
+from octalume.core.memory import MemoryBank
 from octalume.core.models import (
     Agent,
     AgentStatus,
@@ -20,11 +23,8 @@ from octalume.core.models import (
     PhaseStatus,
     ProjectState,
 )
-from octalume.core.state import ProjectStateManager
-from octalume.core.engine import PhaseEngine
-from octalume.core.gates import GateValidator
 from octalume.core.orchestrator import AgentOrchestrator
-from octalume.core.memory import MemoryBank
+from octalume.core.state import ProjectStateManager
 
 
 # Configure asyncio for pytest

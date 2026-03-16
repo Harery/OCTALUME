@@ -1,10 +1,11 @@
 """Integration tests for OCTALUME API."""
 
+import shutil
+import tempfile
+from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
-from pathlib import Path
-import tempfile
-import shutil
 
 from web.backend.main import app
 

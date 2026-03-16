@@ -191,7 +191,7 @@ def list_templates(category: str | None = None) -> list[ProjectTemplate]:
 
 
 def get_template_categories() -> list[str]:
-    return list(set(t.category for t in TEMPLATES.values()))
+    return list({t.category for t in TEMPLATES.values()})
 
 
 def scaffold_from_template(

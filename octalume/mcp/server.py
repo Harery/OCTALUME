@@ -7,12 +7,11 @@ from typing import Any
 
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
-from mcp.types import Tool, TextContent
+from mcp.types import TextContent, Tool
 
+from octalume.compliance.scanner import ComplianceScanner
 from octalume.core.engine import PhaseEngine
 from octalume.core.gates import GateValidator
-from octalume.core.orchestrator import AgentOrchestrator
-from octalume.core.state import ProjectStateManager
 from octalume.core.memory import MemoryBank
 from octalume.core.models import (
     Artifact,
@@ -20,7 +19,8 @@ from octalume.core.models import (
     ComplianceStandard,
     ProjectState,
 )
-from octalume.compliance.scanner import ComplianceScanner
+from octalume.core.orchestrator import AgentOrchestrator
+from octalume.core.state import ProjectStateManager
 from octalume.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -644,9 +644,10 @@ class OctalumeMCPServer:
                 continue
             if "search_term" in args:
                 term = args["search_term"].lower()
-                if term not in artifact.name.lower():
-                    if isinstance(artifact.content, str) and term not in artifact.content.lower():
-                        continue
+                if term not in artifact.name.lower() and (
+                    not isinstance(artifact.content, str) or term not in artifact.content.lower()
+                ):
+                    continue
             results.append(artifact.model_dump())
             if len(results) >= args.get("limit", 50):
                 break

@@ -1,11 +1,11 @@
 """Multi-tenancy support for OCTALUME."""
 
 from datetime import datetime
-from typing import Any
-from uuid import uuid4
 from enum import Enum
+from uuid import uuid4
 
 from pydantic import BaseModel, Field
+
 from octalume.utils.logging import get_logger
 
 logger = get_logger(__name__)

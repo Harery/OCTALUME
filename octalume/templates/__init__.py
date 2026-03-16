@@ -1,11 +1,11 @@
 """OCTALUME project templates."""
 
 from octalume.templates.project_templates import (
-    ProjectTemplate,
     TEMPLATES,
+    ProjectTemplate,
     get_template,
-    list_templates,
     get_template_categories,
+    list_templates,
     scaffold_from_template,
 )
 

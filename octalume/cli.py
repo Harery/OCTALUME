@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
 
 import asyncio
-from pathlib import Path
-from typing import Any
 
 import click
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.table import Table
 
 from octalume import __version__
 from octalume.core.engine import PhaseEngine
 from octalume.core.gates import GateValidator
+from octalume.core.memory import MemoryBank
 from octalume.core.orchestrator import AgentOrchestrator
 from octalume.core.state import ProjectStateManager
-from octalume.core.memory import MemoryBank
 from octalume.utils.logging import configure_logging
 
 console = Console()
@@ -275,11 +273,11 @@ def scan(standard: str | None) -> None:
             TextColumn("[progress.description]{task.description}"),
             console=console,
         ) as progress:
-            progress.add_task(f"Scanning compliance...", total=None)
+            progress.add_task("Scanning compliance...", total=None)
 
             result = await scanner.scan(state, standards, "all")
 
-        console.print(f"\n[bold]Compliance Scan Results[/bold]")
+        console.print("\n[bold]Compliance Scan Results[/bold]")
         console.print(f"Overall Status: [bold {'green' if result['summary']['overall_status'] == 'compliant' else 'red'}]{result['summary']['overall_status']}[/bold]")
         console.print(f"Total Findings: {result['summary']['total_findings']}")
         console.print(f"Critical: {result['summary']['critical_findings']}")

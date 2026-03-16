@@ -4,9 +4,9 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Any
 
+from octalume.core.memory import MemoryBank
 from octalume.core.models import Agent, AgentStatus
 from octalume.core.state import ProjectStateManager
-from octalume.core.memory import MemoryBank
 from octalume.utils.logging import get_logger
 
 logger = get_logger(__name__)

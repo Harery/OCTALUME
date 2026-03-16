@@ -4,7 +4,6 @@ from typing import Any
 
 from octalume.core.models import ProjectState
 
-
 PCI_DSS_REQUIREMENTS = {
     "network_security": {
         "description": "Requirement 1: Install and maintain network security controls",

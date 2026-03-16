@@ -12,9 +12,9 @@ __email__ = "mohamed@harery.com"
 
 from octalume.core.engine import PhaseEngine
 from octalume.core.gates import GateValidator
+from octalume.core.memory import MemoryBank
 from octalume.core.orchestrator import AgentOrchestrator
 from octalume.core.state import ProjectState
-from octalume.core.memory import MemoryBank
 
 __all__ = [
     "__version__",

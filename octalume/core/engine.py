@@ -1,19 +1,17 @@
 """Phase execution engine for OCTALUME."""
 
-import asyncio
 from datetime import datetime
 from typing import Any
 
+from octalume.core.gates import GateValidator
 from octalume.core.models import (
     PHASE_DEFINITIONS,
     Artifact,
-    ArtifactType,
     GateResult,
     Phase,
     PhaseStatus,
     ProjectState,
 )
-from octalume.core.gates import GateValidator
 from octalume.core.orchestrator import AgentOrchestrator
 from octalume.core.state import ProjectStateManager
 from octalume.utils.logging import get_logger

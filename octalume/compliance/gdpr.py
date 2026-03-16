@@ -4,7 +4,6 @@ from typing import Any
 
 from octalume.core.models import ProjectState
 
-
 GDPR_PRINCIPLES = {
     "lawfulness_fairness_transparency": {
         "description": "Article 5(1)(a): Lawfulness, fairness and transparency",
