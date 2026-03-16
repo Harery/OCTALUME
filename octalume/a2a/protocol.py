@@ -151,7 +151,9 @@ class A2AProtocol:
         handler_key = f"{recipient}:{message_type}"
         wildcard_key = f"{recipient}:*"
 
-        handler = self._message_handlers.get(handler_key) or self._message_handlers.get(wildcard_key)
+        handler = self._message_handlers.get(handler_key) or self._message_handlers.get(
+            wildcard_key
+        )
 
         if handler:
             result = await handler(message)
@@ -181,13 +183,15 @@ class A2AProtocol:
 
         for correlation_id, request in self._pending_responses.items():
             elapsed = (now - request["sent_at"]).total_seconds()
-            pending.append({
-                "correlation_id": correlation_id,
-                "message_id": request["message_id"],
-                "elapsed_seconds": elapsed,
-                "timeout_seconds": request["timeout_seconds"],
-                "expired": elapsed > request["timeout_seconds"],
-            })
+            pending.append(
+                {
+                    "correlation_id": correlation_id,
+                    "message_id": request["message_id"],
+                    "elapsed_seconds": elapsed,
+                    "timeout_seconds": request["timeout_seconds"],
+                    "expired": elapsed > request["timeout_seconds"],
+                }
+            )
 
         return pending
 

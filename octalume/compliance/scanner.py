@@ -78,15 +78,19 @@ class ComplianceScanner:
         if standard not in self._scanners:
             if standard == ComplianceStandard.HIPAA:
                 from octalume.compliance.hipaa import HIPAACompliance
+
                 self._scanners[standard] = HIPAACompliance()
             elif standard == ComplianceStandard.SOC2:
                 from octalume.compliance.soc2 import SOC2Compliance
+
                 self._scanners[standard] = SOC2Compliance()
             elif standard == ComplianceStandard.PCI_DSS:
                 from octalume.compliance.pci import PCICompliance
+
                 self._scanners[standard] = PCICompliance()
             elif standard == ComplianceStandard.GDPR:
                 from octalume.compliance.gdpr import GDPRCompliance
+
                 self._scanners[standard] = GDPRCompliance()
 
         return self._scanners.get(standard)
@@ -135,11 +139,13 @@ class ComplianceScanner:
             lines.append(f"- **[{severity}]** {description}")
 
         if report.get("recommendations"):
-            lines.extend([
-                "",
-                "## Recommendations",
-                "",
-            ])
+            lines.extend(
+                [
+                    "",
+                    "## Recommendations",
+                    "",
+                ]
+            )
             for rec in report["recommendations"]:
                 lines.append(f"- {rec}")
 

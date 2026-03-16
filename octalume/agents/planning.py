@@ -106,11 +106,13 @@ class PlanningAgent(BaseAgent):
         }
 
         for member in team:
-            resource_plan["team_members"].append({
-                "name": member.get("name", ""),
-                "role": member.get("role", "Developer"),
-                "allocation": member.get("allocation", "100%"),
-            })
+            resource_plan["team_members"].append(
+                {
+                    "name": member.get("name", ""),
+                    "role": member.get("role", "Developer"),
+                    "allocation": member.get("allocation", "100%"),
+                }
+            )
 
         return {
             "success": True,
@@ -128,13 +130,15 @@ class PlanningAgent(BaseAgent):
 
         sprints = []
         for i in range(1, num_sprints + 1):
-            sprints.append({
-                "sprint": i,
-                "duration_weeks": sprint_duration,
-                "goals": [],
-                "capacity": context.get("capacity_per_sprint", 40),
-                "features": [],
-            })
+            sprints.append(
+                {
+                    "sprint": i,
+                    "duration_weeks": sprint_duration,
+                    "goals": [],
+                    "capacity": context.get("capacity_per_sprint", 40),
+                    "features": [],
+                }
+            )
 
         return {
             "success": True,
@@ -154,10 +158,30 @@ class PlanningAgent(BaseAgent):
         risks = context.get("risks", [])
 
         default_risks = [
-            {"id": "R-001", "description": "Resource availability", "probability": "Medium", "impact": "High"},
-            {"id": "R-002", "description": "Scope creep", "probability": "High", "impact": "Medium"},
-            {"id": "R-003", "description": "Technical complexity", "probability": "Medium", "impact": "Medium"},
-            {"id": "R-004", "description": "Integration challenges", "probability": "Medium", "impact": "High"},
+            {
+                "id": "R-001",
+                "description": "Resource availability",
+                "probability": "Medium",
+                "impact": "High",
+            },
+            {
+                "id": "R-002",
+                "description": "Scope creep",
+                "probability": "High",
+                "impact": "Medium",
+            },
+            {
+                "id": "R-003",
+                "description": "Technical complexity",
+                "probability": "Medium",
+                "impact": "Medium",
+            },
+            {
+                "id": "R-004",
+                "description": "Integration challenges",
+                "probability": "Medium",
+                "impact": "High",
+            },
         ]
 
         risk_register = {
@@ -184,9 +208,21 @@ class PlanningAgent(BaseAgent):
 
         timeline = {
             "phases": [
-                {"phase": "Sprint 1-2", "duration_weeks": sprint_duration * 2, "focus": "Foundation"},
-                {"phase": "Sprint 3-4", "duration_weeks": sprint_duration * 2, "focus": "Core Features"},
-                {"phase": "Sprint 5-6", "duration_weeks": sprint_duration * 2, "focus": "Polish & Testing"},
+                {
+                    "phase": "Sprint 1-2",
+                    "duration_weeks": sprint_duration * 2,
+                    "focus": "Foundation",
+                },
+                {
+                    "phase": "Sprint 3-4",
+                    "duration_weeks": sprint_duration * 2,
+                    "focus": "Core Features",
+                },
+                {
+                    "phase": "Sprint 5-6",
+                    "duration_weeks": sprint_duration * 2,
+                    "focus": "Polish & Testing",
+                },
             ],
             "milestones": [
                 {"name": "MVP Ready", "sprint": sprints // 2},

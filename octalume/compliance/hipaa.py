@@ -69,13 +69,15 @@ class HIPAACompliance:
                 if result["passed"]:
                     passed_checks += 1
                 else:
-                    findings.append({
-                        "rule": rule_id,
-                        "check": check,
-                        "description": rule["description"],
-                        "severity": self._get_severity(check),
-                        "remediation": result.get("remediation", "Address this requirement"),
-                    })
+                    findings.append(
+                        {
+                            "rule": rule_id,
+                            "check": check,
+                            "description": rule["description"],
+                            "severity": self._get_severity(check),
+                            "remediation": result.get("remediation", "Address this requirement"),
+                        }
+                    )
 
         score = int((passed_checks / total_checks) * 100) if total_checks > 0 else 0
         status = "compliant" if score >= 100 else "non-compliant"

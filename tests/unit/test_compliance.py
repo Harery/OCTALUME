@@ -18,6 +18,7 @@ from octalume.core.models import (
 @pytest.fixture
 def empty_state():
     from uuid import uuid4
+
     state = ProjectState(
         id=uuid4(),
         name="test",

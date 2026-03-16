@@ -37,7 +37,7 @@ class TestFullLifecycleWorkflow:
         state = await manager.create(
             name="test-lifecycle-project",
             description="Test full lifecycle",
-            compliance_standards=["soc2"]
+            compliance_standards=["soc2"],
         )
 
         assert state.current_phase == 1
@@ -65,8 +65,7 @@ class TestFullLifecycleWorkflow:
         manager, engine, _ = setup_engine
 
         state = await manager.create(
-            name="compliant-project",
-            compliance_standards=["hipaa", "soc2", "gdpr"]
+            name="compliant-project", compliance_standards=["hipaa", "soc2", "gdpr"]
         )
 
         assert len(state.compliance_standards) == 3
@@ -126,9 +125,7 @@ class TestAgentOrchestration:
         orchestrator = AgentOrchestrator(manager)
 
         agent_id = await orchestrator.spawn_agent(
-            state=state,
-            agent_type="vision",
-            task="Create business case"
+            state=state, agent_type="vision", task="Create business case"
         )
 
         assert agent_id is not None
@@ -141,16 +138,8 @@ class TestAgentOrchestration:
         state = await manager.create(name="agent-list-test")
         orchestrator = AgentOrchestrator(manager)
 
-        await orchestrator.spawn_agent(
-            state=state,
-            agent_type="vision",
-            task="Task 1"
-        )
-        await orchestrator.spawn_agent(
-            state=state,
-            agent_type="architecture",
-            task="Task 2"
-        )
+        await orchestrator.spawn_agent(state=state, agent_type="vision", task="Task 1")
+        await orchestrator.spawn_agent(state=state, agent_type="architecture", task="Task 2")
 
         agents = await orchestrator.list_agents(state)
         assert len(agents) >= 2
@@ -182,10 +171,7 @@ class TestStatePersistence:
     async def test_state_persists_across_sessions(self, temp_state_dir):
         manager1 = ProjectStateManager(state_dir=temp_state_dir)
 
-        state = await manager1.create(
-            name="persistence-test",
-            description="Testing persistence"
-        )
+        state = await manager1.create(name="persistence-test", description="Testing persistence")
         await manager1.save(state)
 
         manager2 = ProjectStateManager(state_dir=temp_state_dir)

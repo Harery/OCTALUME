@@ -11,7 +11,11 @@ PCI_DSS_REQUIREMENTS = {
     },
     "default_settings": {
         "description": "Requirement 2: Apply secure configurations",
-        "checks": ["default_passwords_changed", "unnecessary_services_disabled", "vendor_defaults_changed"],
+        "checks": [
+            "default_passwords_changed",
+            "unnecessary_services_disabled",
+            "vendor_defaults_changed",
+        ],
     },
     "cardholder_data_protection": {
         "description": "Requirement 3: Protect stored cardholder data",
@@ -27,7 +31,12 @@ PCI_DSS_REQUIREMENTS = {
     },
     "secure_systems": {
         "description": "Requirement 6: Develop and maintain secure systems and software",
-        "checks": ["security_patches", "secure_development", "vulnerability_scanning", "change_control"],
+        "checks": [
+            "security_patches",
+            "secure_development",
+            "vulnerability_scanning",
+            "change_control",
+        ],
     },
     "access_control": {
         "description": "Requirement 7: Restrict access by business need to know",
@@ -77,13 +86,15 @@ class PCICompliance:
                 if result["passed"]:
                     passed_checks += 1
                 else:
-                    findings.append({
-                        "requirement": requirement,
-                        "check": check,
-                        "description": details["description"],
-                        "severity": "critical",
-                        "remediation": result.get("remediation", ""),
-                    })
+                    findings.append(
+                        {
+                            "requirement": requirement,
+                            "check": check,
+                            "description": details["description"],
+                            "severity": "critical",
+                            "remediation": result.get("remediation", ""),
+                        }
+                    )
 
         score = int((passed_checks / total_checks) * 100) if total_checks > 0 else 0
         status = "compliant" if score == 100 else "non-compliant"

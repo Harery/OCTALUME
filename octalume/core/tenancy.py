@@ -23,12 +23,14 @@ class TenantSettings(BaseModel):
     allowed_phases: list[int] = Field(default_factory=lambda: list(range(1, 9)))
     max_agents: int = 10
     max_artifacts: int = 1000
-    features: dict[str, bool] = Field(default_factory=lambda: {
-        "mcp_tools": True,
-        "web_dashboard": True,
-        "compliance_scanning": True,
-        "background_jobs": True,
-    })
+    features: dict[str, bool] = Field(
+        default_factory=lambda: {
+            "mcp_tools": True,
+            "web_dashboard": True,
+            "compliance_scanning": True,
+            "background_jobs": True,
+        }
+    )
 
 
 class TenantMember(BaseModel):
@@ -197,7 +199,8 @@ class TenantManager:
 
     def get_user_tenants(self, user_id: str) -> list[Tenant]:
         return [
-            tenant for tenant in self._tenants.values()
+            tenant
+            for tenant in self._tenants.values()
             if user_id in tenant.members and tenant.is_active
         ]
 

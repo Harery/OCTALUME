@@ -62,7 +62,11 @@ class OperationsAgent(BaseAgent):
         incident_response = {
             "severity": severity,
             "response_steps": [
-                {"step": 1, "action": "Acknowledge incident", "sla_minutes": 5 if severity == "critical" else 15},
+                {
+                    "step": 1,
+                    "action": "Acknowledge incident",
+                    "sla_minutes": 5 if severity == "critical" else 15,
+                },
                 {"step": 2, "action": "Assess impact and scope", "sla_minutes": 10},
                 {"step": 3, "action": "Communicate to stakeholders", "sla_minutes": 15},
                 {"step": 4, "action": "Implement mitigation", "sla_minutes": 30},

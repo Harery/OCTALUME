@@ -227,7 +227,9 @@ def scaffold_from_template(
         artifact_dir.mkdir(exist_ok=True)
         artifact_file = artifact_dir / f"{artifact['name'].lower().replace(' ', '-')}.md"
         if not artifact_file.exists():
-            artifact_file.write_text(f"# {artifact['name']}\n\n_TODO: Complete this {artifact['type']}_\n")
+            artifact_file.write_text(
+                f"# {artifact['name']}\n\n_TODO: Complete this {artifact['type']}_\n"
+            )
             result["created_files"].append(str(artifact_file))
 
     return result

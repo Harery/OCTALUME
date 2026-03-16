@@ -107,7 +107,11 @@ QUALITY_GATES: dict[int, QualityGate] = {
         required_artifacts=["P6-TEST-*", "P6-SEC-*", "P6-UAT-*"],
         approvers=["qa_lead", "product_owner", "ciso"],
         bypass_allowed=False,
-        compliance_required=[ComplianceStandard.HIPAA, ComplianceStandard.SOC2, ComplianceStandard.PCI_DSS],
+        compliance_required=[
+            ComplianceStandard.HIPAA,
+            ComplianceStandard.SOC2,
+            ComplianceStandard.PCI_DSS,
+        ],
     ),
     7: QualityGate(
         id="G7-DEPLOYMENT-EXIT",
@@ -183,16 +187,12 @@ class GateValidator:
 
         checks["previous_phase_completed"] = prev_phase.status.value == "completed"
 
-        artifact_check = self._check_required_artifacts(
-            state, prev_gate.required_artifacts
-        )
+        artifact_check = self._check_required_artifacts(state, prev_gate.required_artifacts)
         checks["required_artifacts"] = artifact_check["passed"]
         if not artifact_check["passed"]:
             missing_artifacts.extend(artifact_check["missing"])
 
-        compliance_check = await self._check_compliance(
-            state, prev_gate.compliance_required
-        )
+        compliance_check = await self._check_compliance(state, prev_gate.compliance_required)
         checks["compliance"] = compliance_check["passed"]
 
         passed = all(checks.values())
@@ -235,16 +235,12 @@ class GateValidator:
         for criterion in gate.criteria:
             checks[f"criterion_{criterion[:20]}"] = True
 
-        artifact_check = self._check_required_artifacts(
-            state, gate.required_artifacts
-        )
+        artifact_check = self._check_required_artifacts(state, gate.required_artifacts)
         checks["required_artifacts"] = artifact_check["passed"]
         if not artifact_check["passed"]:
             missing_artifacts.extend(artifact_check["missing"])
 
-        compliance_check = await self._check_compliance(
-            state, gate.compliance_required
-        )
+        compliance_check = await self._check_compliance(state, gate.compliance_required)
         checks["compliance"] = compliance_check["passed"]
         if not compliance_check["passed"]:
             compliance_issues.extend(compliance_check.get("issues", []))

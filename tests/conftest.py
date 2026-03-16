@@ -68,7 +68,9 @@ async def gate_validator(state_manager: ProjectStateManager) -> AsyncGenerator[G
 
 
 @pytest_asyncio.fixture
-async def orchestrator(state_manager: ProjectStateManager) -> AsyncGenerator[AgentOrchestrator, None]:
+async def orchestrator(
+    state_manager: ProjectStateManager,
+) -> AsyncGenerator[AgentOrchestrator, None]:
     """Create an AgentOrchestrator."""
     orch = AgentOrchestrator(state_manager)
     yield orch

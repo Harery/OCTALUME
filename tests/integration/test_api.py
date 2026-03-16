@@ -84,8 +84,7 @@ class TestAgentEndpoints:
 
     def test_spawn_agent_validation(self, client):
         response = client.post(
-            "/api/agents/spawn",
-            json={"agent_type": "vision", "task": "Create business case"}
+            "/api/agents/spawn", json={"agent_type": "vision", "task": "Create business case"}
         )
         assert response.status_code in [200, 400, 422]
 
@@ -100,11 +99,7 @@ class TestArtifactEndpoints:
     def test_create_artifact_validation(self, client):
         response = client.post(
             "/api/artifacts",
-            json={
-                "phase": 1,
-                "artifact_type": "document",
-                "name": "Test Artifact"
-            }
+            json={"phase": 1, "artifact_type": "document", "name": "Test Artifact"},
         )
         assert response.status_code in [200, 201, 400, 422]
 
@@ -125,10 +120,7 @@ class TestComplianceEndpoints:
         assert response.status_code == 200
 
     def test_run_compliance_scan(self, client):
-        response = client.post(
-            "/api/compliance/scan",
-            json={"standards": ["hipaa"]}
-        )
+        response = client.post("/api/compliance/scan", json={"standards": ["hipaa"]})
         assert response.status_code in [200, 400, 422]
 
 

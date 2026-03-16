@@ -33,7 +33,12 @@ AGENT_TYPES = {
     "architecture": {
         "name": "Architecture Agent",
         "phase": 3,
-        "capabilities": ["system_design", "security_architecture", "threat_modeling", "data_modeling"],
+        "capabilities": [
+            "system_design",
+            "security_architecture",
+            "threat_modeling",
+            "data_modeling",
+        ],
         "timeout_seconds": 3600,
     },
     "planning": {
@@ -211,14 +216,16 @@ class AgentOrchestrator:
             if status is not None and agent.status != status:
                 continue
 
-            agents.append({
-                "id": agent.id,
-                "name": agent.name,
-                "phase": agent.phase,
-                "status": agent.status.value,
-                "current_task": agent.current_task,
-                "is_healthy": self._check_agent_health(agent),
-            })
+            agents.append(
+                {
+                    "id": agent.id,
+                    "name": agent.name,
+                    "phase": agent.phase,
+                    "status": agent.status.value,
+                    "current_task": agent.current_task,
+                    "is_healthy": self._check_agent_health(agent),
+                }
+            )
 
         return agents
 
@@ -392,11 +399,15 @@ class AgentOrchestrator:
             if is_healthy:
                 healthy_count += 1
             else:
-                unhealthy_agents.append({
-                    "id": agent.id,
-                    "status": agent.status.value,
-                    "last_heartbeat": agent.last_heartbeat.isoformat() if agent.last_heartbeat else None,
-                })
+                unhealthy_agents.append(
+                    {
+                        "id": agent.id,
+                        "status": agent.status.value,
+                        "last_heartbeat": (
+                            agent.last_heartbeat.isoformat() if agent.last_heartbeat else None
+                        ),
+                    }
+                )
 
         return {
             "total_agents": len(state.agents),

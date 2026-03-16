@@ -222,7 +222,10 @@ class ArchitectureAgent(BaseAgent):
                 {"threat": "DDoS", "mitigation": "CDN, WAF"},
             ],
             "elevation_of_privilege": [
-                {"threat": "Privilege escalation", "mitigation": "RBAC, principle of least privilege"},
+                {
+                    "threat": "Privilege escalation",
+                    "mitigation": "RBAC, principle of least privilege",
+                },
             ],
         }
 
@@ -345,7 +348,8 @@ class ArchitectureAgent(BaseAgent):
 
         microservices_arch = {
             "pattern": "Microservices",
-            "services": services or [
+            "services": services
+            or [
                 {"name": "api-gateway", "purpose": "API routing and aggregation"},
                 {"name": "auth-service", "purpose": "Authentication and authorization"},
                 {"name": "project-service", "purpose": "Project management"},

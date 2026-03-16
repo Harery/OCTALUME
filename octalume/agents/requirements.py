@@ -73,13 +73,15 @@ class RequirementsAgent(BaseAgent):
 
         requirements = []
         for i, feature in enumerate(features, 1):
-            requirements.append({
-                "id": f"FR-{i:03d}",
-                "description": feature.get("description", ""),
-                "priority": feature.get("priority", "medium"),
-                "source": feature.get("source", "stakeholder"),
-                "status": "draft",
-            })
+            requirements.append(
+                {
+                    "id": f"FR-{i:03d}",
+                    "description": feature.get("description", ""),
+                    "priority": feature.get("priority", "medium"),
+                    "source": feature.get("source", "stakeholder"),
+                    "status": "draft",
+                }
+            )
 
         return {
             "success": True,
@@ -134,15 +136,17 @@ class RequirementsAgent(BaseAgent):
 
         stories = []
         for i, feature in enumerate(features, 1):
-            stories.append({
-                "id": f"US-{i:03d}",
-                "as_a": feature.get("as_a", "user"),
-                "i_want": feature.get("i_want", feature.get("description", "")),
-                "so_that": feature.get("so_that", ""),
-                "acceptance_criteria": feature.get("acceptance_criteria", []),
-                "story_points": feature.get("story_points", "TBD"),
-                "priority": feature.get("priority", "medium"),
-            })
+            stories.append(
+                {
+                    "id": f"US-{i:03d}",
+                    "as_a": feature.get("as_a", "user"),
+                    "i_want": feature.get("i_want", feature.get("description", "")),
+                    "so_that": feature.get("so_that", ""),
+                    "acceptance_criteria": feature.get("acceptance_criteria", []),
+                    "story_points": feature.get("story_points", "TBD"),
+                    "priority": feature.get("priority", "medium"),
+                }
+            )
 
         return {
             "success": True,

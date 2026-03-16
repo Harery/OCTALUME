@@ -161,7 +161,11 @@ class DeploymentAgent(BaseAgent):
             "alerts": [
                 {"name": "HighErrorRate", "condition": "error_rate > 1%", "severity": "critical"},
                 {"name": "HighLatency", "condition": "latency_p99 > 2s", "severity": "warning"},
-                {"name": "LowAvailability", "condition": "availability < 99%", "severity": "critical"},
+                {
+                    "name": "LowAvailability",
+                    "condition": "availability < 99%",
+                    "severity": "critical",
+                },
             ],
             "dashboards": ["Overview", "API Performance", "Infrastructure"],
             "integrations": context.get("integrations", ["pagerduty", "slack"]),

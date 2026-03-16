@@ -47,14 +47,16 @@ def init(name: str, description: str | None, compliance: tuple[str, ...]) -> Non
             compliance_standards=list(compliance),
         )
 
-        console.print(Panel.fit(
-            f"[bold green]Project initialized![/bold green]\n\n"
-            f"Name: {state.name}\n"
-            f"ID: {state.id}\n"
-            f"Compliance: {', '.join(c.value for c in state.compliance_standards) or 'None'}\n"
-            f"State: {state_manager.state_file}",
-            title="OCTALUME",
-        ))
+        console.print(
+            Panel.fit(
+                f"[bold green]Project initialized![/bold green]\n\n"
+                f"Name: {state.name}\n"
+                f"ID: {state.id}\n"
+                f"Compliance: {', '.join(c.value for c in state.compliance_standards) or 'None'}\n"
+                f"State: {state_manager.state_file}",
+                title="OCTALUME",
+            )
+        )
 
     asyncio.run(_init())
 
@@ -206,7 +208,9 @@ def gate(phase: int) -> None:
         console.print(table)
 
         decision_color = "green" if result["decision"] == "GO" else "red"
-        console.print(f"\nDecision: [bold {decision_color}]{result['decision']}[/bold {decision_color}]")
+        console.print(
+            f"\nDecision: [bold {decision_color}]{result['decision']}[/bold {decision_color}]"
+        )
 
     asyncio.run(_gate())
 
@@ -238,7 +242,11 @@ def agents() -> None:
                 agent["name"],
                 str(agent["phase"]) if agent["phase"] else "-",
                 agent["status"],
-                agent["current_task"][:30] + "..." if agent["current_task"] and len(agent["current_task"]) > 30 else agent["current_task"] or "-",
+                (
+                    agent["current_task"][:30] + "..."
+                    if agent["current_task"] and len(agent["current_task"]) > 30
+                    else agent["current_task"] or "-"
+                ),
             )
 
         console.print(table)
@@ -278,7 +286,9 @@ def scan(standard: str | None) -> None:
             result = await scanner.scan(state, standards, "all")
 
         console.print("\n[bold]Compliance Scan Results[/bold]")
-        console.print(f"Overall Status: [bold {'green' if result['summary']['overall_status'] == 'compliant' else 'red'}]{result['summary']['overall_status']}[/bold]")
+        console.print(
+            f"Overall Status: [bold {'green' if result['summary']['overall_status'] == 'compliant' else 'red'}]{result['summary']['overall_status']}[/bold]"
+        )
         console.print(f"Total Findings: {result['summary']['total_findings']}")
         console.print(f"Critical: {result['summary']['critical_findings']}")
 
@@ -307,15 +317,17 @@ def memory() -> None:
 
     stats = memory_bank.get_statistics()
 
-    console.print(Panel.fit(
-        f"[bold]Memory Statistics[/bold]\n\n"
-        f"Total Entries: {stats['total_entries']}\n"
-        f"Decisions: {stats['decisions']}\n"
-        f"Progress: {stats['progress']}\n"
-        f"Blockers: {stats['blockers']}\n"
-        f"Notes: {stats['notes']}",
-        title="Memory Bank",
-    ))
+    console.print(
+        Panel.fit(
+            f"[bold]Memory Statistics[/bold]\n\n"
+            f"Total Entries: {stats['total_entries']}\n"
+            f"Decisions: {stats['decisions']}\n"
+            f"Progress: {stats['progress']}\n"
+            f"Blockers: {stats['blockers']}\n"
+            f"Notes: {stats['notes']}",
+            title="Memory Bank",
+        )
+    )
 
     table = Table(title="Recent Activity")
     table.add_column("Category", style="cyan")

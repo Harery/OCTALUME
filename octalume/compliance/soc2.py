@@ -78,13 +78,15 @@ class SOC2Compliance:
                 if result["passed"]:
                     passed_checks += 1
                 else:
-                    findings.append({
-                        "principle": principle,
-                        "check": check,
-                        "description": requirements["description"],
-                        "severity": self._get_severity(check),
-                        "remediation": result.get("remediation", ""),
-                    })
+                    findings.append(
+                        {
+                            "principle": principle,
+                            "check": check,
+                            "description": requirements["description"],
+                            "severity": self._get_severity(check),
+                            "remediation": result.get("remediation", ""),
+                        }
+                    )
 
         score = int((passed_checks / total_checks) * 100) if total_checks > 0 else 0
         status = "compliant" if score >= 100 else "partial" if score >= 70 else "non-compliant"
@@ -144,7 +146,11 @@ class SOC2Compliance:
 
     def _get_severity(self, check: str) -> str:
         """Get severity for a SOC 2 check."""
-        critical = ["access_control_policy", "security_incident_response", "vulnerability_management"]
+        critical = [
+            "access_control_policy",
+            "security_incident_response",
+            "vulnerability_management",
+        ]
         high = ["risk_assessment_documented", "disaster_recovery_plan", "encryption_standards"]
 
         if check in critical:
@@ -161,5 +167,7 @@ class SOC2Compliance:
         """Generate SOC 2 recommendations."""
         return [
             f"[{f['severity'].upper()}] {f['check']}: {f.get('remediation', 'Address this control')}"
-            for f in sorted(findings, key=lambda x: ["critical", "high", "medium"].index(x["severity"]))
+            for f in sorted(
+                findings, key=lambda x: ["critical", "high", "medium"].index(x["severity"])
+            )
         ][:10]

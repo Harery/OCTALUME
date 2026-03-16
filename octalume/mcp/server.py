@@ -83,7 +83,6 @@ TOOLS: list[dict[str, Any]] = [
             "required": ["to_phase", "reason"],
         },
     },
-
     # Agent Management Tools
     {
         "name": "lifecycle_agent_spawn",
@@ -91,7 +90,20 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "agent_type": {"type": "string", "enum": ["vision", "requirements", "architecture", "planning", "development", "quality", "deployment", "operations", "orchestrator"]},
+                "agent_type": {
+                    "type": "string",
+                    "enum": [
+                        "vision",
+                        "requirements",
+                        "architecture",
+                        "planning",
+                        "development",
+                        "quality",
+                        "deployment",
+                        "operations",
+                        "orchestrator",
+                    ],
+                },
                 "task": {"type": "string"},
                 "config": {"type": "object"},
             },
@@ -129,7 +141,10 @@ TOOLS: list[dict[str, Any]] = [
             "type": "object",
             "properties": {
                 "phase": {"type": "integer", "minimum": 1, "maximum": 8},
-                "status": {"type": "string", "enum": ["idle", "running", "completed", "failed", "timeout"]},
+                "status": {
+                    "type": "string",
+                    "enum": ["idle", "running", "completed", "failed", "timeout"],
+                },
             },
         },
     },
@@ -145,7 +160,6 @@ TOOLS: list[dict[str, Any]] = [
             "required": ["agent_id"],
         },
     },
-
     # Artifact Tracking Tools
     {
         "name": "lifecycle_artifact_create",
@@ -154,7 +168,18 @@ TOOLS: list[dict[str, Any]] = [
             "type": "object",
             "properties": {
                 "phase": {"type": "integer", "minimum": 1, "maximum": 8},
-                "artifact_type": {"type": "string", "enum": ["document", "code", "test", "configuration", "design", "report", "decision"]},
+                "artifact_type": {
+                    "type": "string",
+                    "enum": [
+                        "document",
+                        "code",
+                        "test",
+                        "configuration",
+                        "design",
+                        "report",
+                        "decision",
+                    ],
+                },
                 "name": {"type": "string"},
                 "content": {"type": ["string", "object"]},
                 "file_path": {"type": "string"},
@@ -199,7 +224,6 @@ TOOLS: list[dict[str, Any]] = [
             "required": ["source_artifact_id", "target_artifact_id"],
         },
     },
-
     # Quality Gate Tools
     {
         "name": "lifecycle_gate_check",
@@ -245,7 +269,6 @@ TOOLS: list[dict[str, Any]] = [
             "required": ["phase_number"],
         },
     },
-
     # Compliance Tools
     {
         "name": "lifecycle_compliance_scan",
@@ -253,8 +276,17 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "standards": {"type": "array", "items": {"type": "string", "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"]}},
-                "scope": {"type": "string", "enum": ["all", "artifacts", "processes", "documentation"]},
+                "standards": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"],
+                    },
+                },
+                "scope": {
+                    "type": "string",
+                    "enum": ["all", "artifacts", "processes", "documentation"],
+                },
             },
         },
     },
@@ -264,7 +296,10 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "standard": {"type": "string", "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"]},
+                "standard": {
+                    "type": "string",
+                    "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"],
+                },
                 "format": {"type": "string", "enum": ["json", "markdown", "html"]},
             },
             "required": ["standard"],
@@ -276,12 +311,17 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "standards": {"type": "array", "items": {"type": "string", "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"]}},
+                "standards": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["hipaa", "soc2", "pci_dss", "gdpr", "sox", "dod_itar"],
+                    },
+                },
             },
             "required": ["standards"],
         },
     },
-
     # Project State Tools
     {
         "name": "lifecycle_project_init",
@@ -312,7 +352,6 @@ TOOLS: list[dict[str, Any]] = [
             "properties": {},
         },
     },
-
     # Memory & Context Tools
     {
         "name": "lifecycle_memory_save",
@@ -320,7 +359,10 @@ TOOLS: list[dict[str, Any]] = [
         "input_schema": {
             "type": "object",
             "properties": {
-                "category": {"type": "string", "enum": ["decisions", "progress", "blockers", "notes", "context"]},
+                "category": {
+                    "type": "string",
+                    "enum": ["decisions", "progress", "blockers", "notes", "context"],
+                },
                 "key": {"type": "string"},
                 "value": {"type": ["string", "object"]},
                 "metadata": {"type": "object"},
@@ -352,7 +394,6 @@ TOOLS: list[dict[str, Any]] = [
             },
         },
     },
-
     # Observability Tools
     {
         "name": "lifecycle_trace_add",
@@ -389,7 +430,6 @@ TOOLS: list[dict[str, Any]] = [
             "properties": {},
         },
     },
-
     # A2A Communication Tools
     {
         "name": "lifecycle_agent_message",
@@ -533,14 +573,16 @@ class OctalumeMCPServer:
         artifacts_data = args.get("artifacts", [])
         artifacts = []
         for a in artifacts_data:
-            artifacts.append(Artifact(
-                id=a.get("id", f"P{state.current_phase}-ART-{len(state.artifacts)+1:03d}"),
-                phase=state.current_phase,
-                name=a["name"],
-                artifact_type=ArtifactType(a.get("artifact_type", "document")),
-                content=a.get("content"),
-                file_path=a.get("file_path"),
-            ))
+            artifacts.append(
+                Artifact(
+                    id=a.get("id", f"P{state.current_phase}-ART-{len(state.artifacts)+1:03d}"),
+                    phase=state.current_phase,
+                    name=a["name"],
+                    artifact_type=ArtifactType(a.get("artifact_type", "document")),
+                    content=a.get("content"),
+                    file_path=a.get("file_path"),
+                )
+            )
 
         current = state.current_phase
         state, gate_result = await self.engine.transition_phase(state, current, current + 1)
@@ -717,7 +759,9 @@ class OctalumeMCPServer:
         )
         return report
 
-    async def _compliance_configure(self, state: ProjectState, args: dict[str, Any]) -> dict[str, Any]:
+    async def _compliance_configure(
+        self, state: ProjectState, args: dict[str, Any]
+    ) -> dict[str, Any]:
         state.compliance_standards = [ComplianceStandard(s) for s in args["standards"]]
         await self.state_manager.save(state)
         self._state = state

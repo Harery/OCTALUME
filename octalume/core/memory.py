@@ -136,11 +136,13 @@ class MemoryBank:
                     else:
                         continue
 
-                results.append({
-                    "category": cat,
-                    "key": key,
-                    "entry": entry,
-                })
+                results.append(
+                    {
+                        "category": cat,
+                        "key": key,
+                        "entry": entry,
+                    }
+                )
 
                 if len(results) >= limit:
                     return results

@@ -71,13 +71,15 @@ class GDPRCompliance:
                 if result["passed"]:
                     passed_checks += 1
                 else:
-                    findings.append({
-                        "principle": principle,
-                        "check": check,
-                        "description": details["description"],
-                        "severity": self._get_severity(check),
-                        "remediation": result.get("remediation", ""),
-                    })
+                    findings.append(
+                        {
+                            "principle": principle,
+                            "check": check,
+                            "description": details["description"],
+                            "severity": self._get_severity(check),
+                            "remediation": result.get("remediation", ""),
+                        }
+                    )
 
         score = int((passed_checks / total_checks) * 100) if total_checks > 0 else 0
         status = "compliant" if score >= 100 else "partial" if score >= 70 else "non-compliant"
@@ -146,5 +148,7 @@ class GDPRCompliance:
         """Generate GDPR recommendations."""
         return [
             f"[{f['severity'].upper()}] {f['check']}: {f.get('remediation', '')}"
-            for f in sorted(findings, key=lambda x: ["critical", "high", "medium"].index(x["severity"]))
+            for f in sorted(
+                findings, key=lambda x: ["critical", "high", "medium"].index(x["severity"])
+            )
         ][:10]

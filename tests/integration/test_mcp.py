@@ -15,7 +15,9 @@ class TestMCPServerInitialization:
 
     def test_server_has_all_tools_registered(self):
         expected_count = 30
-        assert len(TOOLS) >= expected_count, f"Expected at least {expected_count} tools, got {len(TOOLS)}"
+        assert (
+            len(TOOLS) >= expected_count
+        ), f"Expected at least {expected_count} tools, got {len(TOOLS)}"
 
     def test_all_tools_have_required_fields(self):
         for tool in TOOLS:
@@ -53,8 +55,15 @@ class TestAgentTools:
         agent_type_prop = spawn_tool["input_schema"]["properties"]["agent_type"]
         assert "enum" in agent_type_prop
         expected_types = [
-            "vision", "requirements", "architecture", "planning",
-            "development", "quality", "deployment", "operations", "orchestrator"
+            "vision",
+            "requirements",
+            "architecture",
+            "planning",
+            "development",
+            "quality",
+            "deployment",
+            "operations",
+            "orchestrator",
         ]
         for t in expected_types:
             assert t in agent_type_prop["enum"]
@@ -109,7 +118,7 @@ class TestToolHandler:
     async def test_handle_tool_call_returns_text_content(self):
         server = OctalumeMCPServer()
 
-        with patch.object(server, '_get_state') as mock_state:
+        with patch.object(server, "_get_state") as mock_state:
             mock_state.return_value = Mock()
 
             result = await server._handle_tool_call("lifecycle_gate_list", {})

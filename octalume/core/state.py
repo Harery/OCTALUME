@@ -164,13 +164,15 @@ class ProjectStateManager:
 
         for phase_num in sorted(state.phases.keys()):
             phase = state.phases[phase_num]
-            phases_summary.append({
-                "number": phase.number,
-                "name": phase.name,
-                "status": phase.status.value,
-                "owner": phase.owner,
-                "artifacts_count": len(phase.artifacts),
-            })
+            phases_summary.append(
+                {
+                    "number": phase.number,
+                    "name": phase.name,
+                    "status": phase.status.value,
+                    "owner": phase.owner,
+                    "artifacts_count": len(phase.artifacts),
+                }
+            )
 
         return {
             "id": str(state.id),

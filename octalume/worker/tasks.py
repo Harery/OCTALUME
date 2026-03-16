@@ -48,11 +48,13 @@ def run_compliance_scan(
             meta={"status": "scanning", "progress": 30},
         )
 
-        result = run_async(scanner.scan(
-            state=state,
-            standards=standards_enum,
-            scope=scope,
-        ))
+        result = run_async(
+            scanner.scan(
+                state=state,
+                standards=standards_enum,
+                scope=scope,
+            )
+        )
 
         self.update_state(
             state="PROGRESS",
@@ -169,11 +171,13 @@ def generate_compliance_report(
             return {"success": False, "error": "Project not found"}
 
         scanner = ComplianceScanner()
-        report = run_async(scanner.generate_report(
-            state=state,
-            standard=ComplianceStandard(standard),
-            format=report_format,
-        ))
+        report = run_async(
+            scanner.generate_report(
+                state=state,
+                standard=ComplianceStandard(standard),
+                format=report_format,
+            )
+        )
 
         return {
             "success": True,

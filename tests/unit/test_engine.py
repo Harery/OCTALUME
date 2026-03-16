@@ -1,6 +1,5 @@
 """Tests for OCTALUME core engine."""
 
-
 import pytest
 
 from octalume.core.engine import PhaseEngine
@@ -76,6 +75,7 @@ class TestPhaseEngine:
     async def test_start_phase(self, state_manager, project_state):
         gate_validator = GateValidator(state_manager)
         from octalume.core.orchestrator import AgentOrchestrator
+
         orchestrator = AgentOrchestrator(state_manager)
         engine = PhaseEngine(state_manager, gate_validator, orchestrator)
 
@@ -87,6 +87,7 @@ class TestPhaseEngine:
     async def test_cannot_start_phase_out_of_order(self, state_manager, project_state):
         gate_validator = GateValidator(state_manager)
         from octalume.core.orchestrator import AgentOrchestrator
+
         orchestrator = AgentOrchestrator(state_manager)
         engine = PhaseEngine(state_manager, gate_validator, orchestrator)
 

@@ -139,7 +139,9 @@ class PhaseEngine:
     ) -> tuple[ProjectState, GateResult]:
         """Transition from one phase to another."""
         if to_phase != from_phase + 1:
-            raise ValueError(f"Can only transition to next phase (from {from_phase} to {from_phase + 1})")
+            raise ValueError(
+                f"Can only transition to next phase (from {from_phase} to {from_phase + 1})"
+            )
 
         state, gate_result = await self.complete_phase(state, from_phase)
 
@@ -203,26 +205,17 @@ class PhaseEngine:
             raise ValueError(f"Phase {phase_num} not found")
 
         artifacts = [
-            state.artifacts[aid].model_dump()
-            for aid in phase.artifacts
-            if aid in state.artifacts
+            state.artifacts[aid].model_dump() for aid in phase.artifacts if aid in state.artifacts
         ]
 
-        agents = [
-            a.model_dump()
-            for a in state.agents.values()
-            if a.phase == phase_num
-        ]
+        agents = [a.model_dump() for a in state.agents.values() if a.phase == phase_num]
 
         return {
             "phase": phase.model_dump(),
             "artifacts": artifacts,
             "agents": agents,
             "can_proceed": phase.status == PhaseStatus.COMPLETED,
-            "next_phase_available": (
-                phase_num < 8 and
-                phase.status == PhaseStatus.COMPLETED
-            ),
+            "next_phase_available": (phase_num < 8 and phase.status == PhaseStatus.COMPLETED),
         }
 
     def _increment_artifact_counter(self, state: ProjectState, artifact: Artifact) -> None:

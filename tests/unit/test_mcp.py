@@ -1,6 +1,5 @@
 """Tests for MCP server."""
 
-
 import pytest
 
 from octalume.mcp.server import TOOLS, OctalumeMCPServer
