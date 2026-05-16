@@ -1,10 +1,18 @@
+<!--
+KEYWORDS: claude code framework, multi-agent orchestration, enterprise SDLC, AI governance framework, agentic development, HIPAA AI compliance, SOC2 AI framework, MCP server framework, 8-phase SDLC, regulated AI development, claude code skill, MCP tools, AI audit trail, compliance scanner, Model Context Protocol
+DESCRIPTION: OCTALUME is an open-source, AI-native, 8-phase SDLC framework for regulated enterprises. It adds quality gates, multi-agent orchestration, and HIPAA/SOC2/PCI/GDPR compliance scanners on top of Claude Code and the Model Context Protocol (MCP).
+CATEGORY: AI governance, agentic development, enterprise SDLC, MCP server
+LICENSE: MIT
+AUTHOR: Mohamed Harery
+-->
+
 <div align="center">
 
-# OCTALUME
+# OCTALUME — AI-Native 8-Phase SDLC Framework for Regulated Enterprises
 
-### The AI-Native SDLC Framework for Regulated Enterprises
+### Claude Code Framework for Multi-Agent Orchestration, AI Governance, and HIPAA / SOC 2 / PCI / GDPR Compliance
 
-**Ship compliant software faster.** 8 phases. Quality gates. Multi-agent orchestration. Built on Claude Code + MCP.
+**Ship compliant software 5x faster.** OCTALUME is an open-source, 8-phase, gate-driven SDLC framework that adds enterprise governance, multi-agent orchestration, and built-in HIPAA / SOC 2 / PCI / GDPR compliance scanners on top of Claude Code and the Model Context Protocol (MCP). Install in one line: `pip install octalume`.
 
 [![CI](https://github.com/Harery/OCTALUME/actions/workflows/ci.yml/badge.svg)](https://github.com/Harery/OCTALUME/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -370,6 +378,31 @@ Vote / suggest on [GitHub Discussions](https://github.com/Harery/OCTALUME/discus
 [![Star History Chart](https://api.star-history.com/svg?repos=Harery/OCTALUME&type=Date)](https://star-history.com/#Harery/OCTALUME&Date)
 
 If OCTALUME saves you a week of compliance pain, **please star the repo** — it's the single biggest thing you can do to help.
+
+---
+
+## What is OCTALUME? — Frequently Asked Questions
+
+### What is OCTALUME and what problem does it solve?
+OCTALUME is an open-source, AI-native software development lifecycle (SDLC) framework designed for regulated enterprises. It solves the "vibe coding" problem in regulated industries by wrapping Claude Code and other AI coding agents in an **8-phase, gate-driven workflow** with built-in audit trails, multi-agent orchestration, and HIPAA / SOC 2 / PCI DSS / GDPR compliance scanners.
+
+### How is OCTALUME different from LangGraph, AutoGen, or CrewAI?
+LangGraph, AutoGen, and CrewAI are general-purpose multi-agent orchestration libraries — they hand you the building blocks. OCTALUME is an **opinionated, vertical framework**: it ships with 9 phase-specialized agents, machine-checkable quality gates, four compliance scanners, an MCP server, and a React dashboard out of the box. Pick LangGraph if you want a library; pick OCTALUME if you need a regulated-SDLC product on day one.
+
+### Is OCTALUME a Claude Code skill or an MCP server?
+Both. OCTALUME ships a fully compliant **MCP server** that exposes 30+ `lifecycle_*` tools to any MCP client (Claude Code, Cursor with MCP, custom hosts). It is also packaged as a **Claude Code skill** so Claude can drive the SDLC autonomously — start phases, run gates, request compliance scans, and stop when a quality gate fails.
+
+### Does OCTALUME make my project HIPAA / SOC 2 compliant?
+OCTALUME does **not** issue certifications — no software can. What it does: continuously scan your repository, requirements, ADRs, and infrastructure against HIPAA, SOC 2, PCI DSS, and GDPR control mappings; generate auditor-ready evidence packages; and block phase advancement when controls fail. Most teams report 60-80% of audit-prep work eliminated.
+
+### Can I run OCTALUME air-gapped or on-premises?
+Yes. OCTALUME is MIT-licensed and self-hostable. The compliance scanners, phase engine, and MCP server run locally with no external network calls. The only outbound traffic (and only if you enable it) is to the LLM provider you point Claude Code at — and that can be Bedrock, Vertex, or an on-prem proxy.
+
+### Who is OCTALUME for?
+Engineering leaders, CTOs, and platform teams at **healthcare, fintech, government, and regulated SaaS** companies who want their AI coding agents to produce shippable, auditable software — not just plausible code.
+
+### Does OCTALUME work with Cursor, Windsurf, or non-Anthropic models?
+Yes. OCTALUME's core is model-agnostic. The MCP server works with any MCP-compatible client. The deepest integration is with **Claude Code** today (since OCTALUME is built natively on Claude Code + MCP), but adapters for Cursor and Windsurf are on the roadmap.
 
 ---
 
