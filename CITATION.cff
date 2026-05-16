@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use OCTALUME in your research or product, please cite it as below."
+title: "OCTALUME: AI-Native Enterprise SDLC Framework with Quality Gates and Multi-Agent Orchestration"
+abstract: >-
+  OCTALUME is an open-source, AI-native software development lifecycle
+  framework that drives projects through 8 sequential phases with
+  machine-checkable quality gates, 9 specialized AI agents, and built-in
+  compliance scanners for HIPAA, SOC 2, PCI DSS, and GDPR. It exposes 30+
+  tools via the Model Context Protocol (MCP) for direct integration with
+  Claude Code and other agentic IDEs.
+type: software
+authors:
+  - family-names: "ElHarery"
+    given-names: "Mohamed"
+    email: "octalume@harery.com"
+    website: "https://harery.com"
+    affiliation: "Harery Technologies"
+repository-code: "https://github.com/Harery/OCTALUME"
+url: "https://github.com/Harery/OCTALUME"
+license: MIT
+version: "2.0.0"
+date-released: "2026-05-16"
+keywords:
+  - sdlc
+  - ai-agents
+  - multi-agent-orchestration
+  - model-context-protocol
+  - mcp
+  - claude-code
+  - quality-gates
+  - compliance
+  - hipaa
+  - soc2
+  - pci-dss
+  - gdpr
+  - enterprise-framework
+  - autonomous-sdlc
+  - ai-governance
+preferred-citation:
+  type: software
+  title: "OCTALUME: AI-Native Enterprise SDLC Framework"
+  authors:
+    - family-names: "ElHarery"
+      given-names: "Mohamed"
+  year: 2026
+  url: "https://github.com/Harery/OCTALUME"
+  version: "2.0.0"
