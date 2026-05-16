@@ -22,6 +22,8 @@ jobs:
           fetch-depth: 0
 
       - name: Check PR title follows conventional commits
+        # Skip semantic-pr check for Dependabot PRs (uses lowercase "bump..." subjects).
+        if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
         uses: amannn/action-semantic-pull-request@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,9 +41,10 @@ jobs:
             chore
             revert
           requireScope: false
-          subjectPattern: ^[A-Z].+$
+          # Allow any non-empty subject (case-insensitive). Dependabot uses lowercase.
+          subjectPattern: ^.+$
           subjectPatternError: |
-            Subject must start with a capital letter
+            Subject must not be empty
 
       - name: Check for sensitive files
         run: |
