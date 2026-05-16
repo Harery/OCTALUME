@@ -1,0 +1,81 @@
+name: 🐛 Bug report
+description: Something is broken in OCTALUME. Help us fix it.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report! The more detail you provide, the faster we can help.
+        For security vulnerabilities, please use [SECURITY.md](../../SECURITY.md) instead of a public issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: OCTALUME version
+      description: Output of `octalume --version` or commit SHA.
+      placeholder: "2.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: "3.12.3"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other / Container
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear and concise description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. `octalume init demo --compliance hipaa`
+        2. `octalume start 1`
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs / stack trace
+      render: shell
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the [Code of Conduct](../../CODE_OF_CONDUCT.md).
+          required: true
+        - label: I searched existing issues and did not find a duplicate.
+          required: true

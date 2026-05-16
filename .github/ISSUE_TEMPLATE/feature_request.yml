@@ -1,0 +1,58 @@
+name: ✨ Feature request
+description: Suggest a new capability or improvement.
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping shape OCTALUME. Please describe the *problem* before the *solution* — it makes the discussion much richer.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Who hits this, when, and what's the cost today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you like OCTALUME to behave?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Phase engine
+        - Quality gates
+        - Agents / orchestration
+        - MCP server / tools
+        - Compliance scanners
+        - CLI
+        - Web dashboard
+        - Python API
+        - Docs
+        - CI / packaging
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the [Code of Conduct](../../CODE_OF_CONDUCT.md).
+          required: true

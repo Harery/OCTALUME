@@ -1,59 +1,15 @@
-# Funding for OCTALUME
+# GitHub Sponsors and external funding for OCTALUME.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
 
-**Support the development of OCTALUME**
+github: [Harery]
 
----
-
-## Sponsor
-
-If you find OCTALUME useful, please consider sponsoring the project.
-
-### GitHub Sponsors
-
-Visit: https://github.com/sponsors/Harery
-
-### Direct Support
-
-- **Patreon**: https://www.patreon.com/harery
-- **PayPal**: https://www.paypal.com/paypalme/harery
-- **Buy Me a Coffee**: https://www.buymeacoffee.com/harery
-
-## Why Sponsor?
-
-Your support helps:
-
-- ✅ Maintain and improve the framework
-- ✅ Add new features and capabilities
-- ✅ Fix bugs and security issues
-- ✅ Improve documentation
-- ✅ Support the open-source community
-
-## Sponsorship Tiers
-
-### Bronze ($10/month)
-- Name listed on sponsors page
-- Access to supporter Discord
-
-### Silver ($50/month)
-- All Bronze benefits
-- Early access to new features
-- Priority bug fixes
-
-### Gold ($100/month)
-- All Silver benefits
-- Direct support via email
-- Custom feature requests
-
-### Platinum ($500/month)
-- All Gold benefits
-- Consulting hours included
-- Custom training sessions
-
----
-
-**Thank you for your support!**
-
----
-
-**Contact:** mohamed@harery.com
-**Website:** https://www.harery.com/
+# Uncomment any that you actively use:
+# patreon: harery
+# open_collective: octalume
+# ko_fi: harery
+# tidelift: pypi/octalume
+# liberapay: harery
+# issuehunt: Harery
+# polar: harery
+# buy_me_a_coffee: harery
+# custom: ["https://www.harery.com/sponsor"]
