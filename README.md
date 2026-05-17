@@ -1,132 +1,68 @@
-<!--
-KEYWORDS: claude code framework, multi-agent orchestration, enterprise SDLC, AI governance framework, agentic development, HIPAA AI compliance, SOC2 AI framework, MCP server framework, 8-phase SDLC, regulated AI development, claude code skill, MCP tools, AI audit trail, compliance scanner, Model Context Protocol
-DESCRIPTION: OCTALUME is an open-source, AI-native, 8-phase SDLC framework for regulated enterprises. It adds quality gates, multi-agent orchestration, and HIPAA/SOC2/PCI/GDPR compliance scanners on top of Claude Code and the Model Context Protocol (MCP).
-CATEGORY: AI governance, agentic development, enterprise SDLC, MCP server
-LICENSE: MIT
-AUTHOR: Mohamed Harery
--->
+<!-- KEYWORDS: octalume, claude code framework, enterprise sdlc, 8-phase sdlc, multi-agent orchestration, ai governance, model context protocol, mcp server, hipaa compliance, soc 2 compliance, pci dss, gdpr, sox, regulated industries, audit trail, quality gates, agentic development, python framework, ai-assisted development, software architecture, structured prompting, claude code skill, mcp tools, compliance scanner, regulated ai -->
 
 <div align="center">
 
-# OCTALUME — AI-Native 8-Phase SDLC Framework for Regulated Enterprises
+# OCTALUME
 
-### Claude Code Framework for Multi-Agent Orchestration, AI Governance, and HIPAA / SOC 2 / PCI / GDPR Compliance
-
-**Ship compliant software 5x faster.** OCTALUME is an open-source, 8-phase, gate-driven SDLC framework that adds enterprise governance, multi-agent orchestration, and built-in HIPAA / SOC 2 / PCI / GDPR compliance scanners on top of Claude Code and the Model Context Protocol (MCP). Install in one line: `pip install octalume`.
+**An 8-phase enterprise SDLC framework with multi-agent orchestration for Claude Code.**
 
 [![CI](https://github.com/Harery/OCTALUME/actions/workflows/ci.yml/badge.svg)](https://github.com/Harery/OCTALUME/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![PyPI](https://img.shields.io/pypi/v/octalume.svg)](https://pypi.org/project/octalume/)
-[![MCP](https://img.shields.io/badge/MCP-compatible-7c3aed)](https://modelcontextprotocol.io)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-ready-d97757)](https://claude.com/claude-code)
-[![HIPAA](https://img.shields.io/badge/HIPAA-ready-0ea5e9)](docs/compliance.md)
-[![SOC 2](https://img.shields.io/badge/SOC%202-ready-0ea5e9)](docs/compliance.md)
-[![GDPR](https://img.shields.io/badge/GDPR-ready-0ea5e9)](docs/compliance.md)
-[![Stars](https://img.shields.io/github/stars/Harery/OCTALUME?style=social)](https://github.com/Harery/OCTALUME/stargazers)
-
-[**Quickstart**](#-quickstart-5-minutes) ·
-[**Why OCTALUME**](#-why-octalume) ·
-[**Architecture**](#-architecture) ·
-[**Use Cases**](#-use-cases) ·
-[**Compare**](#-compare) ·
-[**Docs**](docs/index.md) ·
-[**Roadmap**](#-roadmap)
+[![Python](https://img.shields.io/badge/python-%E2%89%A53.11-blue.svg)](https://www.python.org/downloads/)
+[![Release v2.0.0](https://img.shields.io/badge/release-v2.0.0-brightgreen.svg)](https://github.com/Harery/OCTALUME/releases/tag/v2.0.0)
+[![Coming to PyPI](https://img.shields.io/badge/PyPI-coming%20soon-lightgrey.svg)](https://github.com/Harery/OCTALUME/releases)
+[![GitHub stars](https://img.shields.io/github/stars/Harery/OCTALUME?style=social)](https://github.com/Harery/OCTALUME/stargazers)
 
 </div>
 
----
+> OCTALUME treats a software project the way an architect treats a building — every system has structural intent, every connection is deliberate, every decision must serve the people who depend on it.
 
-> **Octa** = 8 phases · **Lume** = light, guidance.
-> OCTALUME walks your AI agents and your team from vision to production with auditable, gated, compliance-aware steps — so "vibe coding" finally becomes shippable in healthcare, finance, defense, and gov.
+<p align="right"><sub><code>DRAWING NO. 01.00  ·  REV. 2026.05  ·  SHEET 01 OF 05</code></sub></p>
 
-<!-- DEMO PLACEHOLDER: replace this comment with an animated GIF (1280x720) at docs/assets/demo.gif
-     once recorded. Suggested flow: `octalume init demo --compliance hipaa soc2` →
-     `octalume start 1` → `octalume gate 1` → `octalume dashboard`. -->
+[Problem](#the-problem) · [Install](#install) · [Quickstart](#quickstart) · [What you get](#what-you-get) · [How it works](#how-it-works) · [Compare](#compare) · [FAQ](#faq) · [Documentation](#documentation) · [Roadmap](#roadmap)
 
-## TL;DR
+## The problem
 
-```bash
-pip install octalume
-octalume init my-app --compliance hipaa soc2
-octalume start 1
-```
+AI coding tools generate code quickly. They do not generate the decision trail an auditor needs. When a regulator asks how a line of code reached production in a HIPAA, SOC 2, PCI DSS, or SOX environment, chat logs and commit messages are not an answer. Most teams bolt governance on at the end. By then the evidence is gone.
 
-That's it. You now have an 8-phase, gate-driven, audit-logged SDLC running locally — with 30+ MCP tools available to Claude Code so the model can drive each phase, request reviews, and stop at quality gates instead of hallucinating its way to "done".
-
----
-
-## Why OCTALUME
-
-Most AI coding tools optimize for **lines of code per minute**. That metric kills you the moment a regulator, an auditor, or a CTO asks: *"Show me the decision trail."*
-
-OCTALUME treats AI-assisted development as a **regulated industrial process**, not a chat:
-
-| Pain | Typical AI coding | OCTALUME |
-|---|---|---|
-| No audit trail for AI decisions | Chat history, manual screenshots | Every artifact + gate decision is signed and queryable |
-| Agents drift off scope | "Forgot" the requirement | Phase 2 requirements pinned; gates block phase 5 advance |
-| Compliance is bolted on at the end | Pen test the week before launch | HIPAA / SOC 2 / GDPR / PCI scanners run continuously |
-| Multi-agent chaos | One mega-prompt, no roles | 9 typed agents with phase-bounded responsibilities |
-| Can't onboard the next dev | "Ask the senior" | Memory store + traceable artifacts per phase |
-
-If you've ever had to answer **"how did this code end up in production?"** for an auditor — OCTALUME is for you.
-
----
-
-## Quickstart (5 minutes)
-
-### 1. Install
+## Install
 
 ```bash
-pip install octalume          # latest from PyPI
-# or, from source:
 git clone https://github.com/Harery/OCTALUME && cd OCTALUME && pip install -e ".[dev]"
 ```
 
-### 2. Initialize a project
+## Quickstart
 
 ```bash
-octalume init my-saas \
-  --description "Telehealth booking platform" \
-  --compliance hipaa soc2
+octalume init my-app --compliance hipaa soc2   # scaffold a project with controls mapped
+octalume start 1                                # enter Phase 1 (Vision & Strategy)
+octalume gate 1 && octalume complete 1          # run the gate; advance only if it passes
 ```
 
-### 3. Walk the 8 phases
+## What you get
 
-```bash
-octalume start 1            # Vision & Strategy
-octalume status             # See current phase, gates, agents
-octalume gate 1             # Run quality gate check
-octalume complete 1         # Advance to phase 2 (only if gate passes)
+```text
+octalume/
+├── core/         Phase engine, gates, orchestrator, state, memory, tenancy
+├── mcp/          MCP server exposing 30+ lifecycle_* tools to Claude Code
+├── agents/       9 phase-specialized agents (+ orchestrator)
+├── compliance/   HIPAA, SOC 2, PCI DSS, GDPR scanners
+├── a2a/          Agent-to-Agent protocol
+├── worker/       Async task workers (Celery-compatible)
+└── utils/        Logging, configuration, observability
+web/
+├── frontend/     Vite + React dashboard (phase view, gate status, audit log)
+└── backend/      FastAPI service backing the dashboard
+mcp-server/       Standalone MCP entry point (python -m octalume.mcp.server)
 ```
 
-### 4. Plug into Claude Code (MCP)
+Each phase produces typed artifacts. Each gate is a machine-checkable set of conditions. Each compliance scan is signed and queryable.
 
-Add to your Claude Code MCP config:
+## How it works
 
-```json
-{
-  "mcpServers": {
-    "octalume": {
-      "command": "python",
-      "args": ["-m", "octalume.mcp.server"]
-    }
-  }
-}
-```
+OCTALUME drives a project through eight sequential phases. Each phase has an owning agent, required artifacts, and a quality gate. The gate is a function, not a meeting — it either passes or it blocks the transition.
 
-Claude Code now has 30+ tools (`lifecycle_phase_*`, `lifecycle_gate_*`, `lifecycle_compliance_*`, ...) to drive your SDLC instead of just writing code.
-
-### 5. Watch it in the dashboard
-
-```bash
-octalume dashboard           # http://localhost:8000
-```
-
----
-
-## The 8 Phases
+A central Phase Engine coordinates nine agents (one per phase plus an orchestrator). The MCP server surfaces 30+ `lifecycle_*` tools so Claude Code can start phases, request reviews, run compliance scans, and stop when a gate fails. State and decisions persist in a memory store the next contributor can read.
 
 ```mermaid
 flowchart LR
@@ -147,292 +83,99 @@ flowchart LR
     P8 -.feedback.-> P1
 ```
 
-| # | Phase | Owner | Typical Duration | Exit Gate |
-|:-:|---|---|:-:|---|
-| 1 | Vision & Strategy | Product Owner | 1 week | Stakeholder signoff, success metrics defined |
-| 2 | Requirements & Scope | Product Owner | 2 weeks | Acceptance criteria, compliance mapping |
-| 3 | Architecture & Design | CTA | 1 week | ADRs, threat model, data classification |
-| 4 | Development Planning | Project Manager | 1 week | Backlog, capacity, risk register |
-| 5 | Development Execution | Tech Lead | Variable | Code review, unit + integration tests green |
-| 6 | Quality & Security | QA Lead | 2 weeks | Compliance scan, pen test, SBOM |
-| 7 | Deployment & Release | DevOps | 1 week | Change record, rollback plan, runbook |
-| 8 | Operations & Maintenance | SRE | Ongoing | SLOs, incident response, periodic review |
+Plug it into Claude Code with a one-line MCP config:
 
-Each gate is a *machine-checkable* set of conditions — not a slack message.
-
----
-
-## Architecture
-
-```mermaid
-flowchart TB
-    subgraph Clients
-        CC[Claude Code]
-        CLI[octalume CLI]
-        DASH[Web Dashboard]
-    end
-
-    subgraph Core
-        ENG[Phase Engine]
-        GATE[Gate Validator]
-        ORCH[Agent Orchestrator]
-        MEM[Memory Store]
-    end
-
-    subgraph Agents["9 Specialized Agents"]
-        A1[Vision]
-        A2[Requirements]
-        A3[Architecture]
-        A4[Planning]
-        A5[Development]
-        A6[Quality]
-        A7[Deployment]
-        A8[Operations]
-        A9[Orchestrator]
-    end
-
-    subgraph Compliance
-        HIPAA
-        SOC2
-        PCI
-        GDPR
-    end
-
-    CC -- MCP --> ENG
-    CLI --> ENG
-    DASH --> ENG
-    ENG --> GATE
-    ENG --> ORCH
-    ORCH --> Agents
-    GATE --> Compliance
-    ENG --> MEM
+```json
+{
+  "mcpServers": {
+    "octalume": { "command": "python", "args": ["-m", "octalume.mcp.server"] }
+  }
+}
 ```
-
-```text
-octalume/
-├── core/         Phase engine, gates, orchestrator, state, memory, tenancy
-├── mcp/          MCP server exposing 30+ lifecycle_* tools
-├── agents/       9 phase-specialized agents (+ orchestrator)
-├── compliance/   HIPAA, SOC 2, PCI DSS, GDPR scanners
-├── a2a/          Agent-to-Agent protocol
-├── worker/       Async task workers (Celery-compatible)
-└── utils/        Logging, configuration, observability
-```
-
----
-
-## Use Cases
-
-<table>
-<tr>
-<td width="33%" valign="top">
-
-### Healthcare / HealthTech
-Telehealth, EHR, claims, AI diagnostics.
-- HIPAA controls auto-mapped to phases
-- PHI handling baked into gates
-- Audit log for OCR / 21 CFR Part 11
-
-</td>
-<td width="33%" valign="top">
-
-### FinTech / Banking
-Payments, lending, trading.
-- PCI DSS scope tracking
-- SOX evidence collection in phase 6
-- SoD enforced via agent roles
-
-</td>
-<td width="33%" valign="top">
-
-### Government / Defense
-Fed, state, ITAR/DoD contractors.
-- FedRAMP / NIST 800-53 mappable
-- Air-gapped install supported
-- Traceability matrices on demand
-
-</td>
-</tr>
-<tr>
-<td valign="top">
-
-### SaaS at Scale
-Multi-tenant B2B platforms.
-- SOC 2 Type II evidence pipeline
-- GDPR data-subject workflows
-- Multi-tenant aware state
-
-</td>
-<td valign="top">
-
-### AI Product Teams
-Anyone shipping LLM features.
-- Agent governance + guardrails
-- Prompt + tool versioning
-- "Show your work" for AI decisions
-
-</td>
-<td valign="top">
-
-### Regulated Startups
-Pre-Series-B teams who can't afford a CISO yet.
-- Compliance-by-default
-- Replaces 5+ spreadsheets
-- Diligence-ready in week one
-
-</td>
-</tr>
-</table>
-
----
 
 ## Compare
 
-| | **OCTALUME** | LangGraph / AutoGen | Cursor / Copilot | Traditional SDLC tools (Jira + ALM) |
-|---|:---:|:---:|:---:|:---:|
-| AI-native | ✅ | ✅ | ✅ | ❌ |
-| Phase-gated workflow | ✅ | ❌ | ❌ | ⚠️ Manual |
-| Built-in compliance scanners | ✅ | ❌ | ❌ | ❌ |
-| Agent role separation | ✅ 9 typed agents | ⚠️ DIY | ❌ | ❌ |
-| MCP / Claude Code native | ✅ | ❌ | ⚠️ | ❌ |
-| Audit trail per AI decision | ✅ | ❌ | ❌ | ⚠️ |
-| Self-hostable, open source | ✅ MIT | ✅ | ❌ | ❌ |
-| Time to first value | **5 min** | hours | 5 min | weeks |
+| Capability                       | OCTALUME      | LangGraph | AutoGen | semantic-kernel | Cursor | Jira |
+|:---------------------------------|:-------------:|:---------:|:-------:|:---------------:|:------:|:----:|
+| Multi-agent orchestration        | 9 typed roles | DIY graph | DIY     | Plugins         | No     | No   |
+| Full-SDLC scope (8 phases)       | Yes           | No        | No      | No              | No     | Partial |
+| Built-in compliance scanners     | HIPAA / SOC 2 / PCI / GDPR | No | No | No        | No     | No   |
+| Machine-checkable quality gates  | Yes           | No        | No      | No              | No     | Manual |
+| Claude Code / MCP native         | Yes           | No        | No      | No              | Partial| No   |
+| Audit trail per AI decision      | Signed, queryable | No    | No      | No              | No     | Partial |
+| Self-hostable, MIT-licensed      | Yes           | Yes       | Yes     | Yes             | No     | No   |
 
----
+## FAQ
 
-## Compliance Standards
+### What is OCTALUME?
+An 8-phase, gate-driven SDLC framework with nine phase-specialized agents, a Model Context Protocol server, four compliance scanners, and a web dashboard. It runs locally and integrates natively with Claude Code.
 
-| Standard | Status | Coverage |
-|---|:-:|---|
-| HIPAA | ✅ Built-in scanner | Administrative, physical, technical safeguards |
-| SOC 2 | ✅ Built-in scanner | Security, availability, confidentiality |
-| PCI DSS | ✅ Built-in scanner | v4.0 control mapping |
-| GDPR | ✅ Built-in scanner | Articles 5, 25, 30, 32, 33 |
-| SOX | ⚠️ Evidence pipeline | ITGC mapping |
-| ISO 27001 | 🛣️ Roadmap | Annex A controls |
-| NIST 800-53 / FedRAMP | 🛣️ Roadmap | Moderate baseline |
-| DoD / ITAR | 🛣️ Roadmap | CMMC L2 |
+### Is this production-ready?
+v2.0.0 is the first stable release. The phase engine, gates, MCP server, and HIPAA / SOC 2 / PCI / GDPR scanners are covered by CI. Treat it as 1.x-grade for the dashboard and a2a protocol — those are still iterating.
 
-See [docs/compliance.md](docs/compliance.md) for the full mapping.
+### Does it work without Claude Code?
+Yes. The CLI, phase engine, and compliance scanners run standalone. The MCP server works with any MCP-compatible client. Claude Code is the deepest integration today; Cursor and Windsurf adapters are on the roadmap.
 
----
+### How do I customize for HIPAA or SOC 2?
+Pass `--compliance hipaa soc2` to `octalume init`. The relevant control catalogs map to phase gates automatically. Override individual controls in `octalume.yaml`; see [docs/compliance.md](docs/compliance.md) for the full mapping.
 
-## Python API
+### What is the difference between OCTALUME and the OCTALUM family?
+OCTALUME is the flagship — the framework that drives a regulated SDLC. The OCTALUM family also includes PYLAB (Python practice), PULSE (Linux maintenance), and bdtb (brain-dump to plan). See the footer for the full set.
 
-```python
-from octalume import PhaseEngine, ProjectStateManager
+### Can I cite it in a paper?
+Yes. See [CITATION.cff](CITATION.cff) for the canonical reference, including DOI-ready metadata.
 
-async def main():
-    manager = ProjectStateManager()
-    state = await manager.create(
-        name="my-project",
-        compliance_standards=["hipaa", "soc2"],
-    )
+## Documentation
 
-    engine = PhaseEngine(manager)
-    await engine.start_phase(state, 1)
-    state, gate = await engine.complete_phase(state, 1)
-    assert gate.passed, gate.failures
-```
-
-Full API: [docs/python-api.md](docs/python-api.md).
-
----
-
-## MCP Tools (30+)
-
-| Category | Tools |
-|---|---|
-| **Phase** | `lifecycle_phase_start`, `_status`, `_validate`, `_transition`, `_rollback` |
-| **Agent** | `lifecycle_agent_spawn`, `_delegate`, `_status`, `_list`, `_terminate` |
-| **Artifact** | `lifecycle_artifact_create`, `_get`, `_search`, `_link` |
-| **Gate** | `lifecycle_gate_check`, `_bypass`, `_list`, `lifecycle_go_no_go` |
-| **Compliance** | `lifecycle_compliance_scan`, `_report`, `_configure` |
-| **Memory** | `lifecycle_memory_save`, `_load`, `_query` |
-| **Observability** | `lifecycle_trace_add`, `_get`, `lifecycle_health_check` |
-
-Full reference: [docs/mcp-tools.md](docs/mcp-tools.md).
-
----
+- [docs/index.md](docs/index.md) — entry point
+- [docs/getting-started.md](docs/getting-started.md) — first project, end to end
+- [docs/phases.md](docs/phases.md) — the 8 phases and their gates
+- [docs/agents.md](docs/agents.md) — the 9 agents and their boundaries
+- [docs/mcp-tools.md](docs/mcp-tools.md) — 30+ `lifecycle_*` MCP tools
+- [docs/python-api.md](docs/python-api.md) — `PhaseEngine`, `ProjectStateManager`
+- [docs/compliance.md](docs/compliance.md) — HIPAA / SOC 2 / PCI / GDPR mappings
+- [docs/architecture.md](docs/architecture.md) — internals and extension points
 
 ## Roadmap
 
-- [x] 8-phase engine + quality gates
-- [x] HIPAA / SOC 2 / PCI / GDPR scanners
-- [x] MCP server with 30+ tools
-- [x] React dashboard
-- [ ] ISO 27001 + NIST 800-53 scanners
-- [ ] OPA / Rego policy plug-in
-- [ ] SBOM (CycloneDX) auto-generation per release
-- [ ] Slack / Teams gate-approval bots
-- [ ] OCTALUME Cloud (managed control plane)
-- [ ] VS Code extension
+- 2026-Q3 — Publish `octalume` to PyPI (`pip install octalume`)
+- 2026-Q3 — ISO 27001 and NIST 800-53 scanners
+- 2026-Q4 — `docs.octalume.dev` (GitHub Pages) goes live
+- 2026-Q4 — v2.1 multi-tenant control plane
+- 2027-Q1 — OPA / Rego policy plug-in, CycloneDX SBOM auto-generation
+- 2027-Q2 — Cursor and Windsurf MCP adapters
 
-Vote / suggest on [GitHub Discussions](https://github.com/Harery/OCTALUME/discussions).
+## Contributing, License, Security
 
----
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Harery/OCTALUME&type=Date)](https://star-history.com/#Harery/OCTALUME&Date)
-
-If OCTALUME saves you a week of compliance pain, **please star the repo** — it's the single biggest thing you can do to help.
+- Contributing: see [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+- License: [MIT](LICENSE). "OCTALUME" is a trademark of Mohamed ElHarery — see [NOTICE](NOTICE).
+- Security: report privately via [SECURITY.md](SECURITY.md). 22 of 22 Dependabot alerts resolved in this release.
+<!-- ============================================================== -->
+<!-- UNIFIED OCTALUM FAMILY FOOTER — keep verbatim across every repo -->
+<!-- ============================================================== -->
 
 ---
-
-## What is OCTALUME? — Frequently Asked Questions
-
-### What is OCTALUME and what problem does it solve?
-OCTALUME is an open-source, AI-native software development lifecycle (SDLC) framework designed for regulated enterprises. It solves the "vibe coding" problem in regulated industries by wrapping Claude Code and other AI coding agents in an **8-phase, gate-driven workflow** with built-in audit trails, multi-agent orchestration, and HIPAA / SOC 2 / PCI DSS / GDPR compliance scanners.
-
-### How is OCTALUME different from LangGraph, AutoGen, or CrewAI?
-LangGraph, AutoGen, and CrewAI are general-purpose multi-agent orchestration libraries — they hand you the building blocks. OCTALUME is an **opinionated, vertical framework**: it ships with 9 phase-specialized agents, machine-checkable quality gates, four compliance scanners, an MCP server, and a React dashboard out of the box. Pick LangGraph if you want a library; pick OCTALUME if you need a regulated-SDLC product on day one.
-
-### Is OCTALUME a Claude Code skill or an MCP server?
-Both. OCTALUME ships a fully compliant **MCP server** that exposes 30+ `lifecycle_*` tools to any MCP client (Claude Code, Cursor with MCP, custom hosts). It is also packaged as a **Claude Code skill** so Claude can drive the SDLC autonomously — start phases, run gates, request compliance scans, and stop when a quality gate fails.
-
-### Does OCTALUME make my project HIPAA / SOC 2 compliant?
-OCTALUME does **not** issue certifications — no software can. What it does: continuously scan your repository, requirements, ADRs, and infrastructure against HIPAA, SOC 2, PCI DSS, and GDPR control mappings; generate auditor-ready evidence packages; and block phase advancement when controls fail. Most teams report 60-80% of audit-prep work eliminated.
-
-### Can I run OCTALUME air-gapped or on-premises?
-Yes. OCTALUME is MIT-licensed and self-hostable. The compliance scanners, phase engine, and MCP server run locally with no external network calls. The only outbound traffic (and only if you enable it) is to the LLM provider you point Claude Code at — and that can be Bedrock, Vertex, or an on-prem proxy.
-
-### Who is OCTALUME for?
-Engineering leaders, CTOs, and platform teams at **healthcare, fintech, government, and regulated SaaS** companies who want their AI coding agents to produce shippable, auditable software — not just plausible code.
-
-### Does OCTALUME work with Cursor, Windsurf, or non-Anthropic models?
-Yes. OCTALUME's core is model-agnostic. The MCP server works with any MCP-compatible client. The deepest integration is with **Claude Code** today (since OCTALUME is built natively on Claude Code + MCP), but adapters for Cursor and Windsurf are on the roadmap.
-
----
-
-## Contributing
-
-We love contributors. Start here:
-
-1. Read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-2. Pick a [good first issue](https://github.com/Harery/OCTALUME/labels/good%20first%20issue).
-3. Fork, branch, PR. CI runs Ruff, Black, MyPy, Bandit, Trivy, pytest.
-
-Security issues: see [SECURITY.md](SECURITY.md) — please do not open public issues.
-
-To cite OCTALUME in academic work, see [CITATION.cff](CITATION.cff).
-
----
-
-## License
-
-[MIT](LICENSE). Use it, fork it, ship it. Attribution appreciated, not required. "OCTALUME" is a trademark of Mohamed ElHarery — see [NOTICE](NOTICE).
-
----
-
-## Author
-
-**Mohamed Harery** — Digital Solutions Architect, 15+ years across cybersecurity, cloud, and enterprise infrastructure.
-[harery.com](https://harery.com) · [LinkedIn](https://www.linkedin.com/in/harery) · [GitHub](https://github.com/Harery)
 
 <div align="center">
 
-**Built with OCTALUME.** Ship compliant software, one phase at a time.
+### Drawn by the same hand
+
+A working portfolio of digital infrastructure, designed and maintained by [**Mohamed Harery**](https://harery.com) — Architect of Digital Systems.
+
+| Sheet | Repo | What it is |
+|:--:|:--|:--|
+| 00 | [**harery.com**](https://github.com/Harery/Mo) | The studio — portfolio, ledger, contact |
+| 01 | [**OCTALUME**](https://github.com/Harery/OCTALUME) | 8-phase enterprise SDLC framework |
+| 02 | [**OCTALUM-PYLAB**](https://github.com/Harery/OCTALUM-PYLAB) | Python DSA & coding-interview prep |
+| 03 | [**OCTALUM-PULSE**](https://github.com/Harery/OCTALUM-PULSE) | Cross-distro Linux maintenance CLI |
+| 04 | [**octalum-bdtb**](https://github.com/Harery/octalum-bdtb) | Brain-dump → spec-kit-shaped plan |
+
+<sub>
+  <a href="https://harery.com">harery.com</a> ·
+  <a href="https://github.com/Harery">github.com/Harery</a> ·
+  <a href="https://www.linkedin.com/in/harery/">LinkedIn</a>
+</sub>
+
+<sub>BLUEPRINT · drawn 2026 · MIT-licensed code · all drawings reserved</sub>
 
 </div>
