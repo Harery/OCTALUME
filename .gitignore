@@ -119,3 +119,4 @@ htmlcov/
 *.backup
 *.orig
 *.old
+.octalume/
