@@ -120,7 +120,7 @@ Yes. The CLI, phase engine, and compliance scanners run standalone. The MCP serv
 Pass `--compliance hipaa soc2` to `octalume init`. The relevant control catalogs map to phase gates automatically. Override individual controls in `octalume.yaml`; see [docs/compliance.md](docs/compliance.md) for the full mapping.
 
 ### What is the difference between OCTALUME and the OCTALUM family?
-OCTALUME is the flagship — the framework that drives a regulated SDLC. The OCTALUM family also includes PYLAB (Python practice), PULSE (Linux maintenance), and bdtb (brain-dump to plan). See the footer for the full set.
+OCTALUME is the flagship — the framework that drives a regulated SDLC. The OCTALUM family also includes PYLAB (Python practice), PULSE (Linux maintenance), and octalum-bdtb (brain-dump-to-build skill). See the footer for the full set.
 
 ### Can I cite it in a paper?
 Yes. See [CITATION.cff](CITATION.cff) for the canonical reference, including DOI-ready metadata.
@@ -168,7 +168,7 @@ A working portfolio of digital infrastructure, designed and maintained by [**Moh
 | 01 | [**OCTALUME**](https://github.com/Harery/OCTALUME) | 8-phase enterprise SDLC framework |
 | 02 | [**OCTALUM-PYLAB**](https://github.com/Harery/OCTALUM-PYLAB) | Python DSA & coding-interview prep |
 | 03 | [**OCTALUM-PULSE**](https://github.com/Harery/OCTALUM-PULSE) | Cross-distro Linux maintenance CLI |
-| 04 | [**octalum-bdtb**](https://github.com/Harery/octalum-bdtb) | Brain-dump → spec-kit-shaped plan |
+| 04 | [**octalum-bdtb**](https://github.com/Harery/octalum-bdtb) | 12-stage Claude Code Skill — brain-dump → product |
 
 <sub>
   <a href="https://harery.com">harery.com</a> ·
