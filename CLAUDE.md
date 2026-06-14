@@ -27,9 +27,14 @@ OCTALUME/
 │   ├── mcp/                  # MCP server with 30+ tools
 │   ├── agents/               # 9 phase-specific AI agents
 │   ├── compliance/           # Compliance scanners
+│   ├── idea/                 # Phase 0 — brain-dump parser, spec-kit renderer, pipeline
 │   ├── a2a/                  # Agent-to-agent protocol
 │   ├── utils/                # Logging, configuration
-│   └── cli.py                # Click-based CLI
+│   └── cli.py                # Click-based CLI (incl. `octalum idea` sub-commands)
+├── .claude/skills/idea/      # Claude Code Skill for 12-stage idea pipeline
+│   ├── SKILL.md              # Orchestrator + pipeline overview
+│   ├── stages/               # 12 stage sub-skills (s01–s12)
+│   └── references/           # Operating constraints, voice guide, architecture
 ├── web/                      # FastAPI backend + React frontend
 ├── tests/                    # pytest tests
 ├── docs/                     # Documentation
@@ -196,4 +201,4 @@ mypy octalume
 
 ---
 
-Version 2.0.0 | OCTALUME AI-Native Enterprise SDLC Framework
+Version 2.1.0 | OCTALUME AI-Native Enterprise SDLC Framework

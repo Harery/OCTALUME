@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+from pathlib import Path
 
 import click
 from rich.console import Console
@@ -340,6 +341,326 @@ def memory() -> None:
             entry["category"],
             entry["key"][:30],
             entry["entry"].get("created_at", "N/A")[:19],
+        )
+
+    console.print(table)
+
+
+# ============================================================================
+# Phase 0 — Idea (formerly octalum-bdtb, merged into OCTALUME)
+# ============================================================================
+
+
+def _read_idea_input(input_arg: str | None) -> str:
+    """Read the brain-dump from a file path or stdin."""
+    import sys
+    from pathlib import Path
+
+    if input_arg and input_arg != "-":
+        p = Path(input_arg)
+        if p.exists():
+            return p.read_text(encoding="utf-8")
+        return input_arg
+    if not sys.stdin.isatty():
+        return sys.stdin.read()
+    raise click.UsageError(
+        "No brain-dump provided. Pass a file path, a quoted string, or pipe text on stdin."
+    )
+
+
+def _ask_interactive() -> str:
+    """Lightweight Q&A to assemble a dump for users who don't have one."""
+    print("Interactive mode. Press Enter twice to finish each answer.\n")
+    questions = [
+        "1) In one sentence, what are you building?",
+        "2) Who is it for?",
+        "3) Top 3-5 features (one per line):",
+        "4) Hard constraints (deadline, budget, regulatory)?",
+        "5) What scares you / what could go wrong?",
+        "6) Any open questions you don't know the answer to?",
+    ]
+    chunks: list[str] = []
+    for q in questions:
+        print(q)
+        lines: list[str] = []
+        while True:
+            try:
+                line = input()
+            except EOFError:
+                break
+            if line == "" and lines and lines[-1] == "":
+                break
+            lines.append(line)
+        chunks.append("\n".join(lines).strip())
+        print()
+
+    title = chunks[0].splitlines()[0] if chunks[0] else "Untitled Project"
+    body = [f"# {title}", "", chunks[0], ""]
+    if chunks[1]:
+        body.append(f"Target users: {chunks[1]}")
+    if chunks[2]:
+        body.append("\n## Features\n")
+        for line in chunks[2].splitlines():
+            line = line.strip("-* \t")
+            if line:
+                body.append(f"- {line}")
+    if chunks[3]:
+        body.append("\n## Constraints\n")
+        for line in chunks[3].splitlines():
+            if line.strip():
+                body.append(f"- {line.strip()}")
+    if chunks[4]:
+        body.append("\n## Risks\n")
+        for line in chunks[4].splitlines():
+            if line.strip():
+                body.append(f"- risk: {line.strip()}")
+    if chunks[5]:
+        body.append("\n## Unknowns\n")
+        for line in chunks[5].splitlines():
+            if line.strip():
+                q = line.strip()
+                if not q.endswith("?"):
+                    q += "?"
+                body.append(f"- {q}")
+    return "\n".join(body)
+
+
+def _write_idea_artifacts(
+    out_dir: Path,
+    artifacts: dict[str, str],
+    force: bool,
+) -> list[str]:
+    """Write idea artifacts to ``out_dir``. Returns list of written paths."""
+    import os
+
+    written: list[str] = []
+    for name, content in artifacts.items():
+        target = out_dir / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.exists() and not force:
+            console.print(f"  [dim]skip: {target} (exists; use --force to overwrite)[/dim]")
+            continue
+        target.write_text(content, encoding="utf-8")
+        if name.endswith(".sh"):
+            os.chmod(target, 0o755)
+        written.append(str(target))
+    return written
+
+
+@main.group()
+def idea() -> None:
+    """Phase 0 — turn a raw brain-dump into a structured project plan."""
+
+
+@idea.command()
+@click.argument("input_str", required=False)
+@click.option(
+    "--output-dir", "-o", default="./plan", help="Directory to write generated artifacts."
+)
+@click.option(
+    "--target",
+    "-t",
+    type=click.Choice(["spec-kit", "octalum-classic"]),
+    default="spec-kit",
+    help="Output shape.",
+)
+@click.option("--force", "-f", is_flag=True, help="Overwrite existing files.")
+@click.option("--llm", metavar="MODEL", default=None, help="Optional LLM model for enrichment.")
+def quick(
+    input_str: str | None,
+    output_dir: str,
+    target: str,
+    force: bool,
+    llm: str | None,
+) -> None:
+    """Quick mode — parse a brain-dump and emit artifacts."""
+    from octalume.idea.parser import parse_brain_dump
+    from octalume.idea.speckit import render_all_speckit
+    from octalume.idea.templates import render_all
+
+    text = _read_idea_input(input_str)
+    project = parse_brain_dump(text)
+
+    if llm:
+        console.print(
+            f"[dim][--llm {llm}] enrichment not invoked: no SDK wired. "
+            "See README > LLM enrichment.[/dim]"
+        )
+
+    out_dir = Path(output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    artifacts = render_all_speckit(project) if target == "spec-kit" else render_all(project)
+    written = _write_idea_artifacts(out_dir, artifacts, force)
+
+    console.print(f"\n[bold green]Project:[/bold green] {project.title}")
+    console.print(f"[bold]Domain:[/bold]  {project.primary_domain}")
+    console.print(f"[bold]Target:[/bold]  {target}")
+    console.print(f"[bold]Wrote:[/bold]   {len(written)} file(s) \u2192 {out_dir}")
+    for w in written:
+        console.print(f"  [cyan]- {w}[/cyan]")
+
+    if target == "spec-kit":
+        console.print(
+            f"\nNext: cd {out_dir} && open specs/{project.slug}/spec.md  "
+            f"# then /speckit.plan, /speckit.tasks, /speckit.implement"
+        )
+
+
+@idea.command()
+@click.argument("input_str", required=False)
+@click.option(
+    "--output-dir", "-o", default="./plan", help="Directory to write generated artifacts."
+)
+@click.option(
+    "--target",
+    "-t",
+    type=click.Choice(["spec-kit", "octalum-classic"]),
+    default="spec-kit",
+    help="Output shape.",
+)
+@click.option("--force", "-f", is_flag=True, help="Overwrite existing files.")
+def bootstrap(
+    input_str: str | None,
+    output_dir: str,
+    target: str,
+    force: bool,
+) -> None:
+    """Bootstrap mode — plan + runnable BUILD_NOW.sh (octalum-classic only)."""
+    from octalume.idea.parser import parse_brain_dump
+    from octalume.idea.templates import render_all
+
+    text = _read_idea_input(input_str)
+    project = parse_brain_dump(text)
+
+    out_dir = Path(output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    artifacts = render_all(project)
+    written = _write_idea_artifacts(out_dir, artifacts, force)
+
+    console.print(f"\n[bold green]Project:[/bold green] {project.title}")
+    console.print(f"[bold]Domain:[/bold]  {project.primary_domain}")
+    console.print(f"[bold]Wrote:[/bold]   {len(written)} file(s) \u2192 {out_dir}")
+    for w in written:
+        console.print(f"  [cyan]- {w}[/cyan]")
+
+    console.print(f"\nNext: bash {out_dir / 'BUILD_NOW.sh'}")
+
+
+@idea.command()
+@click.option(
+    "--output-dir", "-o", default="./plan", help="Directory to write generated artifacts."
+)
+@click.option(
+    "--target",
+    "-t",
+    type=click.Choice(["spec-kit", "octalum-classic"]),
+    default="spec-kit",
+    help="Output shape.",
+)
+@click.option("--force", "-f", is_flag=True, help="Overwrite existing files.")
+def interactive(
+    output_dir: str,
+    target: str,
+    force: bool,
+) -> None:
+    """Interactive mode — Q&A wizard to assemble the brain-dump."""
+    from octalume.idea.parser import parse_brain_dump
+    from octalume.idea.speckit import render_all_speckit
+    from octalume.idea.templates import render_all
+
+    text = _ask_interactive()
+    project = parse_brain_dump(text)
+
+    out_dir = Path(output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    artifacts = render_all_speckit(project) if target == "spec-kit" else render_all(project)
+    written = _write_idea_artifacts(out_dir, artifacts, force)
+
+    console.print(f"\n[bold green]Project:[/bold green] {project.title}")
+    console.print(f"[bold]Domain:[/bold]  {project.primary_domain}")
+    console.print(f"[bold]Target:[/bold]  {target}")
+    console.print(f"[bold]Wrote:[/bold]   {len(written)} file(s) \u2192 {out_dir}")
+    for w in written:
+        console.print(f"  [cyan]- {w}[/cyan]")
+
+
+@idea.command()
+@click.argument("stage_num", type=click.IntRange(1, 12))
+@click.argument("input_str", required=False)
+@click.option(
+    "--output-dir", "-o", default="./plan", help="Directory to write generated artifacts."
+)
+@click.option("--force", "-f", is_flag=True, help="Overwrite existing files.")
+def stage(
+    stage_num: int,
+    input_str: str | None,
+    output_dir: str,
+    force: bool,
+) -> None:
+    """Run a specific pipeline stage (1-12)."""
+    from octalume.idea.parser import parse_brain_dump
+    from octalume.idea.pipeline import get_stage, run_stage_scaffold
+
+    s = get_stage(stage_num)
+
+    text = _read_idea_input(input_str)
+    project = parse_brain_dump(text)
+
+    scaffold = run_stage_scaffold(project, stage_num)
+
+    table = Table(title=f"Stage {s.number} \u2014 {s.name}")
+    table.add_column("Field", style="cyan")
+    table.add_column("Value", style="green")
+    table.add_row("Stage", f"{s.number} \u2014 {s.name}")
+    table.add_row("Layer", s.layer)
+    table.add_row("Skill File", s.skill_file)
+    table.add_row("Expected Output", s.output_file)
+    table.add_row("Description", s.description)
+    table.add_row("Project", project.title)
+    table.add_row("Domain", project.primary_domain)
+    console.print(table)
+
+    console.print(f"\n[bold yellow]{scaffold['approval_prompt']}[/bold yellow]")
+    console.print(f"\n[dim]Load the Claude Code Skill: .claude/skills/idea/{s.skill_file}[/dim]")
+
+    if stage_num <= 5:
+        from octalume.idea.speckit import render_all_speckit
+
+        out_dir = Path(output_dir)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        artifacts = render_all_speckit(project)
+        written = _write_idea_artifacts(out_dir, artifacts, force)
+        if written:
+            console.print(f"\n[bold]Wrote:[/bold] {len(written)} file(s) \u2192 {out_dir}")
+    else:
+        console.print(
+            "\n[dim]Stages 6\u201312 are LLM-driven. Use the Claude Code Skill "
+            "(.claude/skills/idea/) to execute.[/dim]"
+        )
+
+
+@idea.command()
+def stages() -> None:
+    """List all 12 pipeline stages."""
+    from octalume.idea.pipeline import list_stages
+
+    table = Table(title="Idea Pipeline \u2014 12 Stages")
+    table.add_column("#", style="cyan", width=3)
+    table.add_column("Name", style="green")
+    table.add_column("Layer", style="yellow")
+    table.add_column("Output", style="blue")
+    table.add_column("Description", style="dim")
+
+    for s in list_stages():
+        table.add_row(
+            s["number"],
+            s["name"],
+            s["layer"],
+            s["output_file"],
+            s["description"][:60],
         )
 
     console.print(table)

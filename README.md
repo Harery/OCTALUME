@@ -39,6 +39,32 @@ octalume start 1                                # enter Phase 1 (Vision & Strate
 octalume gate 1 && octalume complete 1          # run the gate; advance only if it passes
 ```
 
+### Phase 0 — Idea (Brain Dump to Build)
+
+Before Phase 1, turn a raw idea into a structured plan:
+
+```bash
+# From a brain-dump string
+octalum idea quick "My SaaS app with Stripe billing and user auth"
+
+# From a file
+octalum idea quick ./brain-dump.md --output-dir ./plan
+
+# Interactive wizard
+octalum idea interactive
+
+# Bootstrap mode (plan + BUILD_NOW.sh)
+octalum idea bootstrap ./idea.md --target octalum-classic
+
+# List all 12 pipeline stages
+octalum idea stages
+
+# Run a specific stage
+octalum idea stage 3 ./brain-dump.md
+```
+
+Outputs spec-kit-compatible artifacts (constitution, spec, plan, research, data-model, quickstart, tasks) or the legacy octalum-classic layout (STRUCTURE, STACK, PHASES, RISKS + BUILD_NOW.sh).
+
 ## What you get
 
 ```text
@@ -47,6 +73,7 @@ octalume/
 ├── mcp/          MCP server exposing 30+ lifecycle_* tools to Claude Code
 ├── agents/       9 phase-specialized agents (+ orchestrator)
 ├── compliance/   HIPAA, SOC 2, PCI DSS, GDPR scanners
+├── idea/         Phase 0 — brain-dump parser, spec-kit renderer, 12-stage pipeline
 ├── a2a/          Agent-to-Agent protocol
 ├── worker/       Async task workers (Celery-compatible)
 └── utils/        Logging, configuration, observability
@@ -120,7 +147,7 @@ Yes. The CLI, phase engine, and compliance scanners run standalone. The MCP serv
 Pass `--compliance hipaa soc2` to `octalume init`. The relevant control catalogs map to phase gates automatically. Override individual controls in `octalume.yaml`; see [docs/compliance.md](docs/compliance.md) for the full mapping.
 
 ### What is the difference between OCTALUME and the OCTALUM family?
-OCTALUME is the flagship — the framework that drives a regulated SDLC. The OCTALUM family also includes PYLAB (Python practice), PULSE (Linux maintenance), and octalum-bdtb (brain-dump-to-build skill). See the footer for the full set.
+OCTALUME is the flagship — the framework that drives a regulated SDLC. The OCTALUM family also includes PYLAB (Python practice), PULSE (Linux maintenance), and the former octalum-bdtb (brain-dump-to-build skill), which has been merged into OCTALUME as the `octalume/idea/` Phase 0 component. See the footer for the full set.
 
 ### Can I cite it in a paper?
 Yes. See [CITATION.cff](CITATION.cff) for the canonical reference, including DOI-ready metadata.
@@ -168,7 +195,7 @@ A working portfolio of digital infrastructure, designed and maintained by [**Moh
 | 01 | [**OCTALUME**](https://github.com/Harery/OCTALUME) | 8-phase enterprise SDLC framework |
 | 02 | [**OCTALUM-PYLAB**](https://github.com/Harery/OCTALUM-PYLAB) | Python DSA & coding-interview prep |
 | 03 | [**OCTALUM-PULSE**](https://github.com/Harery/OCTALUM-PULSE) | Cross-distro Linux maintenance CLI |
-| 04 | [**octalum-bdtb**](https://github.com/Harery/octalum-bdtb) | 12-stage Claude Code Skill — brain-dump → product |
+| 04 | ~~**octalum-bdtb**~~ | **Merged into OCTALUME** as `octalume/idea/` (Phase 0) |
 
 <sub>
   <a href="https://harery.com">harery.com</a> ·

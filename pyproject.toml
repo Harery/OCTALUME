@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "octalume"
-version = "2.0.0"
-description = "AI-Native Enterprise SDLC Framework - 8 Phases, Quality Gates, Multi-Agent Orchestration"
+version = "2.1.0"
+description = "AI-Native Enterprise SDLC Framework - 8 Phases, Quality Gates, Multi-Agent Orchestration, Idea-to-Product Pipeline"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.11"
@@ -31,6 +31,9 @@ keywords = [
     "claude-code",
     "langgraph",
     "multi-agent",
+    "brain-dump",
+    "idea-to-product",
+    "spec-kit",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -119,6 +122,7 @@ all = [
 
 [project.scripts]
 octalume = "octalume.cli:main"
+octalum-idea = "octalume.cli:idea"
 
 [project.urls]
 Homepage = "https://github.com/Harery/OCTALUME"
@@ -130,6 +134,9 @@ Discord = "https://discord.gg/octalume"
 
 [tool.hatch.build.targets.wheel]
 packages = ["octalume"]
+
+[tool.hatch.build.targets.wheel.force-include]
+".claude/skills/idea" = "octalume/idea/.claude-skills"
 
 [tool.hatch.build.targets.sdist]
 include = [
